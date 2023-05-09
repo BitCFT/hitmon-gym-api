@@ -11,9 +11,10 @@
       "@business/*": ["./src/2-business/*"],
       "@controller/*": ["./src/3-controller/*"],
       "@framework/*": ["./src/4-framework/*"],
-      "@shared/*": ["./src/shared/*"]
+      "@shared/*": ["./src/shared/*"],
+      "@test/*": ["./test/*"]
     }
   },
-  "include": ["src/**/*.ts"],
+  "include": ["src/**/*.ts", "test"],
   "exclude": ["node_modules"]
 }
