@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "npx tsx watch src/server.ts",
     "test": "jest --maxWorkers=50%",
-    "test:coverage": "jest . --coverage"
+    "test:coverage": "jest . --coverage",
+    "typecheck": "tsc --noEmit"
   },
   "repository": {
     "type": "git",
