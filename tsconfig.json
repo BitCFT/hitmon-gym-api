@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "module": "commonjs",
+    "outDir": "./dist",
+    "esModuleInterop": true,
+    "strict": true,
+    "sourceMap": true,
+    "paths": {
+      "@domain/*": ["./src/1-domain/*"],
+      "@business/*": ["./src/2-business/*"],
+      "@controller/*": ["./src/3-controller/*"],
+      "@framework/*": ["./src/4-framework/*"],
+      "@shared/*": ["./src/shared/*"]
+    }
+  },
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules"]
+}
