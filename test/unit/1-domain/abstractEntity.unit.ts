@@ -3,7 +3,7 @@ import {
   IFakeAbstractEntity,
 } from "@test/utility/fakes/entities/abstractEntity";
 
-describe("AbstractEntity", () => {
+describe("1-domain.abstractEntity", () => {
   it("should create an entity with empty properties if no props are provided", () => {
     const entity = FakeAbstractEntity.create(null);
 
