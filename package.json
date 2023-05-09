@@ -1,0 +1,25 @@
+{
+  "name": "hitmon-gym-api",
+  "version": "1.0.0",
+  "description": "an API for a gym management system",
+  "main": "index.js",
+  "scripts": {
+    "dev": "npx tsx watch src/server.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ivory-software/hitmon-gym-api.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ivory-software/hitmon-gym-api/issues"
+  },
+  "homepage": "https://github.com/ivory-software/hitmon-gym-api#readme",
+  "devDependencies": {
+    "tsx": "^3.12.7",
+    "typescript": "^5.0.4"
+  }
+}
