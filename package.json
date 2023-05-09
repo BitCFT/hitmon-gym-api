@@ -47,7 +47,7 @@
       "json",
       "node"
     ],
-    "testRegex": "/.*\\.(int)|(unit)\\.[jt]s$",
+    "testRegex": "/.*\\.(int)|(unit)\\.ts$",
     "testEnvironment": "node",
     "moduleNameMapper": {
       "@domain/(.*)": "<rootDir>/src/1-domain/$1",
