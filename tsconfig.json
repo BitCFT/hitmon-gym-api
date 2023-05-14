@@ -1,13 +1,34 @@
 {
   "extends": "./tsconfig.paths.json",
   "compilerOptions": {
-    "target": "es6",
-    "module": "commonjs",
-    "outDir": "./dist",
-    "esModuleInterop": true,
-    "strict": true,
-    "sourceMap": true
+    "target": "ES2020", // especifica a versão do ECMAScript que o código será transpilado
+    "lib": ["ES6", "ESNext"], // é usado para especificar as bibliotecas JavaScript que estarão disponíveis durante a compilação do TypeScript. Essas bibliotecas fornecem definições para objetos, métodos e outras funcionalidades que podem ser usadas em código TypeScript. No exemplo acima, o valor do atributo lib é um array que inclui as bibliotecas "ES6" e "ESNext". Isso significa que essas bibliotecas estarão disponíveis durante a compilação e, consequentemente, no código transpilado para o JavaScript.
+    "experimentalDecorators": true, //  permite o uso de funcionalidades experimentais do Typescript chamadas de "decorators".
+    "emitDecoratorMetadata": true, //  inclui metadados de tipo no código emitido pelo compilador Typescript quando os decorators são usados nas annotations.
+
+    "module": "CommonJS" /* Specify what module code is generated. */,
+    "rootDir": "./" /* Specify the root folder within your source files. */,
+    "outDir": "./dist", // especifica a pasta onde os arquivos javascript serão gerados após a transpilação
+
+    "removeComments": true, // remove os comentários nos arquivos javascript gerados
+
+    /* Interop Constraints */
+    "isolatedModules": true /* Certifique-se de que cada arquivo possa ser transpilado com segurança sem depender de outras importações. */,
+    "esModuleInterop": true, // é utilizado para habilitar interoperabilidade entre diferentes formatos de módulos (por exemplo, importar um módulo ES6 em um projeto CommonJS). A opção facilita a utilização de bibliotecas que utilizam diferentes formatos de módulos
+
+    /* Type Checking */
+    "strict": true /* Ativa todas as opções de verificação estrita do TypeScript. Isso inclui o uso de tipos explícitos, a verificação de nulo e indefinido, o uso de métodos e propriedades somente leitura, entre outros. */,
+    "noImplicitAny": true /* Essa opção força o desenvolvedor a informar o tipo de todas as variáveis e parâmetros de função. Se uma variável ou parâmetro não tiver um tipo explicitamente declarado, o compilador irá gerar um erro informando que o tipo implícito é "any". Essa opção ajuda a evitar erros de tipagem. */,
+    "strictNullChecks": true /* Essa opção ativa a verificação rigorosa de valores nulos e indefinidos. Ela obriga o desenvolvedor a tratar as variáveis que podem ser nulas ou indefinidas como tal, evitando erros relacionados a esses valores. */,
+    "strictFunctionTypes": true /* Essa opção ativa a verificação rigorosa de tipos de função. Com ela ativada, o compilador do TypeScript irá verificar se o tipo de retorno de uma função está correto. Essa opção ajuda a manter a consistência de tipos em todo o código. */,
+    "strictPropertyInitialization": true /* Essa opção obriga o desenvolvedor a inicializar todas as propriedades de uma classe ou objeto no momento da declaração ou no construtor da classe. Essa opção ajuda a garantir que as propriedades estejam sempre definidas e evita erros relacionados a valores indefinidos. */
   },
-  "include": ["src/**/*.ts", "test"],
-  "exclude": ["node_modules"]
+  "include": [
+    "src/**/*.ts",
+    "test"
+  ] /* O atributo include é usado para especificar quais arquivos devem ser incluídos no processo de compilação */,
+  "exclude": [
+    "./dist/**/*",
+    "node_modules"
+  ] /* é usado para especificar quais arquivos devem ser excluídos do processo de compilação. */
 }
