@@ -13,6 +13,7 @@ export type InputCreateUser = {
   accountVerificationCode: string;
   accountVerificationCodeExpiresAt: Date;
 };
+
 export interface IUserRepository {
   create(input: InputCreateUser): Promise<IUserEntity>;
   findById(id: string): Promise<OutputFindById>;
