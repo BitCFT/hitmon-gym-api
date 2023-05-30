@@ -58,5 +58,8 @@
       "@shared/(.*)": "<rootDir>/src/shared/$1",
       "@test/(.*)": "<rootDir>/test/$1"
     }
+  },
+  "dependencies": {
+    "inversify": "^6.0.1"
   }
 }
