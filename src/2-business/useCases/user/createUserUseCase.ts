@@ -24,6 +24,11 @@ import {
 import { ILoggerServiceToken } from "@business/services/iLogger";
 import { ILoggerService } from "@business/services/iLogger";
 import { addMinutesToADate } from "@business/helpers/addMinutesToADate";
+import {
+  IQueueService,
+  IQueueServiceToken,
+} from "@business/services/iQueueService";
+import { InputMailParams } from "@business/services/iMailTypes";
 
 @injectable()
 export class CreateUserUseCase
@@ -35,7 +40,8 @@ export class CreateUserUseCase
     @inject(IHashServiceToken) private hashService: IHashService,
     @inject(IRandomCodeServiceToken)
     private randomCodeService: IRandomCodeService,
-    @inject(ILoggerServiceToken) private logService: ILoggerService
+    @inject(ILoggerServiceToken) private logService: ILoggerService,
+    @inject(IQueueServiceToken) private queueService: IQueueService
   ) {}
 
   async exec(input: InputCreateUserDto): Promise<OutputCreateUserDto> {
@@ -61,6 +67,26 @@ export class CreateUserUseCase
         accountVerificationCode,
         accountVerificationCodeExpiresAt,
       });
+
+      const queueResponse = await this.queueService.sendData<
+        InputMailParams<"confirm-account">
+      >({
+        url: process.env.SEND_WELCOME_EMAIL || "",
+        payload: {
+          to: user.email,
+          subject: "Confirm Your Account",
+          body: {
+            template: "confirm-account",
+            envs: {
+              code: accountVerificationCode,
+            },
+          },
+        },
+      });
+
+      if (queueResponse.isLeft()) {
+        return left(queueResponse.value);
+      }
 
       return right(user);
     } catch (error) {
