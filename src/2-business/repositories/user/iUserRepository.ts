@@ -16,5 +16,5 @@ export type InputCreateUser = {
 export interface IUserRepository {
   create(input: InputCreateUser): Promise<IUserEntity>;
   findById(id: string): Promise<OutputFindById>;
-  findByEmail(id: string): Promise<OutputFindByEmail>;
+  findByEmail(email: string): Promise<OutputFindByEmail>;
 }
