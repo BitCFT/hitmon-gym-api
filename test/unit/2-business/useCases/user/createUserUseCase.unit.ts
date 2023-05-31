@@ -71,13 +71,17 @@ describe("2-business.useCases.user.createUserUseCase", () => {
     expect(result.value).toEqual(createUserGeneralError);
   });
 
-  // it("should calls findByEmail method with correct value", async () => {
-  //   const spy = jest.spyOn(userRepositoryMock, "findByEmail");
+  it("should calls generateHash method with correct value", async () => {
+    jest
+      .spyOn(userRepositoryMock, "findByEmail")
+      .mockImplementationOnce(async () => null);
 
-  //   await useCase.exec(input);
+    const spy = jest.spyOn(hashServiceMock, "generateHash");
 
-  //   expect(spy).toHaveBeenCalledWith(input.email);
-  // });
+    await useCase.exec(input);
+
+    expect(spy).toHaveBeenCalledWith(input.password);
+  });
 
   // SUCCESS
   it("should create user on success", async () => {
