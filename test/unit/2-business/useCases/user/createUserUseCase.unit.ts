@@ -149,4 +149,28 @@ describe("2-business.useCases.user.createUserUseCase", () => {
     expect(result.isLeft()).toBeTruthy();
     expect(result.value).toEqual(createUserGeneralError);
   });
+
+  it("should calls sendData method with correct values", async () => {
+    jest
+      .spyOn(userRepositoryMock, "findByEmail")
+      .mockImplementationOnce(async () => null);
+
+    const spy = jest.spyOn(queueServiceMock, "sendData");
+
+    await useCase.exec(input);
+
+    expect(spy).toHaveBeenCalledWith({
+      url: "",
+      payload: {
+        to: "string",
+        subject: "Confirm Your Account",
+        body: {
+          template: "confirm-account",
+          envs: {
+            code: "001",
+          },
+        },
+      },
+    });
+  });
 });
