@@ -1,6 +1,8 @@
 import { container } from "@test/utility/ioc/inversifyConfigTests";
 import { InputCreateUserDto } from "@business/dto/user/createUserDto";
 import { CreateUserUseCase } from "@business/useCases/user/createUserUseCase";
+import { userRepositoryMock } from "@test/utility/mocks/repository/userRepository.mock";
+import { fakeUserEntity } from "@test/utility/fakes/entities/userEntity";
 
 describe("2-business.useCases.user.createUserUseCase", () => {
   beforeEach(() => {
@@ -18,7 +20,15 @@ describe("2-business.useCases.user.createUserUseCase", () => {
     password: "pass",
   };
 
-  test("ensure 1 + 1 to be 2", async () => {
-    expect(1 + 1).toBe(2);
+  test("should create user on success", async () => {
+    jest
+      .spyOn(userRepositoryMock, "findByEmail")
+      .mockImplementationOnce(async () => null);
+
+    const result = await useCase.exec(input);
+
+    expect(result.isLeft()).toBeFalsy();
+    expect(result.isRight()).toBeTruthy();
+    expect(result.value).toEqual(fakeUserEntity);
   });
 });
