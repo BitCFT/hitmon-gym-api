@@ -3,7 +3,10 @@ import { InputCreateUserDto } from "@business/dto/user/createUserDto";
 import { CreateUserUseCase } from "@business/useCases/user/createUserUseCase";
 import { userRepositoryMock } from "@test/utility/mocks/repository/userRepository.mock";
 import { fakeUserEntity } from "@test/utility/fakes/entities/userEntity";
-import { createUserGeneralError } from "@business/module/errors/user/user";
+import {
+  createUserGeneralError,
+  emailNotAvailableError,
+} from "@business/module/errors/user/user";
 
 describe("2-business.useCases.user.createUserUseCase", () => {
   beforeEach(() => {
@@ -39,6 +42,14 @@ describe("2-business.useCases.user.createUserUseCase", () => {
     await useCase.exec(input);
 
     expect(spy).toHaveBeenCalledWith(input.email);
+  });
+
+  it("should return left if email already exists", async () => {
+    const result = await useCase.exec(input);
+
+    expect(result.isRight()).toBeFalsy();
+    expect(result.isLeft()).toBeTruthy();
+    expect(result.value).toEqual(emailNotAvailableError);
   });
 
   it("should create user on success", async () => {
