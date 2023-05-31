@@ -5,7 +5,7 @@ import {
 import { Container } from "inversify";
 import { userRepositoryMock } from "@test/utility/mocks/repository/userRepository.mock";
 
-export const FakeRepositoryModule = (container: Container) => {
+export const FakeRepositoriesModule = (container: Container) => {
   container
     .bind<IUserRepository>(IUserRepositoryToken)
     .toConstantValue(userRepositoryMock);

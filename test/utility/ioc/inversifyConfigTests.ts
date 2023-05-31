@@ -1,11 +1,11 @@
 import { container } from "@shared/container";
 import { UseCasesModule } from "@framework/ioc/useCasesModule";
 import { FakeServicesModule } from "./fakeServicesModule";
-import { FakeRepositoryModule } from "./fakeRepositoryModule";
+import { FakeRepositoriesModule } from "./fakeRepositoriesModule";
 
 container.load(UseCasesModule);
 
 FakeServicesModule(container);
-FakeRepositoryModule(container);
+FakeRepositoriesModule(container);
 
 export { container };
