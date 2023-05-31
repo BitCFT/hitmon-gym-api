@@ -1,12 +1,13 @@
 import { ILoggerService } from "@business/services/iLogger";
-import { injectable } from "inversify";
 
-@injectable()
-export class LoggerServiceMock implements ILoggerService {
-  log(log: any): void {
-    console.log(log);
-  }
-  error(log: any): void {
-    console.error(log);
-  }
-}
+export const logServiceMock: ILoggerService = {
+  log: jest.fn().mockResolvedValue(null) as unknown,
+  error: jest.fn().mockResolvedValue(null) as unknown,
+  warn: jest.fn().mockResolvedValue(null) as unknown,
+  info: jest.fn().mockResolvedValue(null) as unknown,
+  debug: jest.fn().mockResolvedValue(null) as unknown,
+  notice: jest.fn().mockResolvedValue(null) as unknown,
+  crit: jest.fn().mockResolvedValue(null) as unknown,
+  alert: jest.fn().mockResolvedValue(null) as unknown,
+  emerg: jest.fn().mockResolvedValue(null) as unknown,
+} as ILoggerService;
