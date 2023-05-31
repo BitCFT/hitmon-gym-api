@@ -8,6 +8,7 @@ import {
   emailNotAvailableError,
 } from "@business/module/errors/user/user";
 import { hashServiceMock } from "@test/utility/mocks/service/hashService.mock";
+import { queueServiceMock } from "@test/utility/mocks/service/queueService.mock";
 
 describe("2-business.useCases.user.createUserUseCase", () => {
   beforeEach(() => {
@@ -130,5 +131,22 @@ describe("2-business.useCases.user.createUserUseCase", () => {
     expect(result.isLeft()).toBeFalsy();
     expect(result.isRight()).toBeTruthy();
     expect(result.value).toEqual(fakeUserEntity);
+  });
+
+  // QUEUE SERVICE
+  it("should is not be able to send data on queue because exception in sendData method", async () => {
+    jest
+      .spyOn(userRepositoryMock, "findByEmail")
+      .mockImplementationOnce(async () => null);
+
+    jest.spyOn(queueServiceMock, "sendData").mockImplementationOnce(() => {
+      throw new Error("mocked error");
+    });
+
+    const result = await useCase.exec(input);
+
+    expect(result.isRight()).toBeFalsy();
+    expect(result.isLeft()).toBeTruthy();
+    expect(result.value).toEqual(createUserGeneralError);
   });
 });
