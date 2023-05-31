@@ -9,6 +9,8 @@ import {
 } from "@business/module/errors/user/user";
 import { hashServiceMock } from "@test/utility/mocks/service/hashService.mock";
 import { queueServiceMock } from "@test/utility/mocks/service/queueService.mock";
+import { left } from "@shared/either";
+import { IError } from "@shared/iError";
 
 describe("2-business.useCases.user.createUserUseCase", () => {
   beforeEach(() => {
@@ -172,5 +174,27 @@ describe("2-business.useCases.user.createUserUseCase", () => {
         },
       },
     });
+  });
+
+  it("should return left if queue service returns left", async () => {
+    const fakeIError: IError = {
+      code: "000",
+      message: "Fake Message",
+      shortMessage: "fakeShortMessage",
+    };
+
+    jest
+      .spyOn(userRepositoryMock, "findByEmail")
+      .mockImplementationOnce(async () => null);
+
+    jest
+      .spyOn(queueServiceMock, "sendData")
+      .mockResolvedValue(left(fakeIError));
+
+    const result = await useCase.exec(input);
+
+    expect(result.isRight()).toBeFalsy();
+    expect(result.isLeft()).toBeTruthy();
+    expect(result.value).toEqual(fakeIError);
   });
 });
