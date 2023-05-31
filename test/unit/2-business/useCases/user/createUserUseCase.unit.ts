@@ -83,6 +83,23 @@ describe("2-business.useCases.user.createUserUseCase", () => {
     expect(spy).toHaveBeenCalledWith(input.password);
   });
 
+  // CREATE USER
+  it("should is not be able to create user because exception in create method", async () => {
+    jest
+      .spyOn(userRepositoryMock, "findByEmail")
+      .mockImplementationOnce(async () => null);
+
+    jest.spyOn(userRepositoryMock, "create").mockImplementationOnce(() => {
+      throw new Error("mocked error");
+    });
+
+    const result = await useCase.exec(input);
+
+    expect(result.isRight()).toBeFalsy();
+    expect(result.isLeft()).toBeTruthy();
+    expect(result.value).toEqual(createUserGeneralError);
+  });
+
   // SUCCESS
   it("should create user on success", async () => {
     jest
