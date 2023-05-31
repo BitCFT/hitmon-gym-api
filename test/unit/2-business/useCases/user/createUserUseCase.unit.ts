@@ -100,6 +100,25 @@ describe("2-business.useCases.user.createUserUseCase", () => {
     expect(result.value).toEqual(createUserGeneralError);
   });
 
+  it("should calls create method with correct values", async () => {
+    jest.useFakeTimers().setSystemTime(new Date("2023-01-01T00:00:00.000Z"));
+
+    jest
+      .spyOn(userRepositoryMock, "findByEmail")
+      .mockImplementationOnce(async () => null);
+
+    const spy = jest.spyOn(userRepositoryMock, "create");
+
+    await useCase.exec(input);
+
+    expect(spy).toHaveBeenCalledWith({
+      ...input,
+      password: "hash",
+      accountVerificationCode: "001",
+      accountVerificationCodeExpiresAt: new Date("2023-01-01T00:03:00.000Z"),
+    });
+  });
+
   // SUCCESS
   it("should create user on success", async () => {
     jest
