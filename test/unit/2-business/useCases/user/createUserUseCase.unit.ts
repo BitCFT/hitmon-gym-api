@@ -28,7 +28,6 @@ describe("2-business.useCases.user.createUserUseCase", () => {
     password: "pass",
   };
 
-  // FIND BY EMAIL SERVICE //
   it("should is not be able to create user because exception in findByEmail method", async () => {
     jest.spyOn(userRepositoryMock, "findByEmail").mockImplementationOnce(() => {
       throw new Error("mocked error");
@@ -57,7 +56,6 @@ describe("2-business.useCases.user.createUserUseCase", () => {
     expect(result.value).toEqual(emailNotAvailableError);
   });
 
-  // HASH SERVICE
   it("should is not be able to create user because exception in generateHash method", async () => {
     jest
       .spyOn(userRepositoryMock, "findByEmail")
@@ -86,7 +84,6 @@ describe("2-business.useCases.user.createUserUseCase", () => {
     expect(spy).toHaveBeenCalledWith(input.password);
   });
 
-  // CREATE USER
   it("should is not be able to create user because exception in create method", async () => {
     jest
       .spyOn(userRepositoryMock, "findByEmail")
@@ -122,7 +119,6 @@ describe("2-business.useCases.user.createUserUseCase", () => {
     });
   });
 
-  // SUCCESS
   it("should create user on success", async () => {
     jest
       .spyOn(userRepositoryMock, "findByEmail")
@@ -135,7 +131,6 @@ describe("2-business.useCases.user.createUserUseCase", () => {
     expect(result.value).toEqual(fakeUserEntity);
   });
 
-  // QUEUE SERVICE
   it("should is not be able to send data on queue because exception in sendData method", async () => {
     jest
       .spyOn(userRepositoryMock, "findByEmail")
