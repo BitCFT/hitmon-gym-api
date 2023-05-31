@@ -7,6 +7,7 @@ import {
   createUserGeneralError,
   emailNotAvailableError,
 } from "@business/module/errors/user/user";
+import { hashServiceMock } from "@test/utility/mocks/service/hashService.mock";
 
 describe("2-business.useCases.user.createUserUseCase", () => {
   beforeEach(() => {
@@ -24,6 +25,7 @@ describe("2-business.useCases.user.createUserUseCase", () => {
     password: "pass",
   };
 
+  // FIND BY EMAIL SERVICE //
   it("should is not be able to create user because exception in findByEmail method", async () => {
     jest.spyOn(userRepositoryMock, "findByEmail").mockImplementationOnce(() => {
       throw new Error("mocked error");
@@ -52,6 +54,32 @@ describe("2-business.useCases.user.createUserUseCase", () => {
     expect(result.value).toEqual(emailNotAvailableError);
   });
 
+  // HASH SERVICE
+  it("should is not be able to create user because exception in generateHash method", async () => {
+    jest
+      .spyOn(userRepositoryMock, "findByEmail")
+      .mockImplementationOnce(async () => null);
+
+    jest.spyOn(hashServiceMock, "generateHash").mockImplementationOnce(() => {
+      throw new Error("mocked error");
+    });
+
+    const result = await useCase.exec(input);
+
+    expect(result.isRight()).toBeFalsy();
+    expect(result.isLeft()).toBeTruthy();
+    expect(result.value).toEqual(createUserGeneralError);
+  });
+
+  // it("should calls findByEmail method with correct value", async () => {
+  //   const spy = jest.spyOn(userRepositoryMock, "findByEmail");
+
+  //   await useCase.exec(input);
+
+  //   expect(spy).toHaveBeenCalledWith(input.email);
+  // });
+
+  // SUCCESS
   it("should create user on success", async () => {
     jest
       .spyOn(userRepositoryMock, "findByEmail")
