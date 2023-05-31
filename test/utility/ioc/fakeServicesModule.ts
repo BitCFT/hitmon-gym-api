@@ -1,3 +1,4 @@
+import { Container } from "inversify";
 import {
   IHashService,
   IHashServiceToken,
@@ -6,25 +7,30 @@ import {
   ILoggerService,
   ILoggerServiceToken,
 } from "@business/services/iLogger";
-import { ContainerModule, interfaces } from "inversify";
-import { HashServiceMock } from "../mocks/service/hashService.mock";
+import { hashServiceMock } from "@test/utility/mocks/service/hashService.mock";
 import {
   IRandomCodeService,
   IRandomCodeServiceToken,
 } from "@business/services/iRandomCodeService";
-import { RandomCodeServiceMock } from "../mocks/service/randomCodeService.mock";
-import { LoggerServiceMock } from "../mocks/service/loggerService.mock";
+import { randomCodeServiceMock } from "@test/utility/mocks/service/randomCodeService.mock";
+import { logServiceMock } from "@test/utility/mocks/service/loggerService.mock";
 import {
   IQueueService,
   IQueueServiceToken,
 } from "@business/services/iQueueService";
-import { QueueServiceMock } from "../mocks/service/queueService.mock";
+import { queueServiceMock } from "@test/utility/mocks/service/queueService.mock";
 
-export const FakeServicesModule = new ContainerModule(
-  (bind: interfaces.Bind) => {
-    bind<IHashService>(IHashServiceToken).to(HashServiceMock);
-    bind<IRandomCodeService>(IRandomCodeServiceToken).to(RandomCodeServiceMock);
-    bind<ILoggerService>(ILoggerServiceToken).to(LoggerServiceMock);
-    bind<IQueueService>(IQueueServiceToken).to(QueueServiceMock);
-  }
-);
+export const FakeServicesModule = (container: Container) => {
+  container
+    .bind<IHashService>(IHashServiceToken)
+    .toConstantValue(hashServiceMock);
+  container
+    .bind<IRandomCodeService>(IRandomCodeServiceToken)
+    .toConstantValue(randomCodeServiceMock);
+  container
+    .bind<ILoggerService>(ILoggerServiceToken)
+    .toConstantValue(logServiceMock);
+  container
+    .bind<IQueueService>(IQueueServiceToken)
+    .toConstantValue(queueServiceMock);
+};

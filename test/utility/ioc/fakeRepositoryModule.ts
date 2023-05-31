@@ -2,11 +2,11 @@ import {
   IUserRepository,
   IUserRepositoryToken,
 } from "@business/repositories/user/iUserRepository";
-import { ContainerModule, interfaces } from "inversify";
-import { UserRepositoryMock } from "../mocks/repository/userRepository.mock";
+import { Container } from "inversify";
+import { userRepositoryMock } from "@test/utility/mocks/repository/userRepository.mock";
 
-export const FakeRepositoryModule = new ContainerModule(
-  (bind: interfaces.Bind) => {
-    bind<IUserRepository>(IUserRepositoryToken).to(UserRepositoryMock);
-  }
-);
+export const FakeRepositoryModule = (container: Container) => {
+  container
+    .bind<IUserRepository>(IUserRepositoryToken)
+    .toConstantValue(userRepositoryMock);
+};

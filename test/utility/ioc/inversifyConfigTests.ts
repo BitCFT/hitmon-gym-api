@@ -4,7 +4,8 @@ import { FakeServicesModule } from "./fakeServicesModule";
 import { FakeRepositoryModule } from "./fakeRepositoryModule";
 
 container.load(UseCasesModule);
-container.load(FakeServicesModule);
-container.load(FakeRepositoryModule);
+
+FakeServicesModule(container);
+FakeRepositoryModule(container);
 
 export { container };
