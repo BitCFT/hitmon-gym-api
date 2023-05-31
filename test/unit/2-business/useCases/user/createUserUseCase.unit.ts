@@ -33,6 +33,14 @@ describe("2-business.useCases.user.createUserUseCase", () => {
     expect(result.value).toEqual(createUserGeneralError);
   });
 
+  it("should calls findByEmail method with correct value", async () => {
+    const spy = jest.spyOn(userRepositoryMock, "findByEmail");
+
+    await useCase.exec(input);
+
+    expect(spy).toHaveBeenCalledWith(input.email);
+  });
+
   it("should create user on success", async () => {
     jest
       .spyOn(userRepositoryMock, "findByEmail")
