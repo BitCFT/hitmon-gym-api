@@ -61,13 +61,11 @@ describe('2-business.useCases.user.resendAccountVerificationCodeUseCase', () => 
     expect(result.value).toEqual(resendAccountVerificationCodeGeneralError);
   });
 
-  // it('should calls generateCode method', async () => {
-  //   jest.spyOn(userRepositoryMock, 'findByEmail').mockImplementationOnce(async () => null);
+  it('should calls generateCode method', async () => {
+    const spy = jest.spyOn(randomCodeServiceMock, 'generateCode');
 
-  //   const spy = jest.spyOn(randomCodeServiceMock, 'generateCode');
+    await useCase.exec(input);
 
-  //   await useCase.exec(input);
-
-  //   expect(spy).toHaveBeenCalled();
-  // });
+    expect(spy).toHaveBeenCalled();
+  });
 });
