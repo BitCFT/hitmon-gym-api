@@ -20,4 +20,5 @@ export interface IUserRepository {
   create(input: InputCreateUser): Promise<IUserEntity>;
   findById(id: string): Promise<OutputFindById>;
   findByEmail(email: string): Promise<OutputFindByEmail>;
+  update(id: string, params: Partial<IUserEntity>): Promise<IUserEntity>;
 }
