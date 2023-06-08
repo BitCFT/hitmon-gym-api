@@ -8,7 +8,7 @@ import { hashServiceMock } from '@test/utility/mocks/service/hashService.mock';
 import { queueServiceMock } from '@test/utility/mocks/service/queueService.mock';
 import { left } from '@shared/either';
 import { IError } from '@shared/iError';
-import { RegistrationStep } from '@domain/entities/userEntity';
+import { RegistrationStep, UserEntity } from '@domain/entities/userEntity';
 import { randomCodeServiceMock } from '@test/utility/mocks/service/randomCodeService.mock';
 
 describe('2-business.useCases.user.createUserUseCase', () => {
@@ -101,6 +101,24 @@ describe('2-business.useCases.user.createUserUseCase', () => {
     await useCase.exec(input);
 
     expect(spy).toHaveBeenCalled();
+  });
+
+  it('should return left if on create entity returns left', async () => {
+    jest.spyOn(userRepositoryMock, 'findByEmail').mockImplementationOnce(async () => null);
+
+    const fakeError: IError = {
+      code: '000',
+      message: 'fakeMessage',
+      shortMessage: 'fakeShortMessage',
+    };
+
+    jest.spyOn(UserEntity, 'create').mockReturnValueOnce(left(fakeError));
+
+    const result = await useCase.exec(input);
+
+    expect(result.isRight()).toBeFalsy();
+    expect(result.isLeft()).toBeTruthy();
+    expect(result.value).toEqual(fakeError);
   });
 
   it('should is not be able to create user because exception in create method', async () => {
