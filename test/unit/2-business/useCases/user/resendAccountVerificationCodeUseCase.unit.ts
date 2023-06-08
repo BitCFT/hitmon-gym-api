@@ -5,6 +5,7 @@ import { userRepositoryMock } from '@test/utility/mocks/repository/userRepositor
 import { resendAccountVerificationCodeGeneralError, userIsNotFoundError } from '@business/module/errors/user/user';
 import { randomCodeServiceMock } from '@test/utility/mocks/service/randomCodeService.mock';
 import { fakeUserEntity } from '@test/utility/fakes/entities/userEntity';
+import { queueServiceMock } from '@test/utility/mocks/service/queueService.mock';
 
 describe('2-business.useCases.user.resendAccountVerificationCodeUseCase', () => {
   beforeEach(() => {
@@ -102,4 +103,56 @@ describe('2-business.useCases.user.resendAccountVerificationCodeUseCase', () => 
     expect(result.isRight()).toBeTruthy();
     expect(result.value).toEqual({});
   });
+
+  it('should is not be able to send data on queue because exception in sendData method', async () => {
+    jest.spyOn(queueServiceMock, 'sendData').mockImplementationOnce(() => {
+      throw new Error('mocked error');
+    });
+
+    const result = await useCase.exec(input);
+
+    expect(result.isRight()).toBeFalsy();
+    expect(result.isLeft()).toBeTruthy();
+    expect(result.value).toEqual(resendAccountVerificationCodeGeneralError);
+  });
+
+  // it('should calls sendData method with correct values', async () => {
+  //   jest.spyOn(userRepositoryMock, 'findByEmail').mockImplementationOnce(async () => null);
+
+  //   const spy = jest.spyOn(queueServiceMock, 'sendData');
+
+  //   await useCase.exec(input);
+
+  //   expect(spy).toHaveBeenCalledWith({
+  //     url: '',
+  //     payload: {
+  //       to: 'string',
+  //       subject: 'Confirm Your Account',
+  //       body: {
+  //         template: 'confirm-account',
+  //         envs: {
+  //           code: '001',
+  //         },
+  //       },
+  //     },
+  //   });
+  // });
+
+  // it('should return left if queue service returns left', async () => {
+  //   const fakeIError: IError = {
+  //     code: '000',
+  //     message: 'Fake Message',
+  //     shortMessage: 'fakeShortMessage',
+  //   };
+
+  //   jest.spyOn(userRepositoryMock, 'findByEmail').mockImplementationOnce(async () => null);
+
+  //   jest.spyOn(queueServiceMock, 'sendData').mockResolvedValue(left(fakeIError));
+
+  //   const result = await useCase.exec(input);
+
+  //   expect(result.isRight()).toBeFalsy();
+  //   expect(result.isLeft()).toBeTruthy();
+  //   expect(result.value).toEqual(fakeIError);
+  // });
 });
