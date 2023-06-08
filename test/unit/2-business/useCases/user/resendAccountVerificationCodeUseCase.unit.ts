@@ -29,4 +29,20 @@ describe('2-business.useCases.user.resendAccountVerificationCodeUseCase', () => 
     expect(result.isLeft()).toBeTruthy();
     expect(result.value).toEqual(resendAccountVerificationCodeGeneralError);
   });
+
+  it('should calls findByEmail method with correct value', async () => {
+    const spy = jest.spyOn(userRepositoryMock, 'findByEmail');
+
+    await useCase.exec(input);
+
+    expect(spy).toHaveBeenCalledWith(input.email);
+  });
+
+  // it('should return left if email already exists', async () => {
+  //   const result = await useCase.exec(input);
+
+  //   expect(result.isRight()).toBeFalsy();
+  //   expect(result.isLeft()).toBeTruthy();
+  //   expect(result.value).toEqual(emailNotAvailableError);
+  // });
 });
