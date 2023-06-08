@@ -4,6 +4,7 @@ import { InputResendAccountVerificationCodeDto } from '@business/dto/user/resend
 import { userRepositoryMock } from '@test/utility/mocks/repository/userRepository.mock';
 import { resendAccountVerificationCodeGeneralError, userIsNotFoundError } from '@business/module/errors/user/user';
 import { randomCodeServiceMock } from '@test/utility/mocks/service/randomCodeService.mock';
+import { fakeUserEntity } from '@test/utility/fakes/entities/userEntity';
 
 describe('2-business.useCases.user.resendAccountVerificationCodeUseCase', () => {
   beforeEach(() => {
@@ -94,13 +95,11 @@ describe('2-business.useCases.user.resendAccountVerificationCodeUseCase', () => 
     });
   });
 
-  // it('should create user on success', async () => {
-  //   jest.spyOn(userRepositoryMock, 'findByEmail').mockImplementationOnce(async () => null);
+  it('should update user on success', async () => {
+    const result = await useCase.exec(input);
 
-  //   const result = await useCase.exec(input);
-
-  //   expect(result.isLeft()).toBeFalsy();
-  //   expect(result.isRight()).toBeTruthy();
-  //   expect(result.value).toEqual(fakeUserEntity);
-  // });
+    expect(result.isLeft()).toBeFalsy();
+    expect(result.isRight()).toBeTruthy();
+    expect(result.value).toEqual({});
+  });
 });
