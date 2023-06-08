@@ -3,6 +3,7 @@ import { ResendAccountVerificationCodeUseCase } from '@business/useCases/user/re
 import { InputResendAccountVerificationCodeDto } from '@business/dto/user/resendAccountVerificationCodeDto';
 import { userRepositoryMock } from '@test/utility/mocks/repository/userRepository.mock';
 import { resendAccountVerificationCodeGeneralError, userIsNotFoundError } from '@business/module/errors/user/user';
+import { randomCodeServiceMock } from '@test/utility/mocks/service/randomCodeService.mock';
 
 describe('2-business.useCases.user.resendAccountVerificationCodeUseCase', () => {
   beforeEach(() => {
@@ -47,4 +48,26 @@ describe('2-business.useCases.user.resendAccountVerificationCodeUseCase', () => 
     expect(result.isLeft()).toBeTruthy();
     expect(result.value).toEqual(userIsNotFoundError);
   });
+
+  it('should is not be able to create user because exception in generateCode method', async () => {
+    jest.spyOn(randomCodeServiceMock, 'generateCode').mockImplementationOnce(() => {
+      throw new Error('mocked error');
+    });
+
+    const result = await useCase.exec(input);
+
+    expect(result.isRight()).toBeFalsy();
+    expect(result.isLeft()).toBeTruthy();
+    expect(result.value).toEqual(resendAccountVerificationCodeGeneralError);
+  });
+
+  // it('should calls generateCode method', async () => {
+  //   jest.spyOn(userRepositoryMock, 'findByEmail').mockImplementationOnce(async () => null);
+
+  //   const spy = jest.spyOn(randomCodeServiceMock, 'generateCode');
+
+  //   await useCase.exec(input);
+
+  //   expect(spy).toHaveBeenCalled();
+  // });
 });
