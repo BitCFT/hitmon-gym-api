@@ -5,4 +5,5 @@ export const userRepositoryMock: IUserRepository = {
   create: jest.fn().mockResolvedValue(fakeUserEntity),
   findById: jest.fn().mockResolvedValue(fakeUserEntity),
   findByEmail: jest.fn().mockResolvedValue(fakeUserEntity),
+  update: jest.fn().mockResolvedValue(fakeUserEntity),
 };
