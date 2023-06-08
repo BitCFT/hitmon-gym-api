@@ -25,7 +25,6 @@ export class UserEntity extends AbstractEntity<IUserEntity> {
   static create(props: IUserEntity): Either<IError, UserEntity> {
     const user = new UserEntity({
       ...props,
-      createdAt: new Date(),
     });
 
     return right(user);
