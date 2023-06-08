@@ -68,4 +68,39 @@ describe('2-business.useCases.user.resendAccountVerificationCodeUseCase', () => 
 
     expect(spy).toHaveBeenCalled();
   });
+
+  it('should is not be able to update user because exception in update method', async () => {
+    jest.spyOn(userRepositoryMock, 'update').mockImplementationOnce(() => {
+      throw new Error('mocked error');
+    });
+
+    const result = await useCase.exec(input);
+
+    expect(result.isRight()).toBeFalsy();
+    expect(result.isLeft()).toBeTruthy();
+    expect(result.value).toEqual(resendAccountVerificationCodeGeneralError);
+  });
+
+  it('should calls update method with correct values', async () => {
+    jest.useFakeTimers().setSystemTime(new Date('2023-01-01T00:00:00.000Z'));
+
+    const spy = jest.spyOn(userRepositoryMock, 'update');
+
+    await useCase.exec(input);
+
+    expect(spy).toHaveBeenCalledWith('string', {
+      accountVerificationCode: '001',
+      accountVerificationCodeExpiresAt: new Date('2023-01-01T00:03:00.000Z'),
+    });
+  });
+
+  // it('should create user on success', async () => {
+  //   jest.spyOn(userRepositoryMock, 'findByEmail').mockImplementationOnce(async () => null);
+
+  //   const result = await useCase.exec(input);
+
+  //   expect(result.isLeft()).toBeFalsy();
+  //   expect(result.isRight()).toBeTruthy();
+  //   expect(result.value).toEqual(fakeUserEntity);
+  // });
 });
