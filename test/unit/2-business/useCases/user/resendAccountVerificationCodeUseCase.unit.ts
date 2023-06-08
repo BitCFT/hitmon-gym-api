@@ -116,27 +116,25 @@ describe('2-business.useCases.user.resendAccountVerificationCodeUseCase', () => 
     expect(result.value).toEqual(resendAccountVerificationCodeGeneralError);
   });
 
-  // it('should calls sendData method with correct values', async () => {
-  //   jest.spyOn(userRepositoryMock, 'findByEmail').mockImplementationOnce(async () => null);
+  it('should calls sendData method with correct values', async () => {
+    const spy = jest.spyOn(queueServiceMock, 'sendData');
 
-  //   const spy = jest.spyOn(queueServiceMock, 'sendData');
+    await useCase.exec(input);
 
-  //   await useCase.exec(input);
-
-  //   expect(spy).toHaveBeenCalledWith({
-  //     url: '',
-  //     payload: {
-  //       to: 'string',
-  //       subject: 'Confirm Your Account',
-  //       body: {
-  //         template: 'confirm-account',
-  //         envs: {
-  //           code: '001',
-  //         },
-  //       },
-  //     },
-  //   });
-  // });
+    expect(spy).toHaveBeenCalledWith({
+      url: '',
+      payload: {
+        to: 'string',
+        subject: 'Confirm Your Account',
+        body: {
+          template: 'confirm-account',
+          envs: {
+            code: '001',
+          },
+        },
+      },
+    });
+  });
 
   // it('should return left if queue service returns left', async () => {
   //   const fakeIError: IError = {
