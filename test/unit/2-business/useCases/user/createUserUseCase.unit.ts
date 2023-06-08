@@ -93,15 +93,15 @@ describe('2-business.useCases.user.createUserUseCase', () => {
     expect(result.value).toEqual(createUserGeneralError);
   });
 
-  // it('should calls generateHash method with correct value', async () => {
-  //   jest.spyOn(userRepositoryMock, 'findByEmail').mockImplementationOnce(async () => null);
+  it('should calls generateCode method', async () => {
+    jest.spyOn(userRepositoryMock, 'findByEmail').mockImplementationOnce(async () => null);
 
-  //   const spy = jest.spyOn(hashServiceMock, 'generateHash');
+    const spy = jest.spyOn(randomCodeServiceMock, 'generateCode');
 
-  //   await useCase.exec(input);
+    await useCase.exec(input);
 
-  //   expect(spy).toHaveBeenCalledWith(input.password);
-  // });
+    expect(spy).toHaveBeenCalled();
+  });
 
   it('should is not be able to create user because exception in create method', async () => {
     jest.spyOn(userRepositoryMock, 'findByEmail').mockImplementationOnce(async () => null);
