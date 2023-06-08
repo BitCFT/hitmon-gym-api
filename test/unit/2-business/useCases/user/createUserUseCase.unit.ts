@@ -8,6 +8,8 @@ import { hashServiceMock } from '@test/utility/mocks/service/hashService.mock';
 import { queueServiceMock } from '@test/utility/mocks/service/queueService.mock';
 import { left } from '@shared/either';
 import { IError } from '@shared/iError';
+import { RegistrationStep } from '@domain/entities/userEntity';
+import { randomCodeServiceMock } from '@test/utility/mocks/service/randomCodeService.mock';
 
 describe('2-business.useCases.user.createUserUseCase', () => {
   beforeEach(() => {
@@ -77,6 +79,30 @@ describe('2-business.useCases.user.createUserUseCase', () => {
     expect(spy).toHaveBeenCalledWith(input.password);
   });
 
+  it('should is not be able to create user because exception in generateCode method', async () => {
+    jest.spyOn(userRepositoryMock, 'findByEmail').mockImplementationOnce(async () => null);
+
+    jest.spyOn(randomCodeServiceMock, 'generateCode').mockImplementationOnce(() => {
+      throw new Error('mocked error');
+    });
+
+    const result = await useCase.exec(input);
+
+    expect(result.isRight()).toBeFalsy();
+    expect(result.isLeft()).toBeTruthy();
+    expect(result.value).toEqual(createUserGeneralError);
+  });
+
+  // it('should calls generateHash method with correct value', async () => {
+  //   jest.spyOn(userRepositoryMock, 'findByEmail').mockImplementationOnce(async () => null);
+
+  //   const spy = jest.spyOn(hashServiceMock, 'generateHash');
+
+  //   await useCase.exec(input);
+
+  //   expect(spy).toHaveBeenCalledWith(input.password);
+  // });
+
   it('should is not be able to create user because exception in create method', async () => {
     jest.spyOn(userRepositoryMock, 'findByEmail').mockImplementationOnce(async () => null);
 
@@ -102,7 +128,9 @@ describe('2-business.useCases.user.createUserUseCase', () => {
 
     expect(spy).toHaveBeenCalledWith({
       ...input,
+      id: '0c5244eb-d80e-452c-bf99-383236161a51',
       password: 'hash',
+      registrationStep: RegistrationStep.PENDING,
       accountVerificationCode: '001',
       accountVerificationCodeExpiresAt: new Date('2023-01-01T00:03:00.000Z'),
     });
