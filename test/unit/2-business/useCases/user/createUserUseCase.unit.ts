@@ -121,6 +121,24 @@ describe('2-business.useCases.user.createUserUseCase', () => {
     expect(result.value).toEqual(fakeError);
   });
 
+  it('should calls create user entity with correct values', async () => {
+    jest.useFakeTimers().setSystemTime(new Date('2023-01-01T00:00:00.000Z'));
+    jest.spyOn(userRepositoryMock, 'findByEmail').mockImplementationOnce(async () => null);
+
+    const spy = jest.spyOn(UserEntity, 'create');
+
+    await useCase.exec(input);
+
+    expect(spy).toHaveBeenCalledWith({
+      ...input,
+      id: '0c5244eb-d80e-452c-bf99-383236161a51',
+      password: 'hash',
+      registrationStep: RegistrationStep.PENDING,
+      accountVerificationCode: '001',
+      accountVerificationCodeExpiresAt: new Date('2023-01-01T00:03:00.000Z'),
+    });
+  });
+
   it('should is not be able to create user because exception in create method', async () => {
     jest.spyOn(userRepositoryMock, 'findByEmail').mockImplementationOnce(async () => null);
 
