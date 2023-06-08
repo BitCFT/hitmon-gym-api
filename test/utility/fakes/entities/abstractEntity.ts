@@ -1,4 +1,4 @@
-import { AbstractEntity } from "@domain/abstractEntity";
+import { AbstractEntity } from '@domain/abstractEntity';
 
 export interface IFakeAbstractEntity {
   foo?: string;

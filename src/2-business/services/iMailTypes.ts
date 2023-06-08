@@ -1,5 +1,5 @@
 export type EnvsMailTemplateType = {
-  "confirm-account": {
+  'confirm-account': {
     code: string;
   };
 };

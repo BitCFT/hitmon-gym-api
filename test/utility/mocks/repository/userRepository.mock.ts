@@ -1,5 +1,5 @@
-import { IUserRepository } from "@business/repositories/user/iUserRepository";
-import { fakeUserEntity } from "@test/utility/fakes/entities/userEntity";
+import { IUserRepository } from '@business/repositories/user/iUserRepository';
+import { fakeUserEntity } from '@test/utility/fakes/entities/userEntity';
 
 export const userRepositoryMock: IUserRepository = {
   create: jest.fn().mockResolvedValue(fakeUserEntity),

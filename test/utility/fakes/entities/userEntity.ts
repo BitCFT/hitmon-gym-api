@@ -1,9 +1,9 @@
-import { IUserEntity, RegistrationStep } from "@domain/entities/userEntity";
+import { IUserEntity, RegistrationStep } from '@domain/entities/userEntity';
 
 export const fakeUserEntity: IUserEntity = {
-  id: "string",
-  email: "string",
-  password: "string",
+  id: 'string',
+  email: 'string',
+  password: 'string',
   registrationStep: RegistrationStep.PENDING,
-  userName: "string",
+  userName: 'string',
 };

@@ -1,7 +1,7 @@
-import { Either } from "@shared/either";
-import { IError } from "@shared/iError";
+import { Either } from '@shared/either';
+import { IError } from '@shared/iError';
 
-export const IQueueServiceToken = Symbol.for("IQueueServiceToken");
+export const IQueueServiceToken = Symbol.for('IQueueServiceToken');
 
 export type InputSendQueueData<T> = {
   url: string;

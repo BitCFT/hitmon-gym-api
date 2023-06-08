@@ -1,4 +1,4 @@
-export const IHashServiceToken = Symbol.for("IHashServiceToken");
+export const IHashServiceToken = Symbol.for('IHashServiceToken');
 
 export interface IHashService {
   generateHash(value: string): Promise<string>;

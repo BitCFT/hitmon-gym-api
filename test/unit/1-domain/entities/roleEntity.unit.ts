@@ -1,8 +1,8 @@
-import { RoleEntity } from "@domain/entities/roleEntity";
-import { fakeRoleEntity } from "@test/utility/fakes/entities/roleEntity";
+import { RoleEntity } from '@domain/entities/roleEntity';
+import { fakeRoleEntity } from '@test/utility/fakes/entities/roleEntity';
 
-describe("1-domain.entities.roleEntity", () => {
-  test("should be able to create a new role", () => {
+describe('1-domain.entities.roleEntity', () => {
+  test('should be able to create a new role', () => {
     const roleEntity = RoleEntity.create(fakeRoleEntity);
 
     if (roleEntity.isRight()) {

@@ -1,4 +1,4 @@
-export const ILoggerServiceToken = Symbol.for("ILoggerService");
+export const ILoggerServiceToken = Symbol.for('ILoggerService');
 
 export interface ILoggerService {
   log(log: any): void;

@@ -1,4 +1,4 @@
-import { ILoggerService } from "@business/services/iLogger";
+import { ILoggerService } from '@business/services/iLogger';
 
 export const logServiceMock: ILoggerService = {
   log: jest.fn().mockResolvedValue(null),

@@ -1,6 +1,6 @@
-import { IUserEntity } from "@domain/entities/userEntity";
+import { IUserEntity } from '@domain/entities/userEntity';
 
-export const IUserRepositoryToken = Symbol.for("IUserRepositoryToken");
+export const IUserRepositoryToken = Symbol.for('IUserRepositoryToken');
 
 export type OutputFindById = IUserEntity | null;
 

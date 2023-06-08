@@ -1,6 +1,6 @@
-import { IHashService } from "@business/services/iHashService";
+import { IHashService } from '@business/services/iHashService';
 
 export const hashServiceMock: IHashService = {
-  generateHash: jest.fn().mockResolvedValue("hash"),
+  generateHash: jest.fn().mockResolvedValue('hash'),
   compareHash: jest.fn().mockResolvedValue(true),
 };
