@@ -6,6 +6,8 @@ import { resendAccountVerificationCodeGeneralError, userIsNotFoundError } from '
 import { randomCodeServiceMock } from '@test/utility/mocks/service/randomCodeService.mock';
 import { fakeUserEntity } from '@test/utility/fakes/entities/userEntity';
 import { queueServiceMock } from '@test/utility/mocks/service/queueService.mock';
+import { IError } from '@shared/iError';
+import { left } from '@shared/either';
 
 describe('2-business.useCases.user.resendAccountVerificationCodeUseCase', () => {
   beforeEach(() => {
@@ -136,21 +138,19 @@ describe('2-business.useCases.user.resendAccountVerificationCodeUseCase', () => 
     });
   });
 
-  // it('should return left if queue service returns left', async () => {
-  //   const fakeIError: IError = {
-  //     code: '000',
-  //     message: 'Fake Message',
-  //     shortMessage: 'fakeShortMessage',
-  //   };
+  it('should return left if queue service returns left', async () => {
+    const fakeIError: IError = {
+      code: '000',
+      message: 'Fake Message',
+      shortMessage: 'fakeShortMessage',
+    };
 
-  //   jest.spyOn(userRepositoryMock, 'findByEmail').mockImplementationOnce(async () => null);
+    jest.spyOn(queueServiceMock, 'sendData').mockResolvedValue(left(fakeIError));
 
-  //   jest.spyOn(queueServiceMock, 'sendData').mockResolvedValue(left(fakeIError));
+    const result = await useCase.exec(input);
 
-  //   const result = await useCase.exec(input);
-
-  //   expect(result.isRight()).toBeFalsy();
-  //   expect(result.isLeft()).toBeTruthy();
-  //   expect(result.value).toEqual(fakeIError);
-  // });
+    expect(result.isRight()).toBeFalsy();
+    expect(result.isLeft()).toBeTruthy();
+    expect(result.value).toEqual(fakeIError);
+  });
 });
