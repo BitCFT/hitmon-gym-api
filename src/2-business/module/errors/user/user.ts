@@ -11,3 +11,15 @@ export const emailNotAvailableError: IError = {
   message: 'Email Not Available Error',
   shortMessage: 'emailNotAvailableError',
 };
+
+export const userIsNotFoundError: IError = {
+  code: '003',
+  message: 'User Is Not Found Error',
+  shortMessage: 'userIsNotFoundError',
+};
+
+export const resendAccountVerificationCodeGeneralError: IError = {
+  code: '004',
+  message: 'Resend Account Verification Code General Error',
+  shortMessage: 'resendAccountVerificationCodeGeneralError',
+};
