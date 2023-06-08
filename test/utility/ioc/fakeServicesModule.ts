@@ -7,10 +7,13 @@ import { randomCodeServiceMock } from '@test/utility/mocks/service/randomCodeSer
 import { logServiceMock } from '@test/utility/mocks/service/loggerService.mock';
 import { IQueueService, IQueueServiceToken } from '@business/services/iQueueService';
 import { queueServiceMock } from '@test/utility/mocks/service/queueService.mock';
+import { IUniqueIdentifierService, IUniqueIdentifierServiceToken } from '@business/services/iUniqueIdentifierService';
+import { uniqueIdentifierMock } from '../mocks/service/uniqueIdentifierService.mock';
 
 export const FakeServicesModule = (container: Container) => {
   container.bind<IHashService>(IHashServiceToken).toConstantValue(hashServiceMock);
   container.bind<IRandomCodeService>(IRandomCodeServiceToken).toConstantValue(randomCodeServiceMock);
   container.bind<ILoggerService>(ILoggerServiceToken).toConstantValue(logServiceMock);
   container.bind<IQueueService>(IQueueServiceToken).toConstantValue(queueServiceMock);
+  container.bind<IUniqueIdentifierService>(IUniqueIdentifierServiceToken).toConstantValue(uniqueIdentifierMock);
 };
