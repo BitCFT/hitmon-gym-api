@@ -10,16 +10,18 @@ import { ILoggerServiceToken, ILoggerService } from '@business/services/iLogger'
 import { addMinutesToADate } from '@business/helpers/addMinutesToADate';
 import { IQueueService, IQueueServiceToken } from '@business/services/iQueueService';
 import { InputMailParams } from '@business/services/iMailTypes';
+import { RegistrationStep, UserEntity } from '@domain/entities/userEntity';
+import { IUniqueIdentifierService, IUniqueIdentifierServiceToken } from '@business/services/iUniqueIdentifierService';
 
 @injectable()
 export class CreateUserUseCase implements IUseCase<InputCreateUserDto, OutputCreateUserDto> {
   constructor(
     @inject(IUserRepositoryToken) private userRepository: IUserRepository,
     @inject(IHashServiceToken) private hashService: IHashService,
-    @inject(IRandomCodeServiceToken)
-    private randomCodeService: IRandomCodeService,
+    @inject(IRandomCodeServiceToken) private randomCodeService: IRandomCodeService,
     @inject(ILoggerServiceToken) private logService: ILoggerService,
-    @inject(IQueueServiceToken) private queueService: IQueueService
+    @inject(IQueueServiceToken) private queueService: IQueueService,
+    @inject(IUniqueIdentifierServiceToken) private uniqueIdentifierService: IUniqueIdentifierService
   ) {}
 
   async exec(input: InputCreateUserDto): Promise<OutputCreateUserDto> {
@@ -31,15 +33,40 @@ export class CreateUserUseCase implements IUseCase<InputCreateUserDto, OutputCre
       }
 
       const hashedPassword = await this.hashService.generateHash(input.password);
+      const verificationCode = this.randomCodeService.generateCode();
+      const verificationCodeExpiresAt = addMinutesToADate(new Date(), 3);
 
-      const accountVerificationCode = this.randomCodeService.generateCode();
-      const accountVerificationCodeExpiresAt = addMinutesToADate(new Date(), 3);
-
-      const user = await this.userRepository.create({
+      const userEntity = UserEntity.create({
         ...input,
+        id: this.uniqueIdentifierService.create(),
         password: hashedPassword,
+        registrationStep: RegistrationStep.PENDING,
+        accountVerificationCode: verificationCode,
+        accountVerificationCodeExpiresAt: verificationCodeExpiresAt,
+      });
+
+      if (userEntity.isLeft()) {
+        return left(userEntity.value);
+      }
+
+      const {
+        id,
+        email,
         accountVerificationCode,
         accountVerificationCodeExpiresAt,
+        userName,
+        password,
+        registrationStep,
+      } = userEntity.value.export();
+
+      const user = await this.userRepository.create({
+        id,
+        email,
+        userName,
+        password,
+        accountVerificationCode: accountVerificationCode || verificationCode,
+        accountVerificationCodeExpiresAt: accountVerificationCodeExpiresAt || verificationCodeExpiresAt,
+        registrationStep,
       });
 
       const queueResponse = await this.queueService.sendData<InputMailParams<'confirm-account'>>({
@@ -50,7 +77,7 @@ export class CreateUserUseCase implements IUseCase<InputCreateUserDto, OutputCre
           body: {
             template: 'confirm-account',
             envs: {
-              code: accountVerificationCode,
+              code: verificationCode,
             },
           },
         },
