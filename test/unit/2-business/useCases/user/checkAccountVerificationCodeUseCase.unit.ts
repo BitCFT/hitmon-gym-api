@@ -2,6 +2,7 @@ import { container } from '@test/utility/ioc/inversifyConfigTests';
 import { userRepositoryMock } from '@test/utility/mocks/repository/userRepository.mock';
 import {
   checkCodeGeneralError,
+  expiredCodeError,
   resendAccountVerificationCodeGeneralError,
   userAlreadyVerifiedError,
   userIsNotFoundError,
@@ -98,5 +99,15 @@ describe('2-business.useCases.user.checkAccountVerificationCodeUseCase', () => {
     await useCase.exec(input);
 
     expect(spy).toHaveBeenCalledWith(fakeDate, fakeOtherDate);
+  });
+
+  it('should return left if verification code is expired', async () => {
+    jest.spyOn(dateServiceMock, 'checkIfIsAfter').mockImplementationOnce(() => true);
+
+    const result = await useCase.exec(input);
+
+    expect(result.isRight()).toBeFalsy();
+    expect(result.isLeft()).toBeTruthy();
+    expect(result.value).toEqual(expiredCodeError);
   });
 });
