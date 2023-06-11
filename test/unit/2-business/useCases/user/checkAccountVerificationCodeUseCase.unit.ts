@@ -3,12 +3,15 @@ import { userRepositoryMock } from '@test/utility/mocks/repository/userRepositor
 import {
   checkCodeGeneralError,
   resendAccountVerificationCodeGeneralError,
+  userAlreadyVerifiedError,
   userIsNotFoundError,
 } from '@business/module/errors/user/user';
 import { IError } from '@shared/iError';
 import { left, right } from '@shared/either';
 import { CheckAccountVerificationCodeUseCase } from '@business/useCases/user/checkAccountVerificationCodeUseCase';
 import { InputCheckAccountVerificationCodeDto } from '@business/dto/user/checkAccountVerificationCodeDto';
+import { fakeUserEntity } from '@test/utility/fakes/entities/userEntity';
+import { RegistrationStep } from '@domain/entities/userEntity';
 
 describe('2-business.useCases.user.checkAccountVerificationCodeUseCase', () => {
   beforeEach(() => {
@@ -52,5 +55,18 @@ describe('2-business.useCases.user.checkAccountVerificationCodeUseCase', () => {
     expect(result.isRight()).toBeFalsy();
     expect(result.isLeft()).toBeTruthy();
     expect(result.value).toEqual(userIsNotFoundError);
+  });
+
+  it('should return left if user is already verified', async () => {
+    jest.spyOn(userRepositoryMock, 'findByAccountVerificationCode').mockResolvedValueOnce({
+      ...fakeUserEntity,
+      registrationStep: RegistrationStep.VERIFIED,
+    });
+
+    const result = await useCase.exec(input);
+
+    expect(result.isRight()).toBeFalsy();
+    expect(result.isLeft()).toBeTruthy();
+    expect(result.value).toEqual(userAlreadyVerifiedError);
   });
 });
