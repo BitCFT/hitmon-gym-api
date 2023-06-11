@@ -12,6 +12,7 @@ import { CheckAccountVerificationCodeUseCase } from '@business/useCases/user/che
 import { InputCheckAccountVerificationCodeDto } from '@business/dto/user/checkAccountVerificationCodeDto';
 import { fakeUserEntity } from '@test/utility/fakes/entities/userEntity';
 import { RegistrationStep } from '@domain/entities/userEntity';
+import { dateServiceMock } from '@test/utility/mocks/service/dateService.mock';
 
 describe('2-business.useCases.user.checkAccountVerificationCodeUseCase', () => {
   beforeEach(() => {
@@ -68,5 +69,17 @@ describe('2-business.useCases.user.checkAccountVerificationCodeUseCase', () => {
     expect(result.isRight()).toBeFalsy();
     expect(result.isLeft()).toBeTruthy();
     expect(result.value).toEqual(userAlreadyVerifiedError);
+  });
+
+  it('should is not be able to resend code because exception in checkIfIsAfter method', async () => {
+    jest.spyOn(dateServiceMock, 'checkIfIsAfter').mockImplementationOnce(() => {
+      throw new Error('mocked error');
+    });
+
+    const result = await useCase.exec(input);
+
+    expect(result.isRight()).toBeFalsy();
+    expect(result.isLeft()).toBeTruthy();
+    expect(result.value).toEqual(checkCodeGeneralError);
   });
 });
