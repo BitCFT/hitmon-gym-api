@@ -56,7 +56,7 @@ describe('2-business.useCases.user.createUserUseCase', () => {
   });
 
   it('should is not be able to create user because exception in generateHash method', async () => {
-    jest.spyOn(userRepositoryMock, 'findByEmail').mockImplementationOnce(async () => null);
+    //jest.spyOn(userRepositoryMock, 'findByEmail').mockImplementationOnce(async () => null);
 
     jest.spyOn(hashServiceMock, 'generateHash').mockImplementationOnce(() => {
       throw new Error('mocked error');
