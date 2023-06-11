@@ -110,4 +110,36 @@ describe('2-business.useCases.user.checkAccountVerificationCodeUseCase', () => {
     expect(result.isLeft()).toBeTruthy();
     expect(result.value).toEqual(expiredCodeError);
   });
+
+  it('should is not be able to update user because exception in update method', async () => {
+    jest.spyOn(userRepositoryMock, 'update').mockImplementationOnce(() => {
+      throw new Error('mocked error');
+    });
+
+    const result = await useCase.exec(input);
+
+    expect(result.isRight()).toBeFalsy();
+    expect(result.isLeft()).toBeTruthy();
+    expect(result.value).toEqual(checkCodeGeneralError);
+  });
+
+  it('should calls update method with correct values', async () => {
+    const spy = jest.spyOn(userRepositoryMock, 'update');
+
+    await useCase.exec(input);
+
+    expect(spy).toHaveBeenCalledWith('string', {
+      accountVerificationCode: undefined,
+      accountVerificationCodeExpiresAt: undefined,
+      registrationStep: RegistrationStep.VERIFIED,
+    });
+  });
+
+  it('should check verification code on success', async () => {
+    const result = await useCase.exec(input);
+
+    expect(result.isLeft()).toBeFalsy();
+    expect(result.isRight()).toBeTruthy();
+    expect(result.value).toEqual({});
+  });
 });
