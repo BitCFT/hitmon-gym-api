@@ -83,11 +83,20 @@ describe('2-business.useCases.user.checkAccountVerificationCodeUseCase', () => {
     expect(result.value).toEqual(checkCodeGeneralError);
   });
 
-  // it('should calls checkIfIsAfter method with correct value', async () => {
-  //   const spy = jest.spyOn(userRepositoryMock, 'findByAccountVerificationCode');
+  it('should calls checkIfIsAfter method with correct values', async () => {
+    const fakeDate = new Date('2023-01-01T00:00:00.000Z');
+    const fakeOtherDate = new Date('2023-01-01T00:03:00.000Z');
 
-  //   await useCase.exec(input);
+    jest.useFakeTimers().setSystemTime(fakeDate);
+    jest.spyOn(userRepositoryMock, 'findByAccountVerificationCode').mockResolvedValueOnce({
+      ...fakeUserEntity,
+      accountVerificationCodeExpiresAt: fakeOtherDate,
+    });
 
-  //   expect(spy).toHaveBeenCalledWith(input.code);
-  // });
+    const spy = jest.spyOn(dateServiceMock, 'checkIfIsAfter');
+
+    await useCase.exec(input);
+
+    expect(spy).toHaveBeenCalledWith(fakeDate, fakeOtherDate);
+  });
 });
