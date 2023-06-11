@@ -12,6 +12,7 @@ import { IQueueService, IQueueServiceToken } from '@business/services/iQueueServ
 import { InputMailParams } from '@business/services/iMailTypes';
 import { RegistrationStep, UserEntity } from '@domain/entities/userEntity';
 import { IUniqueIdentifierService, IUniqueIdentifierServiceToken } from '@business/services/iUniqueIdentifierService';
+import { IDateService, IDateServiceToken } from '@business/services/iDateService';
 
 @injectable()
 export class CreateUserUseCase implements IUseCase<InputCreateUserDto, OutputCreateUserDto> {
@@ -21,6 +22,7 @@ export class CreateUserUseCase implements IUseCase<InputCreateUserDto, OutputCre
     @inject(IRandomCodeServiceToken) private randomCodeService: IRandomCodeService,
     @inject(ILoggerServiceToken) private logService: ILoggerService,
     @inject(IQueueServiceToken) private queueService: IQueueService,
+    @inject(IDateServiceToken) private dateService: IDateService,
     @inject(IUniqueIdentifierServiceToken) private uniqueIdentifierService: IUniqueIdentifierService
   ) {}
 
@@ -34,7 +36,7 @@ export class CreateUserUseCase implements IUseCase<InputCreateUserDto, OutputCre
 
       const hashedPassword = await this.hashService.generateHash(input.password);
       const verificationCode = this.randomCodeService.generateCode();
-      const verificationCodeExpiresAt = addMinutesToADate(new Date(), 3);
+      const verificationCodeExpiresAt = this.dateService.addMinutesToADate(new Date(), 3);
 
       const userEntity = UserEntity.create({
         ...input,
