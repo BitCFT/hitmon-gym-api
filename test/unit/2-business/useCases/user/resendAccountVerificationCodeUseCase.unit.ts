@@ -4,7 +4,6 @@ import { InputResendAccountVerificationCodeDto } from '@business/dto/user/resend
 import { userRepositoryMock } from '@test/utility/mocks/repository/userRepository.mock';
 import { resendAccountVerificationCodeGeneralError, userIsNotFoundError } from '@business/module/errors/user/user';
 import { randomCodeServiceMock } from '@test/utility/mocks/service/randomCodeService.mock';
-import { fakeUserEntity } from '@test/utility/fakes/entities/userEntity';
 import { queueServiceMock } from '@test/utility/mocks/service/queueService.mock';
 import { IError } from '@shared/iError';
 import { left } from '@shared/either';
