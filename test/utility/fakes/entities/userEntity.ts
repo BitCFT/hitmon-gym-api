@@ -6,4 +6,6 @@ export const fakeUserEntity: IUserEntity = {
   password: 'string',
   registrationStep: RegistrationStep.PENDING,
   userName: 'string',
+  accountVerificationCode: '1234567890',
+  accountVerificationCodeExpiresAt: new Date(),
 };

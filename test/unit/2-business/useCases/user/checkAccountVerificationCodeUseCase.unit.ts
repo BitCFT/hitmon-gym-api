@@ -28,7 +28,7 @@ describe('2-business.useCases.user.checkAccountVerificationCodeUseCase', () => {
     code: '1234567890',
   };
 
-  it('should is not be able to resend code because exception in findByAccountVerificationCode method', async () => {
+  it('should is not be able to check code because exception in findByAccountVerificationCode method', async () => {
     jest.spyOn(userRepositoryMock, 'findByAccountVerificationCode').mockImplementationOnce(() => {
       throw new Error('mocked error');
     });
@@ -71,7 +71,7 @@ describe('2-business.useCases.user.checkAccountVerificationCodeUseCase', () => {
     expect(result.value).toEqual(userAlreadyVerifiedError);
   });
 
-  it('should is not be able to resend code because exception in checkIfIsAfter method', async () => {
+  it('should is not be able to check code because exception in checkIfIsAfter method', async () => {
     jest.spyOn(dateServiceMock, 'checkIfIsAfter').mockImplementationOnce(() => {
       throw new Error('mocked error');
     });
@@ -82,4 +82,12 @@ describe('2-business.useCases.user.checkAccountVerificationCodeUseCase', () => {
     expect(result.isLeft()).toBeTruthy();
     expect(result.value).toEqual(checkCodeGeneralError);
   });
+
+  // it('should calls checkIfIsAfter method with correct value', async () => {
+  //   const spy = jest.spyOn(userRepositoryMock, 'findByAccountVerificationCode');
+
+  //   await useCase.exec(input);
+
+  //   expect(spy).toHaveBeenCalledWith(input.code);
+  // });
 });
