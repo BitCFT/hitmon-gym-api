@@ -31,4 +31,12 @@ describe('2-business.useCases.user.checkAccountVerificationCodeUseCase', () => {
     expect(result.isLeft()).toBeTruthy();
     expect(result.value).toEqual(checkCodeGeneralError);
   });
+
+  it('should calls findByAccountVerificationCode method with correct value', async () => {
+    const spy = jest.spyOn(userRepositoryMock, 'findByAccountVerificationCode');
+
+    await useCase.exec(input);
+
+    expect(spy).toHaveBeenCalledWith(input.code);
+  });
 });
