@@ -3,12 +3,9 @@ import { userRepositoryMock } from '@test/utility/mocks/repository/userRepositor
 import {
   checkCodeGeneralError,
   expiredCodeError,
-  resendAccountVerificationCodeGeneralError,
   userAlreadyVerifiedError,
   userIsNotFoundError,
 } from '@business/module/errors/user/user';
-import { IError } from '@shared/iError';
-import { left, right } from '@shared/either';
 import { CheckAccountVerificationCodeUseCase } from '@business/useCases/user/checkAccountVerificationCodeUseCase';
 import { InputCheckAccountVerificationCodeDto } from '@business/dto/user/checkAccountVerificationCodeDto';
 import { fakeUserEntity } from '@test/utility/fakes/entities/userEntity';
