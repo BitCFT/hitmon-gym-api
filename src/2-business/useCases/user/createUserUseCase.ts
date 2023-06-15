@@ -7,7 +7,6 @@ import { IRandomCodeService, IRandomCodeServiceToken } from '@business/services/
 import { left, right } from '@shared/either';
 import { createUserGeneralError, emailNotAvailableError } from '@business/module/errors/user/user';
 import { ILoggerServiceToken, ILoggerService } from '@business/services/iLogger';
-import { addMinutesToADate } from '@business/helpers/addMinutesToADate';
 import { IQueueService, IQueueServiceToken } from '@business/services/iQueueService';
 import { InputMailParams } from '@business/services/iMailTypes';
 import { RegistrationStep, UserEntity } from '@domain/entities/userEntity';
