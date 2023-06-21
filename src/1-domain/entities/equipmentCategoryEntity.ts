@@ -12,7 +12,6 @@ export class EquipmentCategoryEntity extends AbstractEntity<IEquipmentCategoryEn
   static create(props: IEquipmentCategoryEntity): Either<IError, EquipmentCategoryEntity> {
     const equipmentCategory = new EquipmentCategoryEntity({
       ...props,
-      createdAt: new Date(),
     });
 
     return right(equipmentCategory);

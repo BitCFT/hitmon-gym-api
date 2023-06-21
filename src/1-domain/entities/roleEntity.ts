@@ -18,7 +18,6 @@ export class RoleEntity extends AbstractEntity<IRoleEntity> {
   static create(props: IRoleEntity): Either<IError, RoleEntity> {
     const role = new RoleEntity({
       ...props,
-      createdAt: new Date(),
     });
 
     return right(role);
