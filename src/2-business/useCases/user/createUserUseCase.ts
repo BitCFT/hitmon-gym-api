@@ -50,23 +50,15 @@ export class CreateUserUseCase implements IUseCase<InputCreateUserDto, OutputCre
         return left(userEntity.value);
       }
 
-      const {
-        id,
-        email,
-        accountVerificationCode,
-        accountVerificationCodeExpiresAt,
-        userName,
-        password,
-        registrationStep,
-      } = userEntity.value.export();
+      const { id, email, userName, password, registrationStep } = userEntity.value.export();
 
       const user = await this.userRepository.create({
         id,
         email,
         userName,
         password,
-        accountVerificationCode: accountVerificationCode || verificationCode,
-        accountVerificationCodeExpiresAt: accountVerificationCodeExpiresAt || verificationCodeExpiresAt,
+        accountVerificationCode: verificationCode,
+        accountVerificationCodeExpiresAt: verificationCodeExpiresAt,
         registrationStep,
       });
 
