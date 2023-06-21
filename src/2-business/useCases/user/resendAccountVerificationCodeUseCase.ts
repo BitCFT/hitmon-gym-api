@@ -2,9 +2,9 @@ import {
   InputResendAccountVerificationCodeDto,
   OutputResendAccountVerificationCodeDto,
 } from '@business/dto/user/resendAccountVerificationCodeDto';
-import { addMinutesToADate } from '@business/helpers/addMinutesToADate';
 import { resendAccountVerificationCodeGeneralError, userIsNotFoundError } from '@business/module/errors/user/user';
 import { IUserRepository, IUserRepositoryToken } from '@business/repositories/user/iUserRepository';
+import { IDateService, IDateServiceToken } from '@business/services/iDateService';
 import { ILoggerService, ILoggerServiceToken } from '@business/services/iLogger';
 import { InputMailParams } from '@business/services/iMailTypes';
 import { IQueueService, IQueueServiceToken } from '@business/services/iQueueService';
@@ -21,7 +21,8 @@ export class ResendAccountVerificationCodeUseCase
     @inject(IUserRepositoryToken) private userRepository: IUserRepository,
     @inject(ILoggerServiceToken) private logService: ILoggerService,
     @inject(IRandomCodeServiceToken) private randomCodeService: IRandomCodeService,
-    @inject(IQueueServiceToken) private queueService: IQueueService
+    @inject(IQueueServiceToken) private queueService: IQueueService,
+    @inject(IDateServiceToken) private dateService: IDateService
   ) {}
 
   async exec(input: InputResendAccountVerificationCodeDto): Promise<OutputResendAccountVerificationCodeDto> {
@@ -33,7 +34,7 @@ export class ResendAccountVerificationCodeUseCase
       }
 
       const verificationCode = this.randomCodeService.generateCode();
-      const verificationCodeExpiresAt = addMinutesToADate(new Date(), 3);
+      const verificationCodeExpiresAt = this.dateService.addMinutesToADate(new Date(), 3);
 
       await this.userRepository.update(user.id, {
         accountVerificationCode: verificationCode,

@@ -7,6 +7,7 @@ import { randomCodeServiceMock } from '@test/utility/mocks/service/randomCodeSer
 import { queueServiceMock } from '@test/utility/mocks/service/queueService.mock';
 import { left } from '@shared/either';
 import { fakeIError } from '@test/utility/fakes/error/fakeIError';
+import { dateServiceMock } from '@test/utility/mocks/service/dateService.mock';
 
 describe('2-business.useCases.user.resendAccountVerificationCodeUseCase', () => {
   beforeEach(() => {
@@ -86,6 +87,10 @@ describe('2-business.useCases.user.resendAccountVerificationCodeUseCase', () => 
 
   it('should calls update method with correct values', async () => {
     jest.useFakeTimers().setSystemTime(new Date('2023-01-01T00:00:00.000Z'));
+    jest.spyOn(dateServiceMock, 'addMinutesToADate').mockImplementationOnce((date: Date, minutes: number) => {
+      date.setMinutes(date.getMinutes() + minutes);
+      return date;
+    });
 
     const spy = jest.spyOn(userRepositoryMock, 'update');
 
