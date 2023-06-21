@@ -5,8 +5,8 @@ import { userRepositoryMock } from '@test/utility/mocks/repository/userRepositor
 import { resendAccountVerificationCodeGeneralError, userIsNotFoundError } from '@business/module/errors/user/user';
 import { randomCodeServiceMock } from '@test/utility/mocks/service/randomCodeService.mock';
 import { queueServiceMock } from '@test/utility/mocks/service/queueService.mock';
-import { IError } from '@shared/iError';
 import { left } from '@shared/either';
+import { fakeIError } from '@test/utility/fakes/error/fakeIError';
 
 describe('2-business.useCases.user.resendAccountVerificationCodeUseCase', () => {
   beforeEach(() => {
@@ -138,12 +138,6 @@ describe('2-business.useCases.user.resendAccountVerificationCodeUseCase', () => 
   });
 
   it('should return left if queue service returns left', async () => {
-    const fakeIError: IError = {
-      code: '000',
-      message: 'Fake Message',
-      shortMessage: 'fakeShortMessage',
-    };
-
     jest.spyOn(queueServiceMock, 'sendData').mockResolvedValue(left(fakeIError));
 
     const result = await useCase.exec(input);

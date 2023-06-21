@@ -7,10 +7,10 @@ import { createUserGeneralError, emailNotAvailableError } from '@business/module
 import { hashServiceMock } from '@test/utility/mocks/service/hashService.mock';
 import { queueServiceMock } from '@test/utility/mocks/service/queueService.mock';
 import { left } from '@shared/either';
-import { IError } from '@shared/iError';
 import { RegistrationStep, UserEntity } from '@domain/entities/userEntity';
 import { randomCodeServiceMock } from '@test/utility/mocks/service/randomCodeService.mock';
 import { dateServiceMock } from '@test/utility/mocks/service/dateService.mock';
+import { fakeIError } from '@test/utility/fakes/error/fakeIError';
 
 describe('2-business.useCases.user.createUserUseCase', () => {
   beforeEach(() => {
@@ -58,7 +58,6 @@ describe('2-business.useCases.user.createUserUseCase', () => {
 
   it('should is not be able to create user because exception in generateHash method', async () => {
     jest.spyOn(userRepositoryMock, 'findByEmail').mockImplementationOnce(async () => null);
-
     jest.spyOn(hashServiceMock, 'generateHash').mockImplementationOnce(() => {
       throw new Error('mocked error');
     });
@@ -82,7 +81,6 @@ describe('2-business.useCases.user.createUserUseCase', () => {
 
   it('should is not be able to create user because exception in generateCode method', async () => {
     jest.spyOn(userRepositoryMock, 'findByEmail').mockImplementationOnce(async () => null);
-
     jest.spyOn(randomCodeServiceMock, 'generateCode').mockImplementationOnce(() => {
       throw new Error('mocked error');
     });
@@ -106,7 +104,6 @@ describe('2-business.useCases.user.createUserUseCase', () => {
 
   it('should is not be able to create user because exception in addMinutesToADate method', async () => {
     jest.spyOn(userRepositoryMock, 'findByEmail').mockImplementationOnce(async () => null);
-
     jest.spyOn(dateServiceMock, 'addMinutesToADate').mockImplementationOnce(() => {
       throw new Error('mocked error');
     });
@@ -132,20 +129,13 @@ describe('2-business.useCases.user.createUserUseCase', () => {
 
   it('should return left if on create entity returns left', async () => {
     jest.spyOn(userRepositoryMock, 'findByEmail').mockImplementationOnce(async () => null);
-
-    const fakeError: IError = {
-      code: '000',
-      message: 'fakeMessage',
-      shortMessage: 'fakeShortMessage',
-    };
-
-    jest.spyOn(UserEntity, 'create').mockReturnValueOnce(left(fakeError));
+    jest.spyOn(UserEntity, 'create').mockReturnValueOnce(left(fakeIError));
 
     const result = await useCase.exec(input);
 
     expect(result.isRight()).toBeFalsy();
     expect(result.isLeft()).toBeTruthy();
-    expect(result.value).toEqual(fakeError);
+    expect(result.value).toEqual(fakeIError);
   });
 
   it('should calls create user entity with correct values', async () => {
@@ -174,7 +164,6 @@ describe('2-business.useCases.user.createUserUseCase', () => {
 
   it('should is not be able to create user because exception in create method', async () => {
     jest.spyOn(userRepositoryMock, 'findByEmail').mockImplementationOnce(async () => null);
-
     jest.spyOn(userRepositoryMock, 'create').mockImplementationOnce(() => {
       throw new Error('mocked error');
     });
@@ -256,14 +245,7 @@ describe('2-business.useCases.user.createUserUseCase', () => {
   });
 
   it('should return left if queue service returns left', async () => {
-    const fakeIError: IError = {
-      code: '000',
-      message: 'Fake Message',
-      shortMessage: 'fakeShortMessage',
-    };
-
     jest.spyOn(userRepositoryMock, 'findByEmail').mockImplementationOnce(async () => null);
-
     jest.spyOn(queueServiceMock, 'sendData').mockResolvedValue(left(fakeIError));
 
     const result = await useCase.exec(input);
