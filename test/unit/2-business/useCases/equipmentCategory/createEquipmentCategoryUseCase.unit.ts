@@ -9,6 +9,7 @@ import {
 import { EquipmentCategoryEntity } from '@domain/entities/equipmentCategoryEntity';
 import { left } from '@shared/either';
 import { fakeIError } from '@test/utility/fakes/error/fakeIError';
+import { fakeEquipmentCategory } from '@test/utility/fakes/entities/equipmentCategory';
 
 describe('2-business.useCases.equipmentCategory.createEquipmentCategoryUseCase', () => {
   beforeEach(() => {
@@ -103,13 +104,13 @@ describe('2-business.useCases.equipmentCategory.createEquipmentCategoryUseCase',
     });
   });
 
-  // it('should create user on success', async () => {
-  //   jest.spyOn(userRepositoryMock, 'findByEmail').mockImplementationOnce(async () => null);
+  it('should create an equipment category on success', async () => {
+    jest.spyOn(equipmentCategoryRepositoryMock, 'findByName').mockImplementationOnce(async () => null);
 
-  //   const result = await useCase.exec(input);
+    const result = await useCase.exec(input);
 
-  //   expect(result.isLeft()).toBeFalsy();
-  //   expect(result.isRight()).toBeTruthy();
-  //   expect(result.value).toEqual(fakeUserEntity);
-  // });
+    expect(result.isLeft()).toBeFalsy();
+    expect(result.isRight()).toBeTruthy();
+    expect(result.value).toEqual(fakeEquipmentCategory);
+  });
 });
