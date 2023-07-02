@@ -2,7 +2,10 @@ import { container } from '@test/utility/ioc/inversifyConfigTests';
 import { CreateEquipmentCategoryUseCase } from '@business/useCases/equipmentCategory/createEquipmentCategoryUseCase';
 import { InputCreateEquipmentCategoryDto } from '@business/dto/equipmentCategoryDto.ts/createEquipmentCategoryDto';
 import { equipmentCategoryRepositoryMock } from '@test/utility/mocks/repository/equipementCategory.mock';
-import { createEquipmentCategoryGeneralError } from '@business/module/errors/equipmentCategory/equipmentCategory';
+import {
+  createEquipmentCategoryGeneralError,
+  equipmentCategoryAlreadyInUseError,
+} from '@business/module/errors/equipmentCategory/equipmentCategory';
 
 describe('2-business.useCases.equipmentCategory.createEquipmentCategoryUseCase', () => {
   beforeEach(() => {
@@ -19,7 +22,7 @@ describe('2-business.useCases.equipmentCategory.createEquipmentCategoryUseCase',
   };
 
   it('should is not be able to create equipment category because exception in findByName method', async () => {
-    jest.spyOn(equipmentCategoryRepositoryMock, 'findByName').mockImplementationOnce(() => {
+    const spy = jest.spyOn(equipmentCategoryRepositoryMock, 'findByName').mockImplementationOnce(() => {
       throw new Error('mocked error');
     });
 
@@ -36,5 +39,13 @@ describe('2-business.useCases.equipmentCategory.createEquipmentCategoryUseCase',
     await useCase.exec(input);
 
     expect(spy).toHaveBeenCalledWith(input.name);
+  });
+
+  it('should return left if name is already in use', async () => {
+    const result = await useCase.exec(input);
+
+    expect(result.isRight()).toBeFalsy();
+    expect(result.isLeft()).toBeTruthy();
+    expect(result.value).toEqual(equipmentCategoryAlreadyInUseError);
   });
 });

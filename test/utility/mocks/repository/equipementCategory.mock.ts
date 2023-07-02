@@ -3,5 +3,5 @@ import { fakeEquipmentCategory } from '@test/utility/fakes/entities/equipmentCat
 
 export const equipmentCategoryRepositoryMock: IEquipmentCategoryRepository = {
   create: jest.fn().mockResolvedValue(fakeEquipmentCategory),
-  findByName: jest.fn().mockResolvedValueOnce(fakeEquipmentCategory),
+  findByName: jest.fn().mockResolvedValue(fakeEquipmentCategory),
 };

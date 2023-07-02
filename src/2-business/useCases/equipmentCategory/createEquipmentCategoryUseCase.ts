@@ -9,7 +9,10 @@ import {
 import { IUseCase } from '@business/useCases/iUseCase';
 import { inject, injectable } from 'inversify';
 import { left, right } from '@shared/either';
-import { createEquipmentCategoryGeneralError } from '@business/module/errors/equipmentCategory/equipmentCategory';
+import {
+  createEquipmentCategoryGeneralError,
+  equipmentCategoryAlreadyInUseError,
+} from '@business/module/errors/equipmentCategory/equipmentCategory';
 import { EquipmentCategoryEntity } from '@domain/entities/equipmentCategoryEntity';
 import { IUniqueIdentifierService, IUniqueIdentifierServiceToken } from '@business/services/iUniqueIdentifierService';
 import { ILoggerService, ILoggerServiceToken } from '@business/services/iLogger';
@@ -29,7 +32,7 @@ export class CreateEquipmentCategoryUseCase
       const nameAlreadyExists = await this.equipmentCategoryRepository.findByName(input.name);
 
       if (nameAlreadyExists) {
-        return left(createEquipmentCategoryGeneralError);
+        return left(equipmentCategoryAlreadyInUseError);
       }
 
       const equipmentCategoryEntity = EquipmentCategoryEntity.create({
