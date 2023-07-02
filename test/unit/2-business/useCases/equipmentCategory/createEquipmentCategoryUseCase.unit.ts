@@ -89,28 +89,19 @@ describe('2-business.useCases.equipmentCategory.createEquipmentCategoryUseCase',
     expect(result.value).toEqual(createEquipmentCategoryGeneralError);
   });
 
-  // it('should calls create method with correct values', async () => {
-  //   jest.useFakeTimers().setSystemTime(new Date('2023-01-01T00:00:00.000Z'));
+  it('should calls create method with correct values', async () => {
+    jest.spyOn(equipmentCategoryRepositoryMock, 'findByName').mockImplementationOnce(async () => null);
+    jest.useFakeTimers().setSystemTime(new Date('2023-01-01T00:00:00.000Z'));
 
-  //   jest.spyOn(userRepositoryMock, 'findByEmail').mockImplementationOnce(async () => null);
-  //   jest.spyOn(dateServiceMock, 'addMinutesToADate').mockImplementationOnce((date: Date, minutes: number) => {
-  //     date.setMinutes(date.getMinutes() + minutes);
-  //     return date;
-  //   });
+    const spy = jest.spyOn(equipmentCategoryRepositoryMock, 'create');
 
-  //   const spy = jest.spyOn(userRepositoryMock, 'create');
+    await useCase.exec(input);
 
-  //   await useCase.exec(input);
-
-  //   expect(spy).toHaveBeenCalledWith({
-  //     ...input,
-  //     id: '0c5244eb-d80e-452c-bf99-383236161a51',
-  //     password: 'hash',
-  //     registrationStep: RegistrationStep.PENDING,
-  //     accountVerificationCode: '001',
-  //     accountVerificationCodeExpiresAt: new Date('2023-01-01T00:03:00.000Z'),
-  //   });
-  // });
+    expect(spy).toHaveBeenCalledWith({
+      ...input,
+      id: '0c5244eb-d80e-452c-bf99-383236161a51',
+    });
+  });
 
   // it('should create user on success', async () => {
   //   jest.spyOn(userRepositoryMock, 'findByEmail').mockImplementationOnce(async () => null);
