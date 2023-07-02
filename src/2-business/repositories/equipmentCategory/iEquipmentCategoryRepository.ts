@@ -4,6 +4,7 @@ export const IEquipmentCategoryRepositoryToken = Symbol.for('IEquipmentCategoryR
 
 export type InputCreateEquipmentCategory = {
   name: string;
+  description?: string;
 };
 
 export type OutputFindByName = IEquipmentCategoryEntity | null;
