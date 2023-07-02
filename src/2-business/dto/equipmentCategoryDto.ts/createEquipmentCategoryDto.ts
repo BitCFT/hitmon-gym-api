@@ -4,6 +4,7 @@ import { IError } from '@shared/iError';
 
 export type InputCreateEquipmentCategoryDto = {
   name: string;
+  description?: string;
 };
 
 export type OutputCreateEquipmentCategoryDto = Either<IError, IEquipmentCategoryEntity>;
