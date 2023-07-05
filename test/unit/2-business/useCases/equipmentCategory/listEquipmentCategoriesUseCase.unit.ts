@@ -30,4 +30,26 @@ describe('2-business.useCases.equipmentCategory.listEquipmentCategoriesUseCase',
     expect(result.isLeft()).toBeTruthy();
     expect(result.value).toEqual(listEquipmentCategoriesGeneralError);
   });
+
+  it('should calls listAll method with correct values', async () => {
+    const spy = jest.spyOn(equipmentCategoryRepositoryMock, 'listAll');
+
+    await useCase.exec(input);
+
+    expect(spy).toHaveBeenCalledWith(input);
+  });
+
+  it('should list equipment categories on success', async () => {
+    const result = await useCase.exec(input);
+
+    expect(result.isLeft()).toBeFalsy();
+    expect(result.isRight()).toBeTruthy();
+    expect(result.value).toHaveProperty('data');
+    expect(result.value).toHaveProperty('meta', {
+      hasNext: true,
+      limit: 1,
+      page: 1,
+      total: 2,
+    });
+  });
 });
