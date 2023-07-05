@@ -14,7 +14,7 @@ import { left, right } from '@shared/either';
 import { listEquipmentCategoriesGeneralError } from '@business/module/errors/equipmentCategory/equipmentCategory';
 
 @injectable()
-export class ListEquipmentCategoryUseCase
+export class ListEquipmentCategoriesUseCase
   implements IUseCase<InputListEquipmentCategoriesDto, OutputListEquipmentCategoriesDto>
 {
   constructor(
