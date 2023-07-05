@@ -1,4 +1,5 @@
 import { CreateEquipmentCategoryUseCase } from '@business/useCases/equipmentCategory/createEquipmentCategoryUseCase';
+import { ListEquipmentCategoriesUseCase } from '@business/useCases/equipmentCategory/listEquipmentCategoriesUseCase';
 import { CheckAccountVerificationCodeUseCase } from '@business/useCases/user/checkAccountVerificationCodeUseCase';
 import { CreateUserUseCase } from '@business/useCases/user/createUserUseCase';
 import { ResendAccountVerificationCodeUseCase } from '@business/useCases/user/resendAccountVerificationCodeUseCase';
@@ -9,4 +10,5 @@ export const UseCasesModule = new ContainerModule((bind: interfaces.Bind) => {
   bind(ResendAccountVerificationCodeUseCase).toSelf();
   bind(CheckAccountVerificationCodeUseCase).toSelf();
   bind(CreateEquipmentCategoryUseCase).toSelf();
+  bind(ListEquipmentCategoriesUseCase).toSelf();
 });
