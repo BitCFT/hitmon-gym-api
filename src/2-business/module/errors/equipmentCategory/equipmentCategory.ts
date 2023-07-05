@@ -11,3 +11,9 @@ export const equipmentCategoryAlreadyInUseError: IError = {
   message: 'Equipment Category Is Already In Use',
   shortMessage: 'equipmentCategoryisAlreadyInUse',
 };
+
+export const listEquipmentCategoriesGeneralError: IError = {
+  code: '003',
+  message: 'List Equipment Categories General Error',
+  shortMessage: 'listEquipmentCategoriesGeneralError',
+};
