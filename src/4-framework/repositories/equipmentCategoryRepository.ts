@@ -13,9 +13,9 @@ export class EquipmentCategoryRepository implements IEquipmentCategoryRepository
   private equipmentCategories: IEquipmentCategoryEntity[] = [];
 
   async create(input: InputCreateEquipmentCategory): Promise<IEquipmentCategoryEntity> {
-    this.equipmentCategories.push(input);
+    const index = this.equipmentCategories.push(input) - 1;
 
-    return this.equipmentCategories[this.equipmentCategories.length];
+    return this.equipmentCategories[index];
   }
 
   async findByName(name: string): Promise<OutputFindByName> {

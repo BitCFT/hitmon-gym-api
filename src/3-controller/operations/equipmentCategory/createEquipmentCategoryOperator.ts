@@ -18,6 +18,6 @@ export class CreateEquipmentCategoryOperator extends AbstractOperator<
   }
 
   protected async run(input: InputCreateEquipmentCategory): Promise<OutputCreateEquipmentCategory> {
-    return this.createEquipmentCategoryUseCase.exec(input);
+    return await this.createEquipmentCategoryUseCase.exec(input);
   }
 }
