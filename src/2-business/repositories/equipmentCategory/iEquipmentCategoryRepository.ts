@@ -4,6 +4,7 @@ import { PaginationData, PaginationParams } from '@domain/pagination';
 export const IEquipmentCategoryRepositoryToken = Symbol.for('IEquipmentCategoryRepositoryToken');
 
 export type InputCreateEquipmentCategory = {
+  id: string;
   name: string;
   description?: string;
 };
