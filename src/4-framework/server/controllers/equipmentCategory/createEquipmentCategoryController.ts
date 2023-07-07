@@ -17,7 +17,6 @@ export class CreateEquimentCategoryController implements IController {
       const input = new InputCreateEquipmentCategory(inputData);
 
       const result = await operator.exec(input);
-      console.log('To aqui');
 
       if (result.isLeft()) {
         return {
