@@ -24,7 +24,7 @@ export const logRoutes = (routes: Router) => {
     const method = stack[0].method.toUpperCase();
     let space: string = switchSpace(method);
 
-    console.log(chalk.bgCyan(`${method.toUpperCase()}`) + space + `${path}`);
+    console.log(chalk.bgCyan(`${method.toUpperCase()}`) + space + chalk.green(`${path}`));
   });
 
   console.log('\n');
