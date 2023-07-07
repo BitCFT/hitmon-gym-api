@@ -1,7 +1,8 @@
 import { container } from '@shared/container';
 import { Router } from 'express';
-import { CreateEquimentCategoryController } from '../controllers/equipmentCategory/createEquipmentCategoryController';
+import { CreateEquimentCategoryController } from '@framework/server/controllers/equipmentCategory/createEquipmentCategoryController';
 import { EquipmentCategoryRoutes } from './systemRoutes';
+import { ExpressRoutesAdapter } from '../adapters/expressRoutesAdapter';
 
 export const routes = () => {
   const router = Router();
@@ -12,12 +13,10 @@ export const routes = () => {
     });
   });
 
-  router.post(EquipmentCategoryRoutes.CREATE, async (req, res) => {
-    const controller = container.get(CreateEquimentCategoryController);
-    const controllerHandlerResult = await controller.handle(req);
-
-    return res.status(controllerHandlerResult.statusCode).json(controllerHandlerResult.body);
-  });
+  router.post(
+    EquipmentCategoryRoutes.CREATE,
+    ExpressRoutesAdapter.adapt(container.get(CreateEquimentCategoryController))
+  );
 
   return router;
 };
