@@ -18,8 +18,9 @@ export class EquipmentCategoryRepository implements IEquipmentCategoryRepository
     return this.equipmentCategories[this.equipmentCategories.length];
   }
 
-  findByName(name: string): Promise<OutputFindByName> {
-    throw new Error('Method not implemented.');
+  async findByName(name: string): Promise<OutputFindByName> {
+    const equipmentCategory = this.equipmentCategories.find(element => element.name === name);
+    return equipmentCategory ?? null;
   }
 
   listAll(input: PaginationParams): Promise<OutputListAllEquipmentCategories> {
