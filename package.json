@@ -4,7 +4,8 @@
   "description": "an API for a gym management system",
   "main": "index.js",
   "scripts": {
-    "dev": "npx tsx watch src/4-framework/server/index.ts",
+    "dev": "NODE_ENV=dev npx tsx watch src/4-framework/server/index.ts",
+    "prod": "NODE_ENV=prod npx tsx watch src/4-framework/server/index.ts",
     "test": "jest --maxWorkers=$(nproc) --detectOpenHandles --forceExit",
     "test:coverage": "jest . --coverage",
     "typecheck": "tsc --noEmit",
@@ -79,6 +80,7 @@
   "dependencies": {
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.0",
+    "dotenv": "^16.3.1",
     "express": "^4.18.2",
     "inversify": "^6.0.1",
     "reflect-metadata": "^0.1.13",
