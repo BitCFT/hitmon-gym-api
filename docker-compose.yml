@@ -9,13 +9,13 @@ services:
     ports:
       - '$PORT:$PORT'
     env_file:
-      - .env$API_ENV
-    command: bash -c "npx prisma migrate deploy && npx prisma generate && npm run build && npm run start:$API_START_ARG"
+      - .env
+    command: bash -c "npm run dev"
     networks:
       - containers-network
     depends_on:
       - db
-      - redis
+
   db:
     image: postgres:14
     restart: unless-stopped
@@ -28,13 +28,6 @@ services:
     ports:
       - '5432:5432'
 
-  redis:
-    image: redis:alpine
-    restart: unless-stopped
-    networks:
-      - containers-network
-    ports:
-      - '6379:6379'
 volumes:
   postgres-db-data:
     driver: local

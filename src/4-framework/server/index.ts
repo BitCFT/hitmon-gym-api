@@ -1,4 +1,4 @@
-import '../../../env';
+import 'dotenv/config';
 import '@framework/ioc/inversifyConfig';
 import express, { json } from 'express';
 import { routes } from '@framework/server/config/routes';
