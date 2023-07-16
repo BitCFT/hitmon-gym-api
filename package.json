@@ -50,7 +50,7 @@
     "uuid": "^9.0.0"
   },
   "jest": {
-    "verbose": true,
+    "verbose": false,
     "bail": false,
     "collectCoverage": false,
     "preset": "ts-jest",
