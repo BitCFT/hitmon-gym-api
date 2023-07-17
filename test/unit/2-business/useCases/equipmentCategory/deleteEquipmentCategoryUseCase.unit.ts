@@ -2,7 +2,6 @@ import { container } from '@test/utility/ioc/inversifyConfigTests';
 import { equipmentCategoryRepositoryMock } from '@test/utility/mocks/repository/equipementCategory.mock';
 import {
   deleteEquipmentCategoryGeneralError,
-  equipmentCategoryAlreadyInUseError,
   equipmentCategoryIsNotFoundError,
 } from '@business/module/errors/equipmentCategory/equipmentCategory';
 import { DeleteEquipmentCategoryUseCase } from '@business/useCases/equipmentCategory/deleteEquipmentCategoryUseCase';
