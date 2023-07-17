@@ -1,6 +1,8 @@
 import {
   IEquipmentCategoryRepository,
   InputCreateEquipmentCategory,
+  InputUpdateEquipmentCategory,
+  OutputFindById,
   OutputFindByName,
   OutputListAllEquipmentCategories,
 } from '@business/repositories/equipmentCategory/iEquipmentCategoryRepository';
@@ -24,6 +26,13 @@ export class EquipmentCategoryRepository implements IEquipmentCategoryRepository
   }
 
   listAll(input: PaginationParams): Promise<OutputListAllEquipmentCategories> {
+    throw new Error('Method not implemented.');
+  }
+
+  findById(id: string): Promise<OutputFindById> {
+    throw new Error('Method not implemented.');
+  }
+  update(input: InputUpdateEquipmentCategory): Promise<IEquipmentCategoryEntity> {
     throw new Error('Method not implemented.');
   }
 }
