@@ -1,13 +1,12 @@
 {
   "extends": "./tsconfig.paths.json",
   "compilerOptions": {
-    "target": "ES2020", // especifica a versão do ECMAScript que o código será transpilado
+    "target": "ES5", // especifica a versão do ECMAScript que o código será transpilado
     "lib": ["ES6", "ESNext"], // é usado para especificar as bibliotecas JavaScript que estarão disponíveis durante a compilação do TypeScript. Essas bibliotecas fornecem definições para objetos, métodos e outras funcionalidades que podem ser usadas em código TypeScript. No exemplo acima, o valor do atributo lib é um array que inclui as bibliotecas "ES6" e "ESNext". Isso significa que essas bibliotecas estarão disponíveis durante a compilação e, consequentemente, no código transpilado para o JavaScript.
     "experimentalDecorators": true, //  permite o uso de funcionalidades experimentais do Typescript chamadas de "decorators".
     "emitDecoratorMetadata": true, //  inclui metadados de tipo no código emitido pelo compilador Typescript quando os decorators são usados nas annotations.
 
     "module": "CommonJS" /* Specify what module code is generated. */,
-    "rootDir": "./" /* Specify the root folder within your source files. */,
     "outDir": "./dist", // especifica a pasta onde os arquivos javascript serão gerados após a transpilação
 
     "removeComments": true, // remove os comentários nos arquivos javascript gerados
@@ -24,11 +23,11 @@
     "strictPropertyInitialization": true /* Essa opção obriga o desenvolvedor a inicializar todas as propriedades de uma classe ou objeto no momento da declaração ou no construtor da classe. Essa opção ajuda a garantir que as propriedades estejam sempre definidas e evita erros relacionados a valores indefinidos. */
   },
   "include": [
-    "src/**/*.ts",
-    "test"
+    "src/**/*.ts"
   ] /* O atributo include é usado para especificar quais arquivos devem ser incluídos no processo de compilação */,
   "exclude": [
     "./dist/**/*",
-    "node_modules"
+    "node_modules",
+    "test"
   ] /* é usado para especificar quais arquivos devem ser excluídos do processo de compilação. */
 }
