@@ -5,9 +5,6 @@ import {
   equipmentCategoryIsNotFoundError,
   updateEquipmentCategoryGeneralError,
 } from '@business/module/errors/equipmentCategory/equipmentCategory';
-import { EquipmentCategoryEntity } from '@domain/entities/equipmentCategoryEntity';
-import { left } from '@shared/either';
-import { fakeIError } from '@test/utility/fakes/error/fakeIError';
 import { fakeEquipmentCategory } from '@test/utility/fakes/entities/equipmentCategory';
 import { UpdateEquipmentCategoryUseCase } from '@business/useCases/equipmentCategory/updateEquipmentCategoryUseCase';
 import { InputUpdateEquipmentCategoryDto } from '@business/dto/equipmentCategoryDto.ts/updateEquipmentCategoryDto';
