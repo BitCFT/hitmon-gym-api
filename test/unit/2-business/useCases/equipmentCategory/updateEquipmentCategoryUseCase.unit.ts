@@ -1,6 +1,7 @@
 import { container } from '@test/utility/ioc/inversifyConfigTests';
 import { equipmentCategoryRepositoryMock } from '@test/utility/mocks/repository/equipementCategory.mock';
 import {
+  equipmentCategoryAlreadyInUseError,
   equipmentCategoryIsNotFoundError,
   updateEquipmentCategoryGeneralError,
 } from '@business/module/errors/equipmentCategory/equipmentCategory';
@@ -24,7 +25,7 @@ describe('2-business.useCases.equipmentCategory.updateEquipmentCategoryUseCase',
   const input: InputUpdateEquipmentCategoryDto = {
     id: 'string',
     params: {
-      name: 'head',
+      name: 'arms',
       description: 'head exercises',
     },
   };
@@ -77,6 +78,19 @@ describe('2-business.useCases.equipmentCategory.updateEquipmentCategoryUseCase',
     await useCase.exec(input);
 
     expect(spy).toHaveBeenCalledWith(input.params.name);
+  });
+
+  it('should return left if equipmentCategory is already in use', async () => {
+    jest.spyOn(equipmentCategoryRepositoryMock, 'findByName').mockResolvedValueOnce({
+      ...fakeEquipmentCategory,
+      name: 'head',
+    });
+
+    const result = await useCase.exec(input);
+
+    expect(result.isRight()).toBeFalsy();
+    expect(result.isLeft()).toBeTruthy();
+    expect(result.value).toEqual(equipmentCategoryAlreadyInUseError);
   });
 
   // it('should is not be able to create equipment category because exception in create method', async () => {
