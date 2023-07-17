@@ -23,11 +23,11 @@
     "strictPropertyInitialization": true /* Essa opção obriga o desenvolvedor a inicializar todas as propriedades de uma classe ou objeto no momento da declaração ou no construtor da classe. Essa opção ajuda a garantir que as propriedades estejam sempre definidas e evita erros relacionados a valores indefinidos. */
   },
   "include": [
-    "src/**/*.ts",
-    "test"
+    "src/**/*.ts"
   ] /* O atributo include é usado para especificar quais arquivos devem ser incluídos no processo de compilação */,
   "exclude": [
     "./dist/**/*",
-    "node_modules"
+    "node_modules",
+    "test"
   ] /* é usado para especificar quais arquivos devem ser excluídos do processo de compilação. */
 }
