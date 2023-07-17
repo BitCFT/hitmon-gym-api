@@ -1,6 +1,9 @@
 import { container } from '@test/utility/ioc/inversifyConfigTests';
 import { equipmentCategoryRepositoryMock } from '@test/utility/mocks/repository/equipementCategory.mock';
-import { updateEquipmentCategoryGeneralError } from '@business/module/errors/equipmentCategory/equipmentCategory';
+import {
+  equipmentCategoryIsNotFoundError,
+  updateEquipmentCategoryGeneralError,
+} from '@business/module/errors/equipmentCategory/equipmentCategory';
 import { EquipmentCategoryEntity } from '@domain/entities/equipmentCategoryEntity';
 import { left } from '@shared/either';
 import { fakeIError } from '@test/utility/fakes/error/fakeIError';
@@ -46,13 +49,15 @@ describe('2-business.useCases.equipmentCategory.updateEquipmentCategoryUseCase',
     expect(spy).toHaveBeenCalledWith(input.id);
   });
 
-  // it('should return left if name is already in use', async () => {
-  //   const result = await useCase.exec(input);
+  it('should return left if equipmentCategory is not found', async () => {
+    jest.spyOn(equipmentCategoryRepositoryMock, 'findById').mockResolvedValueOnce(null);
 
-  //   expect(result.isRight()).toBeFalsy();
-  //   expect(result.isLeft()).toBeTruthy();
-  //   expect(result.value).toEqual(equipmentCategoryAlreadyInUseError);
-  // });
+    const result = await useCase.exec(input);
+
+    expect(result.isRight()).toBeFalsy();
+    expect(result.isLeft()).toBeTruthy();
+    expect(result.value).toEqual(equipmentCategoryIsNotFoundError);
+  });
 
   // it('should return left if on create entity returns left', async () => {
   //   jest.spyOn(equipmentCategoryRepositoryMock, 'findByName').mockImplementationOnce(async () => null);
