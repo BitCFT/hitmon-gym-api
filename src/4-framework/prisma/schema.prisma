@@ -1,0 +1,103 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum RegistrationStep {
+  PENDING
+  VERIFIED
+
+  @@map("registration_steps")
+}
+
+model User {
+  id                               String           @id
+  email                            String           @unique @db.VarChar(50)
+  password                         String           @db.VarChar(100)
+  userName                         String           @db.VarChar(50)
+  registrationStep                 RegistrationStep @map("registration_step")
+  accountVerificationCode          String?          @map("account_verification_code") @db.VarChar(6)
+  accountVerificationCodeExpiresAt DateTime?        @map("account_verification_code_expires_at")
+  passwordResetCode                String?          @map("password_reset_code") @db.VarChar(6)
+  passwordResetCodeExpiresAt       DateTime?        @map("password_reset_code_expires_at")
+  roles                            Role[]           @relation("user_roles")
+  createdAt                        DateTime         @default(now()) @map("created_at")
+  updatedAt                        DateTime         @default(now()) @updatedAt @map("updated_at")
+
+  @@map("users")
+}
+
+enum RoleTypes {
+  ADMIN
+  STUDENT
+  INSTRUCTOR
+
+  @@map("role_types")
+}
+
+model Role {
+  id          String    @id
+  type        RoleTypes @default(STUDENT)
+  description String?   @db.VarChar(200)
+  users       User[]    @relation("user_roles")
+
+  @@map("roles")
+}
+
+model Equipment {
+  id                  String             @id
+  name                String             @unique
+  EquipmentCategory   EquipmentCategory? @relation(fields: [equipmentCategoryId], references: [id])
+  equipmentCategoryId String?            @map("category_id")
+  createdAt           DateTime           @default(now()) @map("created_at")
+  updatedAt           DateTime           @default(now()) @updatedAt @map("updated_at")
+
+  @@map("equipment")
+}
+
+model EquipmentCategory {
+  id         String      @id
+  name       String      @unique
+  equipments Equipment[]
+  createdAt  DateTime    @default(now()) @map("created_at")
+  updatedAt  DateTime    @default(now()) @updatedAt @map("updated_at")
+
+  @@map("equipment_categories")
+}
+
+// model Us {
+//   id   String @id @unique @default(uuid())
+//   name String
+
+//   evaluationsAsStudent    Evaluation[] @relation("Student")
+//   evaluationsAsInstructor Evaluation[] @relation("Instructor")
+
+//   paymentStatus StudentPaymentStatus?
+// }
+
+// model Evaluation {
+//   id String @id @unique @default(uuid())
+
+//   student   Us     @relation("Student", fields: [studentId], references: [id])
+//   studentId String
+
+//   instructor   Us     @relation("Instructor", fields: [instructorId], references: [id])
+//   instructorId String
+
+//   bodyWeigth Float
+// }
+
+// model StudentPaymentStatus {
+//   id              String    @id @unique @default(uuid())
+//   user            Us        @relation(fields: [userId], references: [id])
+//   userId          String    @unique
+//   itsPaid         Boolean   @default(false)
+//   lastPaymentDate DateTime?
+// }
