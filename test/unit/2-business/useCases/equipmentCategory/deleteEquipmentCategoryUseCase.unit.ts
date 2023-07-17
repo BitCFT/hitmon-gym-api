@@ -64,13 +64,13 @@ describe('2-business.useCases.equipmentCategory.deleteEquipmentCategoryUseCase',
     expect(result.value).toEqual(deleteEquipmentCategoryGeneralError);
   });
 
-  // it('should calls findByName method with correct value', async () => {
-  //   const spy = jest.spyOn(equipmentCategoryRepositoryMock, 'findByName');
+  it('should calls delete method with correct value', async () => {
+    const spy = jest.spyOn(equipmentCategoryRepositoryMock, 'delete');
 
-  //   await useCase.exec(input);
+    await useCase.exec(input);
 
-  //   expect(spy).toHaveBeenCalledWith(input.params.name);
-  // });
+    expect(spy).toHaveBeenCalledWith(input.id);
+  });
 
   // it('should return left if equipmentCategory is already in use', async () => {
   //   jest.spyOn(equipmentCategoryRepositoryMock, 'findByName').mockResolvedValueOnce({
