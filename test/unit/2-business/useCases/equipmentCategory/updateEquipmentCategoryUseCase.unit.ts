@@ -105,6 +105,17 @@ describe('2-business.useCases.equipmentCategory.updateEquipmentCategoryUseCase',
     expect(result.value).toEqual(updateEquipmentCategoryGeneralError);
   });
 
+  it('should calls update method with correct value', async () => {
+    const spy = jest.spyOn(equipmentCategoryRepositoryMock, 'update');
+
+    await useCase.exec(input);
+
+    expect(spy).toHaveBeenCalledWith({
+      id: input.id,
+      params: input.params,
+    });
+  });
+
   // it('should is not be able to create equipment category because exception in create method', async () => {
   //   jest.spyOn(equipmentCategoryRepositoryMock, 'findByName').mockImplementationOnce(async () => null);
   //   jest.spyOn(equipmentCategoryRepositoryMock, 'create').mockImplementationOnce(() => {
