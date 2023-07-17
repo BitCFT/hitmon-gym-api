@@ -72,47 +72,11 @@ describe('2-business.useCases.equipmentCategory.deleteEquipmentCategoryUseCase',
     expect(spy).toHaveBeenCalledWith(input.id);
   });
 
-  // it('should return left if equipmentCategory is already in use', async () => {
-  //   jest.spyOn(equipmentCategoryRepositoryMock, 'findByName').mockResolvedValueOnce({
-  //     ...fakeEquipmentCategory,
-  //     name: 'head',
-  //   });
+  it('should delete an equipment category on success', async () => {
+    const result = await useCase.exec(input);
 
-  //   const result = await useCase.exec(input);
-
-  //   expect(result.isRight()).toBeFalsy();
-  //   expect(result.isLeft()).toBeTruthy();
-  //   expect(result.value).toEqual(equipmentCategoryAlreadyInUseError);
-  // });
-
-  // it('should is not be able to update equipment category because exception in update method', async () => {
-  //   jest.spyOn(equipmentCategoryRepositoryMock, 'update').mockImplementationOnce(() => {
-  //     throw new Error('mocked error');
-  //   });
-
-  //   const result = await useCase.exec(input);
-
-  //   expect(result.isRight()).toBeFalsy();
-  //   expect(result.isLeft()).toBeTruthy();
-  //   expect(result.value).toEqual(updateEquipmentCategoryGeneralError);
-  // });
-
-  // it('should calls update method with correct value', async () => {
-  //   const spy = jest.spyOn(equipmentCategoryRepositoryMock, 'update');
-
-  //   await useCase.exec(input);
-
-  //   expect(spy).toHaveBeenCalledWith({
-  //     id: input.id,
-  //     params: input.params,
-  //   });
-  // });
-
-  // it('should update an equipment category on success', async () => {
-  //   const result = await useCase.exec(input);
-
-  //   expect(result.isLeft()).toBeFalsy();
-  //   expect(result.isRight()).toBeTruthy();
-  //   expect(result.value).toEqual(fakeEquipmentCategory);
-  // });
+    expect(result.isLeft()).toBeFalsy();
+    expect(result.isRight()).toBeTruthy();
+    expect(result.value).toEqual(undefined);
+  });
 });
