@@ -52,17 +52,17 @@ describe('2-business.useCases.equipmentCategory.deleteEquipmentCategoryUseCase',
     expect(result.value).toEqual(equipmentCategoryIsNotFoundError);
   });
 
-  // it('should is not be able to update equipment category because exception in findByName method', async () => {
-  //   jest.spyOn(equipmentCategoryRepositoryMock, 'findByName').mockImplementationOnce(() => {
-  //     throw new Error('mocked error');
-  //   });
+  it('should is not be able to update equipment category because exception in delete method', async () => {
+    jest.spyOn(equipmentCategoryRepositoryMock, 'delete').mockImplementationOnce(() => {
+      throw new Error('mocked error');
+    });
 
-  //   const result = await useCase.exec(input);
+    const result = await useCase.exec(input);
 
-  //   expect(result.isRight()).toBeFalsy();
-  //   expect(result.isLeft()).toBeTruthy();
-  //   expect(result.value).toEqual(updateEquipmentCategoryGeneralError);
-  // });
+    expect(result.isRight()).toBeFalsy();
+    expect(result.isLeft()).toBeTruthy();
+    expect(result.value).toEqual(deleteEquipmentCategoryGeneralError);
+  });
 
   // it('should calls findByName method with correct value', async () => {
   //   const spy = jest.spyOn(equipmentCategoryRepositoryMock, 'findByName');
