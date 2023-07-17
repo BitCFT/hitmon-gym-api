@@ -29,3 +29,9 @@ export const equipmentCategoryIsNotFoundError: IError = {
   message: 'EquipmentCategory Is Not Found Error',
   shortMessage: 'equipmentCategoryIsNotFoundError',
 };
+
+export const deleteEquipmentCategoryGeneralError: IError = {
+  code: '006',
+  message: 'Delete Equipment Category Genereal Error',
+  shortMessage: 'deleteEquipmentCategoryGeneralError',
+};

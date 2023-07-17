@@ -7,4 +7,5 @@ export const equipmentCategoryRepositoryMock: IEquipmentCategoryRepository = {
   listAll: jest.fn().mockResolvedValue(fakeEquipmentCategories),
   findById: jest.fn().mockResolvedValue(fakeEquipmentCategory),
   update: jest.fn().mockResolvedValue(fakeEquipmentCategory),
+  delete: jest.fn().mockResolvedValue(undefined),
 };

@@ -24,4 +24,5 @@ export interface IEquipmentCategoryRepository {
   findById(id: string): Promise<OutputFindById>;
   listAll(input: InputListAllEquipmentCategories): Promise<OutputListAllEquipmentCategories>;
   update(input: InputUpdateEquipmentCategory): Promise<IEquipmentCategoryEntity>;
+  delete(id: string): Promise<void>;
 }

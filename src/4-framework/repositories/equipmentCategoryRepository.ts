@@ -32,7 +32,12 @@ export class EquipmentCategoryRepository implements IEquipmentCategoryRepository
   findById(id: string): Promise<OutputFindById> {
     throw new Error('Method not implemented.');
   }
+
   update(input: InputUpdateEquipmentCategory): Promise<IEquipmentCategoryEntity> {
+    throw new Error('Method not implemented.');
+  }
+
+  delete(id: string): Promise<void> {
     throw new Error('Method not implemented.');
   }
 }
