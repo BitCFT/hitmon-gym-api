@@ -59,29 +59,17 @@ describe('2-business.useCases.equipmentCategory.updateEquipmentCategoryUseCase',
     expect(result.value).toEqual(equipmentCategoryIsNotFoundError);
   });
 
-  // it('should return left if on create entity returns left', async () => {
-  //   jest.spyOn(equipmentCategoryRepositoryMock, 'findByName').mockImplementationOnce(async () => null);
-  //   jest.spyOn(EquipmentCategoryEntity, 'create').mockReturnValueOnce(left(fakeIError));
+  it('should is not be able to update equipment category because exception in findByName method', async () => {
+    jest.spyOn(equipmentCategoryRepositoryMock, 'findByName').mockImplementationOnce(() => {
+      throw new Error('mocked error');
+    });
 
-  //   const result = await useCase.exec(input);
+    const result = await useCase.exec(input);
 
-  //   expect(result.isRight()).toBeFalsy();
-  //   expect(result.isLeft()).toBeTruthy();
-  //   expect(result.value).toEqual(fakeIError);
-  // });
-
-  // it('should calls create equipment category entity with correct values', async () => {
-  //   jest.spyOn(equipmentCategoryRepositoryMock, 'findByName').mockImplementationOnce(async () => null);
-
-  //   const spy = jest.spyOn(EquipmentCategoryEntity, 'create');
-
-  //   await useCase.exec(input);
-
-  //   expect(spy).toHaveBeenCalledWith({
-  //     ...input,
-  //     id: '0c5244eb-d80e-452c-bf99-383236161a51',
-  //   });
-  // });
+    expect(result.isRight()).toBeFalsy();
+    expect(result.isLeft()).toBeTruthy();
+    expect(result.value).toEqual(updateEquipmentCategoryGeneralError);
+  });
 
   // it('should is not be able to create equipment category because exception in create method', async () => {
   //   jest.spyOn(equipmentCategoryRepositoryMock, 'findByName').mockImplementationOnce(async () => null);
