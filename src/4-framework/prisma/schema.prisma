@@ -63,11 +63,12 @@ model Equipment {
 }
 
 model EquipmentCategory {
-  id         String      @id
-  name       String      @unique
-  equipments Equipment[]
-  createdAt  DateTime    @default(now()) @map("created_at")
-  updatedAt  DateTime    @default(now()) @updatedAt @map("updated_at")
+  id          String      @id
+  name        String      @unique
+  description String?     @db.VarChar(100)
+  equipments  Equipment[]
+  createdAt   DateTime    @default(now()) @map("created_at")
+  updatedAt   DateTime    @default(now()) @updatedAt @map("updated_at")
 
   @@map("equipment_categories")
 }

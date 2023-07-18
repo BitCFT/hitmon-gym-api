@@ -9,20 +9,26 @@ import {
 import { IEquipmentCategoryEntity } from '@domain/entities/equipmentCategoryEntity';
 import { PaginationParams } from '@domain/pagination';
 import { injectable } from 'inversify';
+import { prismaClient } from '@framework/prisma/prismaClient';
 
 @injectable()
 export class EquipmentCategoryRepository implements IEquipmentCategoryRepository {
-  private equipmentCategories: IEquipmentCategoryEntity[] = [];
-
   async create(input: InputCreateEquipmentCategory): Promise<IEquipmentCategoryEntity> {
-    const index = this.equipmentCategories.push(input) - 1;
+    const equipmentCategory = await prismaClient.equipmentCategory.create({
+      data: input,
+    });
 
-    return this.equipmentCategories[index];
+    return this.mapper(equipmentCategory);
   }
 
   async findByName(name: string): Promise<OutputFindByName> {
-    const equipmentCategory = this.equipmentCategories.find(element => element.name === name);
-    return equipmentCategory ?? null;
+    const equipmentCategory = await prismaClient.equipmentCategory.findUnique({
+      where: {
+        name,
+      },
+    });
+
+    return equipmentCategory ? this.mapper(equipmentCategory) : null;
   }
 
   listAll(input: PaginationParams): Promise<OutputListAllEquipmentCategories> {
@@ -39,5 +45,15 @@ export class EquipmentCategoryRepository implements IEquipmentCategoryRepository
 
   delete(id: string): Promise<void> {
     throw new Error('Method not implemented.');
+  }
+
+  private mapper(input: any): IEquipmentCategoryEntity {
+    return {
+      id: input.id,
+      name: input.name,
+      ...(input.description && { description: input.description }),
+      ...(input.createdAt && { createdAt: input.createdAt }),
+      ...(input.updatedAt && { updatedAt: input.updatedAt }),
+    };
   }
 }

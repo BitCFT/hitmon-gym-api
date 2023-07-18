@@ -25,6 +25,7 @@ export class CreateEquimentCategoryController implements IController {
 
       return created(result.value);
     } catch (error: any) {
+      console.log(error);
       if (error?.code === validationError().code) {
         return badRequest(error);
       }
