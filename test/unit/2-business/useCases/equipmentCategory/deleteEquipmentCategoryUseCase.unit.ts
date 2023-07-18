@@ -30,7 +30,7 @@ describe('2-business.useCases.equipmentCategory.deleteEquipmentCategoryUseCase',
 
     expect(result.isRight()).toBeFalsy();
     expect(result.isLeft()).toBeTruthy();
-    expect(result.value).toEqual(deleteEquipmentCategoryGeneralError);
+    expect(result.value).toEqual(deleteEquipmentCategoryGeneralError('mocked error'));
   });
 
   it('should calls findById method with correct value', async () => {
@@ -60,7 +60,7 @@ describe('2-business.useCases.equipmentCategory.deleteEquipmentCategoryUseCase',
 
     expect(result.isRight()).toBeFalsy();
     expect(result.isLeft()).toBeTruthy();
-    expect(result.value).toEqual(deleteEquipmentCategoryGeneralError);
+    expect(result.value).toEqual(deleteEquipmentCategoryGeneralError('mocked error'));
   });
 
   it('should calls delete method with correct value', async () => {
