@@ -23,27 +23,29 @@ export class EquipmentCategoryRepository implements IEquipmentCategoryRepository
 
   async findByName(name: string): Promise<OutputFindByName> {
     const equipmentCategory = await prismaClient.equipmentCategory.findUnique({
-      where: {
-        name,
-      },
+      where: { name },
     });
 
     return equipmentCategory ? this.mapper(equipmentCategory) : null;
+  }
+
+  async findById(id: string): Promise<OutputFindById> {
+    const equipmentCategory = await prismaClient.equipmentCategory.findUnique({
+      where: { id },
+    });
+
+    return equipmentCategory ? this.mapper(equipmentCategory) : null;
+  }
+
+  async delete(id: string): Promise<void> {
+    await prismaClient.equipmentCategory.delete({ where: { id } });
   }
 
   listAll(input: PaginationParams): Promise<OutputListAllEquipmentCategories> {
     throw new Error('Method not implemented.');
   }
 
-  findById(id: string): Promise<OutputFindById> {
-    throw new Error('Method not implemented.');
-  }
-
   update(input: InputUpdateEquipmentCategory): Promise<IEquipmentCategoryEntity> {
-    throw new Error('Method not implemented.');
-  }
-
-  delete(id: string): Promise<void> {
     throw new Error('Method not implemented.');
   }
 

@@ -35,9 +35,9 @@ export class DeleteEquipmentCategoryUseCase
       await this.equipmentCategoryRepository.delete(input.id);
 
       return right(undefined);
-    } catch (error) {
+    } catch (error: any) {
       this.logService.error(error);
-      return left(deleteEquipmentCategoryGeneralError);
+      return left(deleteEquipmentCategoryGeneralError(error?.message));
     }
   }
 }

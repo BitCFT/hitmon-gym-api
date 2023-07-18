@@ -1,7 +1,7 @@
 import { createEquipmentCategoryGeneralError } from '@business/module/errors/equipmentCategory/equipmentCategory';
 import { validationError } from '@business/module/errors/validation';
 import { HttpRequest, HttpResponse, IController } from '@business/services/iController';
-import { CreateEquipmentCategoryOperator } from '@controller/operations/equipmentCategory/createEquipmentCategoryOperator';
+import { CreateEquipmentCategoryOperator } from '@controller/operators/equipmentCategory/createEquipmentCategoryOperator';
 import { InputCreateEquipmentCategory } from '@controller/serializers/equipmentCategory/createEquipmentCategorySerializer';
 import { container } from '@shared/container';
 import { badRequest, created, serverError } from '@shared/httpHelper';
