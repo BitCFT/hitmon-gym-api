@@ -30,8 +30,8 @@ export const equipmentCategoryIsNotFoundError: IError = {
   shortMessage: 'equipmentCategoryIsNotFoundError',
 };
 
-export const deleteEquipmentCategoryGeneralError: IError = {
+export const deleteEquipmentCategoryGeneralError = (message?: string): IError => ({
   code: '006',
-  message: 'Delete Equipment Category Genereal Error',
+  message: message || 'Delete Equipment Category Genereal Error',
   shortMessage: 'deleteEquipmentCategoryGeneralError',
-};
+});
