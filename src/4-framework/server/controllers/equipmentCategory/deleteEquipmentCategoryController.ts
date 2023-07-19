@@ -21,7 +21,7 @@ export class DeleteEquimentCategoryController implements IController {
 
       if (result.isLeft()) {
         if (result.value.code === deleteEquipmentCategoryGeneralError().code) {
-          throw deleteEquipmentCategoryGeneralError;
+          throw result.value;
         }
         if (result.value.code === equipmentCategoryIsNotFoundError.code) {
           return notFound(result.value);

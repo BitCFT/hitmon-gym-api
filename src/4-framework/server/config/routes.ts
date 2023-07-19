@@ -4,6 +4,7 @@ import { CreateEquimentCategoryController } from '@framework/server/controllers/
 import { EquipmentCategoryRoutes } from './systemRoutes';
 import { ExpressRoutesAdapter } from '../adapters/expressRoutesAdapter';
 import { DeleteEquimentCategoryController } from '@framework/server/controllers/equipmentCategory/deleteEquipmentCategoryController';
+import { ListEquipmentCategoriesController } from '../controllers/equipmentCategory/listEquipmentCategoriesController';
 
 export const routes = () => {
   const router = Router();
@@ -23,5 +24,11 @@ export const routes = () => {
     EquipmentCategoryRoutes.DELETE,
     ExpressRoutesAdapter.adapt(container.get(DeleteEquimentCategoryController))
   );
+
+  router.get(
+    EquipmentCategoryRoutes.FIND_ALL,
+    ExpressRoutesAdapter.adapt(container.get(ListEquipmentCategoriesController))
+  );
+
   return router;
 };

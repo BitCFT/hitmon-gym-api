@@ -41,8 +41,23 @@ export class EquipmentCategoryRepository implements IEquipmentCategoryRepository
     await prismaClient.equipmentCategory.delete({ where: { id } });
   }
 
-  listAll(input: PaginationParams): Promise<OutputListAllEquipmentCategories> {
-    throw new Error('Method not implemented.');
+  async listAll({ page, limit }: PaginationParams): Promise<OutputListAllEquipmentCategories> {
+    const data = await prismaClient.equipmentCategory.findMany({
+      take: limit,
+      skip: (page - 1) * limit,
+    });
+    const mappedData = data.map(row => this.mapper(row));
+    const total = await prismaClient.equipmentCategory.count();
+
+    return {
+      meta: {
+        page,
+        limit,
+        total,
+        hasNext: total > page * limit,
+      },
+      data: mappedData,
+    };
   }
 
   update(input: InputUpdateEquipmentCategory): Promise<IEquipmentCategoryEntity> {

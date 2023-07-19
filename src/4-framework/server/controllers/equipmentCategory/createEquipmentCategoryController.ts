@@ -18,7 +18,7 @@ export class CreateEquimentCategoryController implements IController {
 
       if (result.isLeft()) {
         if (result.value === createEquipmentCategoryGeneralError) {
-          throw createEquipmentCategoryGeneralError;
+          throw result.value;
         }
         return badRequest(result.value);
       }
