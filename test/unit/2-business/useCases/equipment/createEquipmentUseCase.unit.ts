@@ -3,6 +3,7 @@ import { CreateEquipmentUseCase } from '@business/useCases/equipment/createEquip
 import { InputCreateEquipmentDto } from '@business/dto/equipment/createEquipmentDto';
 import { equipmentRepositoryMock } from '@test/utility/mocks/repository/equipment.mock';
 import { createEquipmentGeneralError, equipmentAlreadyInUseError } from '@business/module/errors/equipment/equipment';
+import { equipmentCategoryRepositoryMock } from '@test/utility/mocks/repository/equipmentCategory.mock';
 
 describe('2-business.useCases.equipment.createEquipmentUseCase', () => {
   beforeEach(() => {
@@ -47,6 +48,34 @@ describe('2-business.useCases.equipment.createEquipmentUseCase', () => {
     expect(result.isLeft()).toBeTruthy();
     expect(result.value).toEqual(equipmentAlreadyInUseError);
   });
+
+  it('should is not be able to create equipment because exception in findById method', async () => {
+    jest.spyOn(equipmentCategoryRepositoryMock, 'findById').mockImplementationOnce(() => {
+      throw new Error('mocked error');
+    });
+
+    const result = await useCase.exec(input);
+
+    expect(result.isRight()).toBeFalsy();
+    expect(result.isLeft()).toBeTruthy();
+    expect(result.value).toEqual(createEquipmentGeneralError);
+  });
+
+  // it('should calls findByName method with correct value', async () => {
+  //   const spy = jest.spyOn(equipmentRepositoryMock, 'findByName');
+
+  //   await useCase.exec(input);
+
+  //   expect(spy).toHaveBeenCalledWith(input.name);
+  // });
+
+  // it('should return left if name is already in use', async () => {
+  //   const result = await useCase.exec(input);
+
+  //   expect(result.isRight()).toBeFalsy();
+  //   expect(result.isLeft()).toBeTruthy();
+  //   expect(result.value).toEqual(equipmentAlreadyInUseError);
+  // });
 
   // it('should return left if on create entity returns left', async () => {
   //   jest.spyOn(equipmentRepositoryMock, 'findByName').mockImplementationOnce(async () => null);
