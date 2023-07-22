@@ -1,6 +1,6 @@
 import { AbstractSerializer } from '../abstractSerializer';
 import { IsUUID } from 'class-validator';
-import { OutputDeleteEquipmentCategoryDto } from '@business/dto/equipmentCategoryDto.ts/deleteEquipmentCategoryDto';
+import { OutputDeleteEquipmentCategoryDto } from '@business/dto/equipmentCategory/deleteEquipmentCategoryDto';
 
 export class InputDeleteEquipmentCategory extends AbstractSerializer<InputDeleteEquipmentCategory> {
   @IsUUID()

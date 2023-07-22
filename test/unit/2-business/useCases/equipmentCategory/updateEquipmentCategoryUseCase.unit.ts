@@ -7,7 +7,7 @@ import {
 } from '@business/module/errors/equipmentCategory/equipmentCategory';
 import { fakeEquipmentCategory } from '@test/utility/fakes/entities/equipmentCategory';
 import { UpdateEquipmentCategoryUseCase } from '@business/useCases/equipmentCategory/updateEquipmentCategoryUseCase';
-import { InputUpdateEquipmentCategoryDto } from '@business/dto/equipmentCategoryDto.ts/updateEquipmentCategoryDto';
+import { InputUpdateEquipmentCategoryDto } from '@business/dto/equipmentCategory/updateEquipmentCategoryDto';
 
 describe('2-business.useCases.equipmentCategory.updateEquipmentCategoryUseCase', () => {
   beforeEach(() => {

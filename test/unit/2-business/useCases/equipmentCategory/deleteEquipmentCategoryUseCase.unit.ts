@@ -5,7 +5,7 @@ import {
   equipmentCategoryIsNotFoundError,
 } from '@business/module/errors/equipmentCategory/equipmentCategory';
 import { DeleteEquipmentCategoryUseCase } from '@business/useCases/equipmentCategory/deleteEquipmentCategoryUseCase';
-import { InputDeleteEquipmentCategoryDto } from '@business/dto/equipmentCategoryDto.ts/deleteEquipmentCategoryDto';
+import { InputDeleteEquipmentCategoryDto } from '@business/dto/equipmentCategory/deleteEquipmentCategoryDto';
 
 describe('2-business.useCases.equipmentCategory.deleteEquipmentCategoryUseCase', () => {
   beforeEach(() => {

@@ -3,7 +3,7 @@ import { IUseCase } from '../iUseCase';
 import {
   InputUpdateEquipmentCategoryDto,
   OutputUpdateEquipmentCategoryDto,
-} from '@business/dto/equipmentCategoryDto.ts/updateEquipmentCategoryDto';
+} from '@business/dto/equipmentCategory/updateEquipmentCategoryDto';
 import { ILoggerService, ILoggerServiceToken } from '@business/services/iLogger';
 import {
   IEquipmentCategoryRepository,
