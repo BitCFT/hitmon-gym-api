@@ -4,6 +4,7 @@ import { InputCreateEquipmentDto } from '@business/dto/equipment/createEquipment
 import { equipmentRepositoryMock } from '@test/utility/mocks/repository/equipment.mock';
 import { createEquipmentGeneralError, equipmentAlreadyInUseError } from '@business/module/errors/equipment/equipment';
 import { equipmentCategoryRepositoryMock } from '@test/utility/mocks/repository/equipmentCategory.mock';
+import { equipmentCategoryIsNotFoundError } from '@business/module/errors/equipmentCategory/equipmentCategory';
 
 describe('2-business.useCases.equipment.createEquipmentUseCase', () => {
   beforeEach(() => {
@@ -75,6 +76,17 @@ describe('2-business.useCases.equipment.createEquipmentUseCase', () => {
     expect(result.isRight()).toBeFalsy();
     expect(result.isLeft()).toBeTruthy();
     expect(result.value).toEqual(equipmentAlreadyInUseError);
+  });
+
+  it('should return left if equipment category is not found', async () => {
+    jest.spyOn(equipmentRepositoryMock, 'findByName').mockImplementationOnce(async () => null);
+    jest.spyOn(equipmentCategoryRepositoryMock, 'findById').mockImplementationOnce(async () => null);
+
+    const result = await useCase.exec(input);
+
+    expect(result.isRight()).toBeFalsy();
+    expect(result.isLeft()).toBeTruthy();
+    expect(result.value).toEqual(equipmentCategoryIsNotFoundError);
   });
 
   // it('should return left if on create entity returns left', async () => {
