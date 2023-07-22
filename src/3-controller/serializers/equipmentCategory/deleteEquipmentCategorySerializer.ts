@@ -1,9 +1,10 @@
 import { AbstractSerializer } from '../abstractSerializer';
-import { IsUUID } from 'class-validator';
+import { IsNotEmpty, IsUUID } from 'class-validator';
 import { OutputDeleteEquipmentCategoryDto } from '@business/dto/equipmentCategory/deleteEquipmentCategoryDto';
 
 export class InputDeleteEquipmentCategory extends AbstractSerializer<InputDeleteEquipmentCategory> {
   @IsUUID()
+  @IsNotEmpty()
   id!: string;
 }
 
