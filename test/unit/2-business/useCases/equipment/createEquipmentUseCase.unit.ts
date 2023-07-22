@@ -61,13 +61,13 @@ describe('2-business.useCases.equipment.createEquipmentUseCase', () => {
     expect(result.value).toEqual(createEquipmentGeneralError);
   });
 
-  // it('should calls findByName method with correct value', async () => {
-  //   const spy = jest.spyOn(equipmentRepositoryMock, 'findByName');
+  it('should calls findById method with correct value', async () => {
+    const spy = jest.spyOn(equipmentCategoryRepositoryMock, 'findById');
 
-  //   await useCase.exec(input);
+    await useCase.exec(input);
 
-  //   expect(spy).toHaveBeenCalledWith(input.name);
-  // });
+    expect(spy).toHaveBeenCalledWith(input.categoryId);
+  });
 
   // it('should return left if name is already in use', async () => {
   //   const result = await useCase.exec(input);
