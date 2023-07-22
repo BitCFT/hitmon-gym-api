@@ -1,3 +1,4 @@
+import { CreateEquipmentUseCase } from '@business/useCases/equipment/createEquipmentUseCase';
 import { CreateEquipmentCategoryUseCase } from '@business/useCases/equipmentCategory/createEquipmentCategoryUseCase';
 import { DeleteEquipmentCategoryUseCase } from '@business/useCases/equipmentCategory/deleteEquipmentCategoryUseCase';
 import { ListEquipmentCategoriesUseCase } from '@business/useCases/equipmentCategory/listEquipmentCategoriesUseCase';
@@ -15,4 +16,5 @@ export const UseCasesModule = new ContainerModule((bind: interfaces.Bind) => {
   bind(ListEquipmentCategoriesUseCase).toSelf();
   bind(UpdateEquipmentCategoryUseCase).toSelf();
   bind(DeleteEquipmentCategoryUseCase).toSelf();
+  bind(CreateEquipmentUseCase).toSelf();
 });
