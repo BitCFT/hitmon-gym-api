@@ -6,7 +6,7 @@ export const IEquipmentRepositoryToken = Symbol.for('IEquipmentRepositoryToken')
 export type InputCreateEquipment = {
   id: string;
   name: string;
-  price: string;
+  price: number;
   categoryId: string;
 };
 
