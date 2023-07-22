@@ -8,6 +8,7 @@ import { equipmentCategoryIsNotFoundError } from '@business/module/errors/equipm
 import { EquipmentEntity } from '@domain/entities/equipmentEntity';
 import { left } from '@shared/either';
 import { fakeIError } from '@test/utility/fakes/error/fakeIError';
+import { fakeEquipment } from '@test/utility/fakes/entities/equipment';
 
 describe('2-business.useCases.equipment.createEquipmentUseCase', () => {
   beforeEach(() => {
@@ -143,13 +144,13 @@ describe('2-business.useCases.equipment.createEquipmentUseCase', () => {
     });
   });
 
-  // it('should create an equipment  on success', async () => {
-  //   jest.spyOn(equipmentRepositoryMock, 'findByName').mockImplementationOnce(async () => null);
+  it('should create an equipment on success', async () => {
+    jest.spyOn(equipmentRepositoryMock, 'findByName').mockImplementationOnce(async () => null);
 
-  //   const result = await useCase.exec(input);
+    const result = await useCase.exec(input);
 
-  //   expect(result.isLeft()).toBeFalsy();
-  //   expect(result.isRight()).toBeTruthy();
-  //   expect(result.value).toEqual(fakeEquipment);
-  // });
+    expect(result.isLeft()).toBeFalsy();
+    expect(result.isRight()).toBeTruthy();
+    expect(result.value).toEqual(fakeEquipment);
+  });
 });
