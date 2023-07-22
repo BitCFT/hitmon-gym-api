@@ -4,7 +4,7 @@ import { IError } from '@shared/iError';
 
 export type InputUpdateEquipmentCategoryDto = {
   id: string;
-  params: Partial<IEquipmentCategoryEntity>;
+  params: Partial<Pick<IEquipmentCategoryEntity, 'name' | 'description'>>;
 };
 
 export type OutputUpdateEquipmentCategoryDto = Either<IError, IEquipmentCategoryEntity>;
