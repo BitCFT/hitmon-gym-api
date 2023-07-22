@@ -1,3 +1,4 @@
+import { CreateEquipmentOperator } from '@controller/operators/equipment/createEquipmentOperator';
 import { CreateEquipmentCategoryOperator } from '@controller/operators/equipmentCategory/createEquipmentCategoryOperator';
 import { DeleteEquipmentCategoryOperator } from '@controller/operators/equipmentCategory/deleteEquipmentCategoryOperator';
 import { ListEquipmentCategoriesOperator } from '@controller/operators/equipmentCategory/listEquipmentCategoriesOperator';
@@ -9,4 +10,5 @@ export const OperatorModule = new ContainerModule((bind: interfaces.Bind) => {
   bind(DeleteEquipmentCategoryOperator).toSelf();
   bind(ListEquipmentCategoriesOperator).toSelf();
   bind(UpdateEquipmentCategoryOperator).toSelf();
+  bind(CreateEquipmentOperator).toSelf();
 });
