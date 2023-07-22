@@ -15,7 +15,7 @@ export type InputListAllEquipmentCategories = PaginationParams;
 export type OutputListAllEquipmentCategories = PaginationData<IEquipmentCategoryEntity>;
 export type InputUpdateEquipmentCategory = {
   id: string;
-  params: Partial<IEquipmentCategoryEntity>;
+  params: Partial<Pick<IEquipmentCategoryEntity, 'name' | 'description'>>;
 };
 
 export interface IEquipmentCategoryRepository {
