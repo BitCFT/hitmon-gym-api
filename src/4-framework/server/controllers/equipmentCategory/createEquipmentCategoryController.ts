@@ -1,7 +1,7 @@
 import { createEquipmentCategoryGeneralError } from '@business/module/errors/equipmentCategory/equipmentCategory';
 import { validationError } from '@business/module/errors/validation';
 import { HttpRequest, HttpResponse, IController } from '@business/services/iController';
-import { CreateEquipmentCategoryOperator } from '@controller/operations/equipmentCategory/createEquipmentCategoryOperator';
+import { CreateEquipmentCategoryOperator } from '@controller/operators/equipmentCategory/createEquipmentCategoryOperator';
 import { InputCreateEquipmentCategory } from '@controller/serializers/equipmentCategory/createEquipmentCategorySerializer';
 import { container } from '@shared/container';
 import { badRequest, created, serverError } from '@shared/httpHelper';
@@ -18,13 +18,14 @@ export class CreateEquimentCategoryController implements IController {
 
       if (result.isLeft()) {
         if (result.value === createEquipmentCategoryGeneralError) {
-          throw createEquipmentCategoryGeneralError;
+          throw result.value;
         }
         return badRequest(result.value);
       }
 
       return created(result.value);
     } catch (error: any) {
+      console.log(error);
       if (error?.code === validationError().code) {
         return badRequest(error);
       }
