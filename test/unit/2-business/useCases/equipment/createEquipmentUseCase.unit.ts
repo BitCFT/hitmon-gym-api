@@ -69,13 +69,13 @@ describe('2-business.useCases.equipment.createEquipmentUseCase', () => {
     expect(spy).toHaveBeenCalledWith(input.categoryId);
   });
 
-  // it('should return left if name is already in use', async () => {
-  //   const result = await useCase.exec(input);
+  it('should return left if name is already in use', async () => {
+    const result = await useCase.exec(input);
 
-  //   expect(result.isRight()).toBeFalsy();
-  //   expect(result.isLeft()).toBeTruthy();
-  //   expect(result.value).toEqual(equipmentAlreadyInUseError);
-  // });
+    expect(result.isRight()).toBeFalsy();
+    expect(result.isLeft()).toBeTruthy();
+    expect(result.value).toEqual(equipmentAlreadyInUseError);
+  });
 
   // it('should return left if on create entity returns left', async () => {
   //   jest.spyOn(equipmentRepositoryMock, 'findByName').mockImplementationOnce(async () => null);
