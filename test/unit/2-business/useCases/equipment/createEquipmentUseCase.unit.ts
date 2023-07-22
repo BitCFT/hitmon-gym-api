@@ -129,19 +129,19 @@ describe('2-business.useCases.equipment.createEquipmentUseCase', () => {
     expect(result.value).toEqual(createEquipmentGeneralError);
   });
 
-  // it('should calls create method with correct values', async () => {
-  //   jest.spyOn(equipmentRepositoryMock, 'findByName').mockImplementationOnce(async () => null);
-  //   jest.useFakeTimers().setSystemTime(new Date('2023-01-01T00:00:00.000Z'));
+  it('should calls create method with correct values', async () => {
+    jest.spyOn(equipmentRepositoryMock, 'findByName').mockImplementationOnce(async () => null);
+    jest.useFakeTimers().setSystemTime(new Date('2023-01-01T00:00:00.000Z'));
 
-  //   const spy = jest.spyOn(equipmentRepositoryMock, 'create');
+    const spy = jest.spyOn(equipmentRepositoryMock, 'create');
 
-  //   await useCase.exec(input);
+    await useCase.exec(input);
 
-  //   expect(spy).toHaveBeenCalledWith({
-  //     ...input,
-  //     id: '0c5244eb-d80e-452c-bf99-383236161a51',
-  //   });
-  // });
+    expect(spy).toHaveBeenCalledWith({
+      ...input,
+      id: '0c5244eb-d80e-452c-bf99-383236161a51',
+    });
+  });
 
   // it('should create an equipment  on success', async () => {
   //   jest.spyOn(equipmentRepositoryMock, 'findByName').mockImplementationOnce(async () => null);
