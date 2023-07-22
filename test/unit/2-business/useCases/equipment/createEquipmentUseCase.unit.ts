@@ -2,7 +2,7 @@ import { container } from '@test/utility/ioc/inversifyConfigTests';
 import { CreateEquipmentUseCase } from '@business/useCases/equipment/createEquipmentUseCase';
 import { InputCreateEquipmentDto } from '@business/dto/equipment/createEquipmentDto';
 import { equipmentRepositoryMock } from '@test/utility/mocks/repository/equipment.mock';
-import { createEquipmentGeneralError } from '@business/module/errors/equipment/equipment';
+import { createEquipmentGeneralError, equipmentAlreadyInUseError } from '@business/module/errors/equipment/equipment';
 
 describe('2-business.useCases.equipment.createEquipmentUseCase', () => {
   beforeEach(() => {
@@ -40,13 +40,13 @@ describe('2-business.useCases.equipment.createEquipmentUseCase', () => {
     expect(spy).toHaveBeenCalledWith(input.name);
   });
 
-  // it('should return left if name is already in use', async () => {
-  //   const result = await useCase.exec(input);
+  it('should return left if name is already in use', async () => {
+    const result = await useCase.exec(input);
 
-  //   expect(result.isRight()).toBeFalsy();
-  //   expect(result.isLeft()).toBeTruthy();
-  //   expect(result.value).toEqual(equipmentAlreadyInUseError);
-  // });
+    expect(result.isRight()).toBeFalsy();
+    expect(result.isLeft()).toBeTruthy();
+    expect(result.value).toEqual(equipmentAlreadyInUseError);
+  });
 
   // it('should return left if on create entity returns left', async () => {
   //   jest.spyOn(equipmentRepositoryMock, 'findByName').mockImplementationOnce(async () => null);
