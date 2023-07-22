@@ -116,18 +116,18 @@ describe('2-business.useCases.equipment.createEquipmentUseCase', () => {
     });
   });
 
-  // it('should is not be able to create equipment  because exception in create method', async () => {
-  //   jest.spyOn(equipmentRepositoryMock, 'findByName').mockImplementationOnce(async () => null);
-  //   jest.spyOn(equipmentRepositoryMock, 'create').mockImplementationOnce(() => {
-  //     throw new Error('mocked error');
-  //   });
+  it('should is not be able to create equipment because exception in create method', async () => {
+    jest.spyOn(equipmentRepositoryMock, 'findByName').mockImplementationOnce(async () => null);
+    jest.spyOn(equipmentRepositoryMock, 'create').mockImplementationOnce(() => {
+      throw new Error('mocked error');
+    });
 
-  //   const result = await useCase.exec(input);
+    const result = await useCase.exec(input);
 
-  //   expect(result.isRight()).toBeFalsy();
-  //   expect(result.isLeft()).toBeTruthy();
-  //   expect(result.value).toEqual(createEquipmentGeneralError);
-  // });
+    expect(result.isRight()).toBeFalsy();
+    expect(result.isLeft()).toBeTruthy();
+    expect(result.value).toEqual(createEquipmentGeneralError);
+  });
 
   // it('should calls create method with correct values', async () => {
   //   jest.spyOn(equipmentRepositoryMock, 'findByName').mockImplementationOnce(async () => null);
