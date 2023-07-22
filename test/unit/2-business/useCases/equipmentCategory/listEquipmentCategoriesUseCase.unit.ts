@@ -1,5 +1,5 @@
 import { container } from '@test/utility/ioc/inversifyConfigTests';
-import { equipmentCategoryRepositoryMock } from '@test/utility/mocks/repository/equipementCategory.mock';
+import { equipmentCategoryRepositoryMock } from '@test/utility/mocks/repository/equipmentCategory.mock';
 import { listEquipmentCategoriesGeneralError } from '@business/module/errors/equipmentCategory/equipmentCategory';
 import { ListEquipmentCategoriesUseCase } from '@business/useCases/equipmentCategory/listEquipmentCategoriesUseCase';
 import { InputListEquipmentCategoriesDto } from '@business/dto/equipmentCategory/listEquipmentCategoriesDto';
