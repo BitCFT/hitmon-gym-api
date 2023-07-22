@@ -60,8 +60,15 @@ export class EquipmentCategoryRepository implements IEquipmentCategoryRepository
     };
   }
 
-  update(input: InputUpdateEquipmentCategory): Promise<IEquipmentCategoryEntity> {
-    throw new Error('Method not implemented.');
+  async update(input: InputUpdateEquipmentCategory): Promise<IEquipmentCategoryEntity> {
+    const updatedEquipmentCategory = await prismaClient.equipmentCategory.update({
+      where: {
+        id: input.id,
+      },
+      data: input.params,
+    });
+
+    return this.mapper(updatedEquipmentCategory);
   }
 
   private mapper(input: any): IEquipmentCategoryEntity {

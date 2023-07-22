@@ -49,6 +49,7 @@ export class UpdateEquipmentCategoryUseCase
 
       return right(updatedEquipmentCategory);
     } catch (error) {
+      this.logService.error(error);
       return left(updateEquipmentCategoryGeneralError);
     }
   }
