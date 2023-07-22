@@ -5,6 +5,9 @@ import { equipmentRepositoryMock } from '@test/utility/mocks/repository/equipmen
 import { createEquipmentGeneralError, equipmentAlreadyInUseError } from '@business/module/errors/equipment/equipment';
 import { equipmentCategoryRepositoryMock } from '@test/utility/mocks/repository/equipmentCategory.mock';
 import { equipmentCategoryIsNotFoundError } from '@business/module/errors/equipmentCategory/equipmentCategory';
+import { EquipmentEntity } from '@domain/entities/equipmentEntity';
+import { left } from '@shared/either';
+import { fakeIError } from '@test/utility/fakes/error/fakeIError';
 
 describe('2-business.useCases.equipment.createEquipmentUseCase', () => {
   beforeEach(() => {
@@ -89,16 +92,16 @@ describe('2-business.useCases.equipment.createEquipmentUseCase', () => {
     expect(result.value).toEqual(equipmentCategoryIsNotFoundError);
   });
 
-  // it('should return left if on create entity returns left', async () => {
-  //   jest.spyOn(equipmentRepositoryMock, 'findByName').mockImplementationOnce(async () => null);
-  //   jest.spyOn(EquipmentEntity, 'create').mockReturnValueOnce(left(fakeIError));
+  it('should return left if on create entity returns left', async () => {
+    jest.spyOn(equipmentRepositoryMock, 'findByName').mockImplementationOnce(async () => null);
+    jest.spyOn(EquipmentEntity, 'create').mockReturnValueOnce(left(fakeIError));
 
-  //   const result = await useCase.exec(input);
+    const result = await useCase.exec(input);
 
-  //   expect(result.isRight()).toBeFalsy();
-  //   expect(result.isLeft()).toBeTruthy();
-  //   expect(result.value).toEqual(fakeIError);
-  // });
+    expect(result.isRight()).toBeFalsy();
+    expect(result.isLeft()).toBeTruthy();
+    expect(result.value).toEqual(fakeIError);
+  });
 
   // it('should calls create equipment  entity with correct values', async () => {
   //   jest.spyOn(equipmentRepositoryMock, 'findByName').mockImplementationOnce(async () => null);
