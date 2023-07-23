@@ -54,6 +54,7 @@ model Role {
 model Equipment {
   id                  String            @id
   name                String            @unique
+  price               Float
   EquipmentCategory   EquipmentCategory @relation(fields: [equipmentCategoryId], references: [id])
   equipmentCategoryId String            @map("category_id")
   createdAt           DateTime          @default(now()) @map("created_at")
