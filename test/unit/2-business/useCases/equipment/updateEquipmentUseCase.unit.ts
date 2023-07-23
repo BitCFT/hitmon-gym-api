@@ -8,6 +8,8 @@ import {
 import { fakeEquipment } from '@test/utility/fakes/entities/equipment';
 import { UpdateEquipmentUseCase } from '@business/useCases/equipment/updateEquipmentUseCase';
 import { InputUpdateEquipmentDto } from '@business/dto/equipment/updateEquipmentDto';
+import { equipmentCategoryIsNotFoundError } from '@business/module/errors/equipmentCategory/equipmentCategory';
+import { equipmentCategoryRepositoryMock } from '@test/utility/mocks/repository/equipmentCategory.mock';
 
 describe('2-business.useCases.equipment.updateEquipmentUseCase', () => {
   beforeEach(() => {
@@ -90,6 +92,39 @@ describe('2-business.useCases.equipment.updateEquipmentUseCase', () => {
     expect(result.isLeft()).toBeTruthy();
     expect(result.value).toEqual(equipmentAlreadyInUseError);
   });
+
+  it('should is not be able to update equipment because exception in findById method', async () => {
+    jest.spyOn(equipmentCategoryRepositoryMock, 'findById').mockImplementationOnce(() => {
+      throw new Error('mocked error');
+    });
+
+    const result = await useCase.exec(input);
+
+    expect(result.isRight()).toBeFalsy();
+    expect(result.isLeft()).toBeTruthy();
+    expect(result.value).toEqual(updateEquipmentGeneralError);
+  });
+
+  // it('should calls findByName method with correct value', async () => {
+  //   const spy = jest.spyOn(equipmentRepositoryMock, 'findByName');
+
+  //   await useCase.exec(input);
+
+  //   expect(spy).toHaveBeenCalledWith(input.params.name);
+  // });
+
+  // it('should return left if equipment is already in use', async () => {
+  //   jest.spyOn(equipmentRepositoryMock, 'findByName').mockResolvedValueOnce({
+  //     ...fakeEquipment,
+  //     name: 'head',
+  //   });
+
+  //   const result = await useCase.exec(input);
+
+  //   expect(result.isRight()).toBeFalsy();
+  //   expect(result.isLeft()).toBeTruthy();
+  //   expect(result.value).toEqual(equipmentAlreadyInUseError);
+  // });
 
   // it('should is not be able to update equipment  because exception in update method', async () => {
   //   jest.spyOn(equipmentRepositoryMock, 'update').mockImplementationOnce(() => {
