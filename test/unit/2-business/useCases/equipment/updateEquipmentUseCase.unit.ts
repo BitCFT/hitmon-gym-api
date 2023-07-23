@@ -123,17 +123,17 @@ describe('2-business.useCases.equipment.updateEquipmentUseCase', () => {
     expect(result.value).toEqual(equipmentCategoryIsNotFoundError);
   });
 
-  // it('should is not be able to update equipment  because exception in update method', async () => {
-  //   jest.spyOn(equipmentRepositoryMock, 'update').mockImplementationOnce(() => {
-  //     throw new Error('mocked error');
-  //   });
+  it('should is not be able to update equipment because exception in update method', async () => {
+    jest.spyOn(equipmentRepositoryMock, 'update').mockImplementationOnce(() => {
+      throw new Error('mocked error');
+    });
 
-  //   const result = await useCase.exec(input);
+    const result = await useCase.exec(input);
 
-  //   expect(result.isRight()).toBeFalsy();
-  //   expect(result.isLeft()).toBeTruthy();
-  //   expect(result.value).toEqual(updateEquipmentGeneralError);
-  // });
+    expect(result.isRight()).toBeFalsy();
+    expect(result.isLeft()).toBeTruthy();
+    expect(result.value).toEqual(updateEquipmentGeneralError);
+  });
 
   // it('should calls update method with correct value', async () => {
   //   const spy = jest.spyOn(equipmentRepositoryMock, 'update');
