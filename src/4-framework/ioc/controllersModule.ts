@@ -1,4 +1,5 @@
 import { CreateEquipmentController } from '@framework/server/controllers/equipment/createEquipmentController';
+import { DeleteEquipmentController } from '@framework/server/controllers/equipment/deleteEquipmentController';
 import { ListEquipmentsController } from '@framework/server/controllers/equipment/listEquipmentsController';
 import { CreateEquimentCategoryController } from '@framework/server/controllers/equipmentCategory/createEquipmentCategoryController';
 import { DeleteEquimentCategoryController } from '@framework/server/controllers/equipmentCategory/deleteEquipmentCategoryController';
@@ -13,4 +14,5 @@ export const ControllersModule = new ContainerModule((bind: interfaces.Bind) => 
   bind(UpdateEquipmentCategoryController).toSelf();
   bind(CreateEquipmentController).toSelf();
   bind(ListEquipmentsController).toSelf();
+  bind(DeleteEquipmentController).toSelf();
 });
