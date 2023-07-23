@@ -7,7 +7,7 @@ import { HttpRequest, HttpResponse, IController } from '@business/services/iCont
 import { DeleteEquipmentCategoryOperator } from '@controller/operators/equipmentCategory/deleteEquipmentCategoryOperator';
 import { InputDeleteEquipmentCategory } from '@controller/serializers/equipmentCategory/deleteEquipmentCategorySerializer';
 import { container } from '@shared/container';
-import { badRequest, notFound, ok, serverError } from '@shared/httpHelper';
+import { badRequest, noContent, notFound, serverError } from '@shared/httpHelper';
 import { injectable } from 'inversify';
 
 @injectable()
@@ -29,7 +29,7 @@ export class DeleteEquimentCategoryController implements IController {
         return badRequest(result.value);
       }
 
-      return ok(result.value);
+      return noContent(result.value);
     } catch (error: any) {
       if (error?.code === validationError().code) {
         return badRequest(error);
