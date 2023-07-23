@@ -39,17 +39,17 @@ describe('2-business.useCases.equipment.listEquipmentsUseCase', () => {
     expect(spy).toHaveBeenCalledWith(input);
   });
 
-  // it('should list equipment  on success', async () => {
-  //   const result = await useCase.exec(input);
+  it('should list equipments on success', async () => {
+    const result = await useCase.exec(input);
 
-  //   expect(result.isLeft()).toBeFalsy();
-  //   expect(result.isRight()).toBeTruthy();
-  //   expect(result.value).toHaveProperty('data');
-  //   expect(result.value).toHaveProperty('meta', {
-  //     hasNext: true,
-  //     limit: 1,
-  //     page: 1,
-  //     total: 2,
-  //   });
-  // });
+    expect(result.isLeft()).toBeFalsy();
+    expect(result.isRight()).toBeTruthy();
+    expect(result.value).toHaveProperty('data');
+    expect(result.value).toHaveProperty('meta', {
+      hasNext: true,
+      limit: 1,
+      page: 1,
+      total: 2,
+    });
+  });
 });
