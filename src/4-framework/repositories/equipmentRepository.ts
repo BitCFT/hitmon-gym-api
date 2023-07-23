@@ -64,7 +64,11 @@ export class EquipmentRepository implements IEquipmentRepository {
       where: {
         id: input.id,
       },
-      data: input.params,
+      data: {
+        ...(input.params.name && { name: input.params.name }),
+        ...(input.params.price && { price: input.params.price }),
+        ...(input.params.categoryId && { equipmentCategoryId: input.params.categoryId }),
+      },
     });
 
     return this.mapper(updatedEquipment);
