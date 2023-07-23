@@ -59,8 +59,15 @@ export class EquipmentRepository implements IEquipmentRepository {
     };
   }
 
-  update(input: InputUpdateEquipment): Promise<IEquipmentEntity> {
-    throw new Error('Method not implemented.');
+  async update(input: InputUpdateEquipment): Promise<IEquipmentEntity> {
+    const updatedEquipment = await prismaClient.equipment.update({
+      where: {
+        id: input.id,
+      },
+      data: input.params,
+    });
+
+    return this.mapper(updatedEquipment);
   }
 
   async delete(id: string): Promise<void> {
