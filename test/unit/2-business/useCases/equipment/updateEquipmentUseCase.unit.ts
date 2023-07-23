@@ -146,11 +146,11 @@ describe('2-business.useCases.equipment.updateEquipmentUseCase', () => {
     });
   });
 
-  // it('should update an equipment  on success', async () => {
-  //   const result = await useCase.exec(input);
+  it('should update an equipment on success', async () => {
+    const result = await useCase.exec(input);
 
-  //   expect(result.isLeft()).toBeFalsy();
-  //   expect(result.isRight()).toBeTruthy();
-  //   expect(result.value).toEqual(fakeEquipment);
-  // });
+    expect(result.isLeft()).toBeFalsy();
+    expect(result.isRight()).toBeTruthy();
+    expect(result.value).toEqual(fakeEquipment);
+  });
 });
