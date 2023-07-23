@@ -39,8 +39,8 @@ export class CreateEquipmentUseCase implements IUseCase<InputCreateEquipmentDto,
       }
 
       const equipmentEntity = EquipmentEntity.create({
-        id: this.uniqueIdentifierService.create(),
         ...input,
+        id: this.uniqueIdentifierService.create(),
       });
 
       if (equipmentEntity.isLeft()) {
