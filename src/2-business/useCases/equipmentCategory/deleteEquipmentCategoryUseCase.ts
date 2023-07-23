@@ -8,7 +8,7 @@ import { ILoggerService, ILoggerServiceToken } from '@business/services/iLogger'
 import {
   InputDeleteEquipmentCategoryDto,
   OutputDeleteEquipmentCategoryDto,
-} from '@business/dto/equipmentCategoryDto.ts/deleteEquipmentCategoryDto';
+} from '@business/dto/equipmentCategory/deleteEquipmentCategoryDto';
 import { left, right } from '@shared/either';
 import {
   deleteEquipmentCategoryGeneralError,

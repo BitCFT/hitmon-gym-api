@@ -3,9 +3,10 @@ import {
   OutputUpdateEquipmentCategory,
 } from '@controller/serializers/equipmentCategory/updateEquipmentCategorySerializer';
 import { AbstractOperator } from '../abstractOperator';
-import { inject } from 'inversify';
+import { inject, injectable } from 'inversify';
 import { UpdateEquipmentCategoryUseCase } from '@business/useCases/equipmentCategory/updateEquipmentCategoryUseCase';
 
+@injectable()
 export class UpdateEquipmentCategoryOperator extends AbstractOperator<
   InputUpdateEquipmentCategory,
   OutputUpdateEquipmentCategory

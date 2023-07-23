@@ -1,7 +1,7 @@
 import { container } from '@test/utility/ioc/inversifyConfigTests';
 import { CreateEquipmentCategoryUseCase } from '@business/useCases/equipmentCategory/createEquipmentCategoryUseCase';
-import { InputCreateEquipmentCategoryDto } from '@business/dto/equipmentCategoryDto.ts/createEquipmentCategoryDto';
-import { equipmentCategoryRepositoryMock } from '@test/utility/mocks/repository/equipementCategory.mock';
+import { InputCreateEquipmentCategoryDto } from '@business/dto/equipmentCategory/createEquipmentCategoryDto';
+import { equipmentCategoryRepositoryMock } from '@test/utility/mocks/repository/equipmentCategory.mock';
 import {
   createEquipmentCategoryGeneralError,
   equipmentCategoryAlreadyInUseError,

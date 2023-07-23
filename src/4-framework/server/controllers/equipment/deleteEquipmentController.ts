@@ -1,29 +1,26 @@
-import {
-  deleteEquipmentCategoryGeneralError,
-  equipmentCategoryIsNotFoundError,
-} from '@business/module/errors/equipmentCategory/equipmentCategory';
+import { deleteEquipmentGeneralError, equipmentIsNotFoundError } from '@business/module/errors/equipment/equipment';
 import { validationError } from '@business/module/errors/validation';
 import { HttpRequest, HttpResponse, IController } from '@business/services/iController';
-import { DeleteEquipmentCategoryOperator } from '@controller/operators/equipmentCategory/deleteEquipmentCategoryOperator';
-import { InputDeleteEquipmentCategory } from '@controller/serializers/equipmentCategory/deleteEquipmentCategorySerializer';
+import { DeleteEquipmentOperator } from '@controller/operators/equipment/deleteEquipmentOperator';
+import { InputDeleteEquipment } from '@controller/serializers/equipment/deleteEquipmentSerializer';
 import { container } from '@shared/container';
 import { badRequest, noContent, notFound, serverError } from '@shared/httpHelper';
 import { injectable } from 'inversify';
 
 @injectable()
-export class DeleteEquimentCategoryController implements IController {
+export class DeleteEquipmentController implements IController {
   async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
     try {
-      const operator = container.get(DeleteEquipmentCategoryOperator);
+      const operator = container.get(DeleteEquipmentOperator);
       const inputData = httpRequest.params;
-      const input = new InputDeleteEquipmentCategory(inputData);
+      const input = new InputDeleteEquipment(inputData);
       const result = await operator.exec(input);
 
       if (result.isLeft()) {
-        if (result.value.code === deleteEquipmentCategoryGeneralError().code) {
+        if (result.value === deleteEquipmentGeneralError) {
           throw result.value;
         }
-        if (result.value.code === equipmentCategoryIsNotFoundError.code) {
+        if (result.value === equipmentIsNotFoundError) {
           return notFound(result.value);
         }
         return badRequest(result.value);

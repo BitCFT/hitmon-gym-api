@@ -1,7 +1,7 @@
 import {
   InputCreateEquipmentCategoryDto,
   OutputCreateEquipmentCategoryDto,
-} from '@business/dto/equipmentCategoryDto.ts/createEquipmentCategoryDto';
+} from '@business/dto/equipmentCategory/createEquipmentCategoryDto';
 import {
   IEquipmentCategoryRepository,
   IEquipmentCategoryRepositoryToken,

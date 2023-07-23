@@ -1,5 +1,5 @@
 import { container } from '@test/utility/ioc/inversifyConfigTests';
-import { equipmentCategoryRepositoryMock } from '@test/utility/mocks/repository/equipementCategory.mock';
+import { equipmentCategoryRepositoryMock } from '@test/utility/mocks/repository/equipmentCategory.mock';
 import {
   equipmentCategoryAlreadyInUseError,
   equipmentCategoryIsNotFoundError,
@@ -7,7 +7,7 @@ import {
 } from '@business/module/errors/equipmentCategory/equipmentCategory';
 import { fakeEquipmentCategory } from '@test/utility/fakes/entities/equipmentCategory';
 import { UpdateEquipmentCategoryUseCase } from '@business/useCases/equipmentCategory/updateEquipmentCategoryUseCase';
-import { InputUpdateEquipmentCategoryDto } from '@business/dto/equipmentCategoryDto.ts/updateEquipmentCategoryDto';
+import { InputUpdateEquipmentCategoryDto } from '@business/dto/equipmentCategory/updateEquipmentCategoryDto';
 
 describe('2-business.useCases.equipmentCategory.updateEquipmentCategoryUseCase', () => {
   beforeEach(() => {

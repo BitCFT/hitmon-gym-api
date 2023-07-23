@@ -1,7 +1,7 @@
 import {
   InputListEquipmentCategoriesDto,
   OutputListEquipmentCategoriesDto,
-} from '@business/dto/equipmentCategoryDto.ts/listEquipmentCategoriesDto';
+} from '@business/dto/equipmentCategory/listEquipmentCategoriesDto';
 import { IUseCase } from '../iUseCase';
 import { PaginationParams } from '@domain/pagination';
 import { inject, injectable } from 'inversify';

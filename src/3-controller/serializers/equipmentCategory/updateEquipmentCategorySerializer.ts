@@ -1,6 +1,6 @@
 import { IsNotEmpty, IsOptional, IsString, IsUUID, Length } from 'class-validator';
 import { AbstractSerializer } from '../abstractSerializer';
-import { OutputUpdateEquipmentCategoryDto } from '@business/dto/equipmentCategoryDto.ts/updateEquipmentCategoryDto';
+import { OutputUpdateEquipmentCategoryDto } from '@business/dto/equipmentCategory/updateEquipmentCategoryDto';
 
 class Params extends AbstractSerializer<Params> {
   @IsString()

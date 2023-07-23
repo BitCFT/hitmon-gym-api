@@ -1,11 +1,15 @@
 import { container } from '@shared/container';
 import { Router } from 'express';
 import { CreateEquimentCategoryController } from '@framework/server/controllers/equipmentCategory/createEquipmentCategoryController';
-import { EquipmentCategoryRoutes } from './systemRoutes';
+import { EquipmentCategoryRoutes, EquipmentRoutes } from './systemRoutes';
 import { ExpressRoutesAdapter } from '../adapters/expressRoutesAdapter';
 import { DeleteEquimentCategoryController } from '@framework/server/controllers/equipmentCategory/deleteEquipmentCategoryController';
 import { ListEquipmentCategoriesController } from '../controllers/equipmentCategory/listEquipmentCategoriesController';
 import { UpdateEquipmentCategoryController } from '../controllers/equipmentCategory/updateEquipmentCategoryController';
+import { CreateEquipmentController } from '../controllers/equipment/createEquipmentController';
+import { ListEquipmentsController } from '../controllers/equipment/listEquipmentsController';
+import { DeleteEquipmentController } from '../controllers/equipment/deleteEquipmentController';
+import { UpdateEquipmentController } from '../controllers/equipment/updateEquipmentController';
 
 export const routes = () => {
   const router = Router();
@@ -16,6 +20,7 @@ export const routes = () => {
     });
   });
 
+  // equipment-categories routes
   router.post(
     EquipmentCategoryRoutes.CREATE,
     ExpressRoutesAdapter.adapt(container.get(CreateEquimentCategoryController))
@@ -35,6 +40,15 @@ export const routes = () => {
     EquipmentCategoryRoutes.UPDATE,
     ExpressRoutesAdapter.adapt(container.get(UpdateEquipmentCategoryController))
   );
+
+  // equipment routes
+  router.post(EquipmentRoutes.CREATE, ExpressRoutesAdapter.adapt(container.get(CreateEquipmentController)));
+
+  router.get(EquipmentRoutes.FIND_ALL, ExpressRoutesAdapter.adapt(container.get(ListEquipmentsController)));
+
+  router.delete(EquipmentRoutes.DELETE, ExpressRoutesAdapter.adapt(container.get(DeleteEquipmentController)));
+
+  router.patch(EquipmentRoutes.UPDATE, ExpressRoutesAdapter.adapt(container.get(UpdateEquipmentController)));
 
   return router;
 };

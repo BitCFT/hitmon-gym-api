@@ -1,4 +1,4 @@
-import { OutputCreateEquipmentCategoryDto } from '@business/dto/equipmentCategoryDto.ts/createEquipmentCategoryDto';
+import { OutputCreateEquipmentCategoryDto } from '@business/dto/equipmentCategory/createEquipmentCategoryDto';
 import { AbstractSerializer } from '../abstractSerializer';
 import { IsNotEmpty, IsOptional, IsString, Length } from 'class-validator';
 

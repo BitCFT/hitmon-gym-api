@@ -24,7 +24,8 @@
   },
   "include": [
     "src/**/*.ts",
-    "test"
+    "test",
+    "src/2-business/dto/equipmentCategory"
   ] /* O atributo include é usado para especificar quais arquivos devem ser incluídos no processo de compilação */,
   "exclude": [
     "./dist/**/*",

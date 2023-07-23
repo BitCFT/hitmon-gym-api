@@ -1,7 +1,6 @@
-import { OutputListEquipmentCategoriesDto } from '@business/dto/equipmentCategoryDto.ts/listEquipmentCategoriesDto';
+import { OutputListEquipmentCategoriesDto } from '@business/dto/equipmentCategory/listEquipmentCategoriesDto';
 import { AbstractSerializer } from '../abstractSerializer';
 import { IsInt, IsNotEmpty, IsPositive } from 'class-validator';
-import { Type } from 'class-transformer';
 
 export class InputListEquipmentCategories extends AbstractSerializer<InputListEquipmentCategories> {
   @IsNotEmpty()
