@@ -7,7 +7,7 @@ export enum EquipmentCategoryRoutes {
 
 export enum EquipmentRoutes {
   CREATE = '/equipments',
-  FIND_ALL = '/equipment',
-  DELETE = '/equipment/:id',
-  UPDATE = '/equipment/:id',
+  FIND_ALL = '/equipments',
+  DELETE = '/equipments/:id',
+  UPDATE = '/equipments/:id',
 }
