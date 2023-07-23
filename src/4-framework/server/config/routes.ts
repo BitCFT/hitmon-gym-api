@@ -9,6 +9,7 @@ import { UpdateEquipmentCategoryController } from '../controllers/equipmentCateg
 import { CreateEquipmentController } from '../controllers/equipment/createEquipmentController';
 import { ListEquipmentsController } from '../controllers/equipment/listEquipmentsController';
 import { DeleteEquipmentController } from '../controllers/equipment/deleteEquipmentController';
+import { UpdateEquipmentController } from '../controllers/equipment/updateEquipmentController';
 
 export const routes = () => {
   const router = Router();
@@ -46,6 +47,8 @@ export const routes = () => {
   router.get(EquipmentRoutes.FIND_ALL, ExpressRoutesAdapter.adapt(container.get(ListEquipmentsController)));
 
   router.delete(EquipmentRoutes.DELETE, ExpressRoutesAdapter.adapt(container.get(DeleteEquipmentController)));
+
+  router.patch(EquipmentRoutes.UPDATE, ExpressRoutesAdapter.adapt(container.get(UpdateEquipmentController)));
 
   return router;
 };
