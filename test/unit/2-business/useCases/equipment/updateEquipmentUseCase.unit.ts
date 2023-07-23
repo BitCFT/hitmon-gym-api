@@ -58,17 +58,17 @@ describe('2-business.useCases.equipment.updateEquipmentUseCase', () => {
     expect(result.value).toEqual(equipmentIsNotFoundError);
   });
 
-  // it('should is not be able to update equipment  because exception in findByName method', async () => {
-  //   jest.spyOn(equipmentRepositoryMock, 'findByName').mockImplementationOnce(() => {
-  //     throw new Error('mocked error');
-  //   });
+  it('should is not be able to update equipment because exception in findByName method', async () => {
+    jest.spyOn(equipmentRepositoryMock, 'findByName').mockImplementationOnce(() => {
+      throw new Error('mocked error');
+    });
 
-  //   const result = await useCase.exec(input);
+    const result = await useCase.exec(input);
 
-  //   expect(result.isRight()).toBeFalsy();
-  //   expect(result.isLeft()).toBeTruthy();
-  //   expect(result.value).toEqual(updateEquipmentGeneralError);
-  // });
+    expect(result.isRight()).toBeFalsy();
+    expect(result.isLeft()).toBeTruthy();
+    expect(result.value).toEqual(updateEquipmentGeneralError);
+  });
 
   // it('should calls findByName method with correct value', async () => {
   //   const spy = jest.spyOn(equipmentRepositoryMock, 'findByName');
