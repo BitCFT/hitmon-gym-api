@@ -36,8 +36,23 @@ export class EquipmentRepository implements IEquipmentRepository {
     throw new Error('Method not implemented.');
   }
 
-  listAll(input: PaginationParams): Promise<OutputListAllEquipments> {
-    throw new Error('Method not implemented.');
+  async listAll({ page, limit }: PaginationParams): Promise<OutputListAllEquipments> {
+    const data = await prismaClient.equipment.findMany({
+      take: limit,
+      skip: (page - 1) * limit,
+    });
+    const mappedData = data.map(row => this.mapper(row));
+    const total = await prismaClient.equipment.count();
+
+    return {
+      meta: {
+        page,
+        limit,
+        total,
+        hasNext: total > page * limit,
+      },
+      data: mappedData,
+    };
   }
 
   update(input: InputUpdateEquipment): Promise<IEquipmentEntity> {
