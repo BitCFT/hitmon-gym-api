@@ -31,13 +31,13 @@ describe('2-business.useCases.equipment.listEquipmentsUseCase', () => {
     expect(result.value).toEqual(listEquipmentsGeneralError);
   });
 
-  // it('should calls listAll method with correct values', async () => {
-  //   const spy = jest.spyOn(equipmentRepositoryMock, 'listAll');
+  it('should calls listAll method with correct values', async () => {
+    const spy = jest.spyOn(equipmentRepositoryMock, 'listAll');
 
-  //   await useCase.exec(input);
+    await useCase.exec(input);
 
-  //   expect(spy).toHaveBeenCalledWith(input);
-  // });
+    expect(spy).toHaveBeenCalledWith(input);
+  });
 
   // it('should list equipment  on success', async () => {
   //   const result = await useCase.exec(input);
