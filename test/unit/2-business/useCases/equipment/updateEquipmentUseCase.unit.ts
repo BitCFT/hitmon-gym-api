@@ -78,18 +78,18 @@ describe('2-business.useCases.equipment.updateEquipmentUseCase', () => {
     expect(spy).toHaveBeenCalledWith(input.params.name);
   });
 
-  // it('should return left if equipment is already in use', async () => {
-  //   jest.spyOn(equipmentRepositoryMock, 'findByName').mockResolvedValueOnce({
-  //     ...fakeEquipment,
-  //     name: 'head',
-  //   });
+  it('should return left if equipment is already in use', async () => {
+    jest.spyOn(equipmentRepositoryMock, 'findByName').mockResolvedValueOnce({
+      ...fakeEquipment,
+      name: 'head',
+    });
 
-  //   const result = await useCase.exec(input);
+    const result = await useCase.exec(input);
 
-  //   expect(result.isRight()).toBeFalsy();
-  //   expect(result.isLeft()).toBeTruthy();
-  //   expect(result.value).toEqual(equipmentAlreadyInUseError);
-  // });
+    expect(result.isRight()).toBeFalsy();
+    expect(result.isLeft()).toBeTruthy();
+    expect(result.value).toEqual(equipmentAlreadyInUseError);
+  });
 
   // it('should is not be able to update equipment  because exception in update method', async () => {
   //   jest.spyOn(equipmentRepositoryMock, 'update').mockImplementationOnce(() => {
