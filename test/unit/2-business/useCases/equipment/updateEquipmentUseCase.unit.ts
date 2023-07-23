@@ -70,13 +70,13 @@ describe('2-business.useCases.equipment.updateEquipmentUseCase', () => {
     expect(result.value).toEqual(updateEquipmentGeneralError);
   });
 
-  // it('should calls findByName method with correct value', async () => {
-  //   const spy = jest.spyOn(equipmentRepositoryMock, 'findByName');
+  it('should calls findByName method with correct value', async () => {
+    const spy = jest.spyOn(equipmentRepositoryMock, 'findByName');
 
-  //   await useCase.exec(input);
+    await useCase.exec(input);
 
-  //   expect(spy).toHaveBeenCalledWith(input.params.name);
-  // });
+    expect(spy).toHaveBeenCalledWith(input.params.name);
+  });
 
   // it('should return left if equipment is already in use', async () => {
   //   jest.spyOn(equipmentRepositoryMock, 'findByName').mockResolvedValueOnce({
