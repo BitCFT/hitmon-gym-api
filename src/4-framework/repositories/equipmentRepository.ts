@@ -32,8 +32,12 @@ export class EquipmentRepository implements IEquipmentRepository {
     return equipment ? this.mapper(equipment) : null;
   }
 
-  findById(id: string): Promise<OutputFindById> {
-    throw new Error('Method not implemented.');
+  async findById(id: string): Promise<OutputFindById> {
+    const equipment = await prismaClient.equipment.findUnique({
+      where: { id },
+    });
+
+    return equipment ? this.mapper(equipment) : null;
   }
 
   async listAll({ page, limit }: PaginationParams): Promise<OutputListAllEquipments> {
@@ -59,8 +63,8 @@ export class EquipmentRepository implements IEquipmentRepository {
     throw new Error('Method not implemented.');
   }
 
-  delete(id: string): Promise<void> {
-    throw new Error('Method not implemented.');
+  async delete(id: string): Promise<void> {
+    await prismaClient.equipment.delete({ where: { id } });
   }
 
   private mapper(data: any): IEquipmentEntity {
