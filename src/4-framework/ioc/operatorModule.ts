@@ -6,6 +6,7 @@ import { CreateEquipmentCategoryOperator } from '@controller/operators/equipment
 import { DeleteEquipmentCategoryOperator } from '@controller/operators/equipmentCategory/deleteEquipmentCategoryOperator';
 import { ListEquipmentCategoriesOperator } from '@controller/operators/equipmentCategory/listEquipmentCategoriesOperator';
 import { UpdateEquipmentCategoryOperator } from '@controller/operators/equipmentCategory/updateEquipmentCategoryOperator';
+import { CreateUserOperator } from '@controller/operators/user/createUserOperator';
 import { ContainerModule, interfaces } from 'inversify';
 
 export const OperatorModule = new ContainerModule((bind: interfaces.Bind) => {
@@ -20,4 +21,7 @@ export const OperatorModule = new ContainerModule((bind: interfaces.Bind) => {
   bind(ListEquipmentsOperator).toSelf();
   bind(DeleteEquipmentOperator).toSelf();
   bind(UpdateEquipmentOperator).toSelf();
+
+  // users
+  bind(CreateUserOperator).toSelf();
 });
