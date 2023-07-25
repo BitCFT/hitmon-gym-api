@@ -4,4 +4,4 @@ import { IError } from '@shared/iError';
 
 export type InputCreateUserDto = Pick<IUserEntity, 'email' | 'password' | 'userName'>;
 
-export type OutputCreateUserDto = Either<IError, IUserEntity>;
+export type OutputCreateUserDto = Either<IError, Omit<IUserEntity, 'password'>>;
