@@ -6,6 +6,7 @@ import { CreateEquimentCategoryController } from '@framework/server/controllers/
 import { DeleteEquimentCategoryController } from '@framework/server/controllers/equipmentCategory/deleteEquipmentCategoryController';
 import { ListEquipmentCategoriesController } from '@framework/server/controllers/equipmentCategory/listEquipmentCategoriesController';
 import { UpdateEquipmentCategoryController } from '@framework/server/controllers/equipmentCategory/updateEquipmentCategoryController';
+import { CreateUserController } from '@framework/server/controllers/user/createUserController';
 import { ContainerModule, interfaces } from 'inversify';
 
 export const ControllersModule = new ContainerModule((bind: interfaces.Bind) => {
@@ -17,4 +18,5 @@ export const ControllersModule = new ContainerModule((bind: interfaces.Bind) => 
   bind(ListEquipmentsController).toSelf();
   bind(DeleteEquipmentController).toSelf();
   bind(UpdateEquipmentController).toSelf();
+  bind(CreateUserController).toSelf();
 });

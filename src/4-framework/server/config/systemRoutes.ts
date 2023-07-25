@@ -11,3 +11,7 @@ export enum EquipmentRoutes {
   DELETE = '/equipments/:id',
   UPDATE = '/equipments/:id',
 }
+
+export enum UserRoutes {
+  CREATE = '/users',
+}
