@@ -22,6 +22,7 @@ export class UserRepository implements IUserRepository {
           },
         },
       },
+      include: {roles: true}
     });
 
     return this.mapper(user);
@@ -59,6 +60,7 @@ export class UserRepository implements IUserRepository {
       ...(data?.passwordResetCodeExpiresAt && { passwordResetCodeExpiresAt: data.passwordResetCodeExpiresAt }),
       ...(data.createdAt && { createdAt: data.createdAt }),
       ...(data.updatedAt && { updatedAt: data.updatedAt }),
+      ...(data.roles && {roles: data.roles})
     };
   }
 }
