@@ -2,7 +2,7 @@ import { prismaClient } from "../prismaClient";
 import { v4 as uuid } from 'uuid';
 
 (async () => {
-  const [studentRole, adminRole, instructorRole] = await Promise.all([
+  await Promise.all([
     prismaClient.role.upsert({
       where: {type: 'STUDENT'},
       update: {},
