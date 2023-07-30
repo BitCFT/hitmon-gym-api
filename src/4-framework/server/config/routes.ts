@@ -12,6 +12,7 @@ import { DeleteEquipmentController } from '../controllers/equipment/deleteEquipm
 import { UpdateEquipmentController } from '../controllers/equipment/updateEquipmentController';
 import { CreateUserController } from '../controllers/user/createUserController';
 import { CheckAccountVerificationCodeController } from '../controllers/user/checkAccountVerificationCodeController';
+import { ResendAccountVerificationCodeController } from '../controllers/user/resendAccountVerificationCodeController';
 
 export const routes = () => {
   const router = Router();
@@ -49,6 +50,7 @@ export const routes = () => {
   // user routes
   router.post(UserRoutes.CREATE, ExpressRoutesAdapter.adapt(container.get(CreateUserController)));
   router.post(UserRoutes.CHECK_ACCOUNT_VERIFICATION_CODE, ExpressRoutesAdapter.adapt(container.get(CheckAccountVerificationCodeController)))
+  router.patch(UserRoutes.RESEND_ACCOUNT_VERIFICATION_CODE, ExpressRoutesAdapter.adapt(container.get(ResendAccountVerificationCodeController)))
 
   return router;
 };

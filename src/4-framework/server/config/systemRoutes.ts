@@ -14,5 +14,6 @@ export enum EquipmentRoutes {
 
 export enum UserRoutes {
   CREATE = '/users',
-  CHECK_ACCOUNT_VERIFICATION_CODE = '/users/verification-code/:code'
+  CHECK_ACCOUNT_VERIFICATION_CODE = '/users/verification-code/:code',
+  RESEND_ACCOUNT_VERIFICATION_CODE = '/users/resend-verification-code'
 }

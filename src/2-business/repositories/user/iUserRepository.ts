@@ -23,5 +23,5 @@ export interface IUserRepository {
   findById(id: string): Promise<OutputFindById>;
   findByEmail(email: string): Promise<OutputFindByEmail>;
   findByAccountVerificationCode(code: string): Promise<OutputFindByAccountVerificationCode>;
-  update(id: string, params: Partial<IUserEntity>): Promise<IUserEntity>;
+  update(id: string, params: Partial<IUserEntity>): Promise<Omit<IUserEntity, 'password'>>;
 }

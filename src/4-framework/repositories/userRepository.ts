@@ -44,8 +44,13 @@ export class UserRepository implements IUserRepository {
     return user ? this.mapper(user) : null
   }
 
-  update(id: string, params: Partial<IUserEntity>): Promise<IUserEntity> {
-    throw new Error('Method not implemented.');
+  async update(id: string, params: Partial<IUserEntity>): Promise<Omit<IUserEntity, 'password'>> {
+    const updatedUser = await prismaClient.user.update({
+      where: {id},
+      data: params as any
+    })
+
+    return this.mapper(updatedUser)
   }
 
   private mapper(data: any): Omit<IUserEntity, 'password'> {
