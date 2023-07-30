@@ -4,7 +4,7 @@ import { HttpRequest, HttpResponse, IController } from '@business/services/iCont
 import { CheckAccountVerificationCodeOperator } from '@controller/operators/user/checkAccountVerificationCodeOperator';
 import { InputCheckAccountVerificationCode } from '@controller/serializers/user/checkAccountVerificationCodeSerializer';
 import { container } from '@shared/container';
-import { badRequest, notFound, ok, serverError } from '@shared/httpHelper';
+import { badRequest, noContent, notFound, ok, serverError } from '@shared/httpHelper';
 import { injectable } from 'inversify';
 
 @injectable()
@@ -27,7 +27,7 @@ export class CheckAccountVerificationCodeController implements IController {
         return badRequest(result.value);
       }
 
-      return ok(result.value);
+      return noContent(result.value);
     } catch (error: any) {
       if (error?.code === validationError().code) {
         return badRequest(error);
