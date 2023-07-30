@@ -4,7 +4,7 @@ import { HttpRequest, HttpResponse, IController } from '@business/services/iCont
 import { ResendAccountVerificationCodeOperator } from '@controller/operators/user/resendAccountVerificationCodeOperator';
 import { InputResendAccountVerificationCode } from '@controller/serializers/user/resendAccountVerificationCodeSerializer';
 import { container } from '@shared/container';
-import { badRequest, noContent, notFound, ok, serverError } from '@shared/httpHelper';
+import { badRequest, noContent, notFound, serverError } from '@shared/httpHelper';
 import { injectable } from 'inversify';
 
 @injectable()
