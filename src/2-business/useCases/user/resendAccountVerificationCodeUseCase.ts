@@ -2,7 +2,7 @@ import {
   InputResendAccountVerificationCodeDto,
   OutputResendAccountVerificationCodeDto,
 } from '@business/dto/user/resendAccountVerificationCodeDto';
-import { resendAccountVerificationCodeGeneralError, userIsNotFoundError } from '@business/module/errors/user/user';
+import { resendAccountVerificationCodeGeneralError, userAlreadyVerifiedError, userIsNotFoundError } from '@business/module/errors/user/user';
 import { IUserRepository, IUserRepositoryToken } from '@business/repositories/user/iUserRepository';
 import { IDateService, IDateServiceToken } from '@business/services/iDateService';
 import { ILoggerService, ILoggerServiceToken } from '@business/services/iLogger';
@@ -10,6 +10,7 @@ import { InputMailParams } from '@business/services/iMailTypes';
 import { IQueueService, IQueueServiceToken } from '@business/services/iQueueService';
 import { IRandomCodeService, IRandomCodeServiceToken } from '@business/services/iRandomCodeService';
 import { IUseCase } from '@business/useCases/iUseCase';
+import { RegistrationStep } from '@domain/entities/userEntity';
 import { left, right } from '@shared/either';
 import { inject, injectable } from 'inversify';
 
@@ -31,6 +32,10 @@ export class ResendAccountVerificationCodeUseCase
 
       if (!user) {
         return left(userIsNotFoundError);
+      }
+
+      if (user.registrationStep === RegistrationStep.VERIFIED) {
+        return left(userAlreadyVerifiedError);
       }
 
       const verificationCode = this.randomCodeService.generateCode();
