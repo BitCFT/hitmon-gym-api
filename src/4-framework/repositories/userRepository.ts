@@ -38,8 +38,10 @@ export class UserRepository implements IUserRepository {
     return user ? this.mapper(user) : null;
   }
 
-  findByAccountVerificationCode(code: string): Promise<OutputFindByAccountVerificationCode> {
-    throw new Error('Method not implemented.');
+  async findByAccountVerificationCode(code: string): Promise<OutputFindByAccountVerificationCode> {
+    const user = await prismaClient.user.findFirst({where: {accountVerificationCode: code}})
+
+    return user ? this.mapper(user) : null
   }
 
   update(id: string, params: Partial<IUserEntity>): Promise<IUserEntity> {

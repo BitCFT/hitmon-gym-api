@@ -6,6 +6,7 @@ import { CreateEquimentCategoryController } from '@framework/server/controllers/
 import { DeleteEquimentCategoryController } from '@framework/server/controllers/equipmentCategory/deleteEquipmentCategoryController';
 import { ListEquipmentCategoriesController } from '@framework/server/controllers/equipmentCategory/listEquipmentCategoriesController';
 import { UpdateEquipmentCategoryController } from '@framework/server/controllers/equipmentCategory/updateEquipmentCategoryController';
+import { CheckAccountVerificationCodeController } from '@framework/server/controllers/user/checkAccountVerificationCodeController';
 import { CreateUserController } from '@framework/server/controllers/user/createUserController';
 import { ContainerModule, interfaces } from 'inversify';
 
@@ -19,4 +20,5 @@ export const ControllersModule = new ContainerModule((bind: interfaces.Bind) => 
   bind(DeleteEquipmentController).toSelf();
   bind(UpdateEquipmentController).toSelf();
   bind(CreateUserController).toSelf();
+  bind(CheckAccountVerificationCodeController).toSelf()
 });
