@@ -6,6 +6,7 @@ import { CreateEquipmentCategoryOperator } from '@controller/operators/equipment
 import { DeleteEquipmentCategoryOperator } from '@controller/operators/equipmentCategory/deleteEquipmentCategoryOperator';
 import { ListEquipmentCategoriesOperator } from '@controller/operators/equipmentCategory/listEquipmentCategoriesOperator';
 import { UpdateEquipmentCategoryOperator } from '@controller/operators/equipmentCategory/updateEquipmentCategoryOperator';
+import { CheckAccountVerificationCodeOperator } from '@controller/operators/user/checkAccountVerificationCodeOperator';
 import { CreateUserOperator } from '@controller/operators/user/createUserOperator';
 import { ContainerModule, interfaces } from 'inversify';
 
@@ -24,4 +25,5 @@ export const OperatorModule = new ContainerModule((bind: interfaces.Bind) => {
 
   // users
   bind(CreateUserOperator).toSelf();
+  bind(CheckAccountVerificationCodeOperator).toSelf()
 });
