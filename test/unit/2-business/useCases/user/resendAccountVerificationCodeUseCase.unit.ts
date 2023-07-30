@@ -2,12 +2,14 @@ import { container } from '@test/utility/ioc/inversifyConfigTests';
 import { ResendAccountVerificationCodeUseCase } from '@business/useCases/user/resendAccountVerificationCodeUseCase';
 import { InputResendAccountVerificationCodeDto } from '@business/dto/user/resendAccountVerificationCodeDto';
 import { userRepositoryMock } from '@test/utility/mocks/repository/userRepository.mock';
-import { resendAccountVerificationCodeGeneralError, userIsNotFoundError } from '@business/module/errors/user/user';
+import { resendAccountVerificationCodeGeneralError, userAlreadyVerifiedError, userIsNotFoundError } from '@business/module/errors/user/user';
 import { randomCodeServiceMock } from '@test/utility/mocks/service/randomCodeService.mock';
 import { queueServiceMock } from '@test/utility/mocks/service/queueService.mock';
 import { left } from '@shared/either';
 import { fakeIError } from '@test/utility/fakes/error/fakeIError';
 import { dateServiceMock } from '@test/utility/mocks/service/dateService.mock';
+import { fakeUserEntity } from '@test/utility/fakes/entities/userEntity';
+import { RegistrationStep } from '@domain/entities/userEntity';
 
 describe('2-business.useCases.user.resendAccountVerificationCodeUseCase', () => {
   beforeEach(() => {
@@ -51,6 +53,19 @@ describe('2-business.useCases.user.resendAccountVerificationCodeUseCase', () => 
     expect(result.isRight()).toBeFalsy();
     expect(result.isLeft()).toBeTruthy();
     expect(result.value).toEqual(userIsNotFoundError);
+  });
+
+  it('should return left if user is already verified', async () => {
+    jest.spyOn(userRepositoryMock, 'findByEmail').mockResolvedValueOnce({
+      ...fakeUserEntity,
+      registrationStep: RegistrationStep.VERIFIED,
+    });
+
+    const result = await useCase.exec(input);
+
+    expect(result.isRight()).toBeFalsy();
+    expect(result.isLeft()).toBeTruthy();
+    expect(result.value).toEqual(userAlreadyVerifiedError);
   });
 
   it('should is not be able to create user because exception in generateCode method', async () => {

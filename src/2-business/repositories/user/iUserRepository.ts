@@ -2,9 +2,9 @@ import { IUserEntity, RegistrationStep } from '@domain/entities/userEntity';
 
 export const IUserRepositoryToken = Symbol.for('IUserRepositoryToken');
 
-export type OutputFindById = IUserEntity | null;
+export type OutputFindById = Omit<IUserEntity, 'password'> | null;
 
-export type OutputFindByEmail = IUserEntity | null;
+export type OutputFindByEmail = Omit<IUserEntity, 'password'> | null;
 
 export type InputCreateUser = {
   id: string;
@@ -16,12 +16,12 @@ export type InputCreateUser = {
   accountVerificationCodeExpiresAt: Date;
 };
 
-export type OutputFindByAccountVerificationCode = IUserEntity | null;
+export type OutputFindByAccountVerificationCode = Omit<IUserEntity, 'password'> | null;
 
 export interface IUserRepository {
-  create(input: InputCreateUser): Promise<IUserEntity>;
+  create(input: InputCreateUser): Promise<Omit<IUserEntity, 'password'>>;
   findById(id: string): Promise<OutputFindById>;
   findByEmail(email: string): Promise<OutputFindByEmail>;
   findByAccountVerificationCode(code: string): Promise<OutputFindByAccountVerificationCode>;
-  update(id: string, params: Partial<IUserEntity>): Promise<IUserEntity>;
+  update(id: string, params: Partial<IUserEntity>): Promise<Omit<IUserEntity, 'password'>>;
 }

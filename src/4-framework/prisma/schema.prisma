@@ -44,7 +44,7 @@ enum RoleTypes {
 
 model Role {
   id          String    @id
-  type        RoleTypes @default(STUDENT)
+  type        RoleTypes @unique
   description String?   @db.VarChar(200)
   users       User[]    @relation("user_roles")
 

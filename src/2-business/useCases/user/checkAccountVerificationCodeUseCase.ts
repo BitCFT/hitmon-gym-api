@@ -34,10 +34,6 @@ export class CheckAccountVerificationCodeUseCase
         return left(userIsNotFoundError);
       }
 
-      if (user.registrationStep === RegistrationStep.VERIFIED) {
-        return left(userAlreadyVerifiedError);
-      }
-
       const isExpired = this.isAccountVerificationCodeExpired(user.accountVerificationCodeExpiresAt!);
 
       if (isExpired) {
@@ -45,8 +41,8 @@ export class CheckAccountVerificationCodeUseCase
       }
 
       await this.userRepository.update(user.id, {
-        accountVerificationCode: undefined,
-        accountVerificationCodeExpiresAt: undefined,
+        accountVerificationCode: null,
+        accountVerificationCodeExpiresAt: null,
         registrationStep: RegistrationStep.VERIFIED,
       });
 

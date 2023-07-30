@@ -56,19 +56,6 @@ describe('2-business.useCases.user.checkAccountVerificationCodeUseCase', () => {
     expect(result.value).toEqual(userIsNotFoundError);
   });
 
-  it('should return left if user is already verified', async () => {
-    jest.spyOn(userRepositoryMock, 'findByAccountVerificationCode').mockResolvedValueOnce({
-      ...fakeUserEntity,
-      registrationStep: RegistrationStep.VERIFIED,
-    });
-
-    const result = await useCase.exec(input);
-
-    expect(result.isRight()).toBeFalsy();
-    expect(result.isLeft()).toBeTruthy();
-    expect(result.value).toEqual(userAlreadyVerifiedError);
-  });
-
   it('should is not be able to check code because exception in checkIfIsAfter method', async () => {
     jest.spyOn(dateServiceMock, 'checkIfIsAfter').mockImplementationOnce(() => {
       throw new Error('mocked error');
@@ -126,8 +113,8 @@ describe('2-business.useCases.user.checkAccountVerificationCodeUseCase', () => {
     await useCase.exec(input);
 
     expect(spy).toHaveBeenCalledWith('string', {
-      accountVerificationCode: undefined,
-      accountVerificationCodeExpiresAt: undefined,
+      accountVerificationCode: null,
+      accountVerificationCodeExpiresAt: null,
       registrationStep: RegistrationStep.VERIFIED,
     });
   });
