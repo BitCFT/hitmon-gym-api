@@ -1,5 +1,4 @@
 import { Router } from 'express';
-import chalk from 'chalk';
 
 const switchSpace = (method: any) => {
   switch (method.length) {
@@ -17,14 +16,14 @@ const switchSpace = (method: any) => {
 };
 
 export const logRoutes = (routes: Router) => {
-  console.log(chalk.bgRed('Routes:\n'));
+  console.log('Routes:\n');
 
   routes.stack.forEach(layer => {
     const { path, stack } = layer.route;
     const method = stack[0].method.toUpperCase();
     let space: string = switchSpace(method);
 
-    console.log(chalk.bgCyan(`${method.toUpperCase()}`) + space + chalk.green(`${path}`));
+    console.log(`${method.toUpperCase()}` + space + `${path}`);
   });
 
   console.log('\n');
