@@ -16,7 +16,7 @@ export interface IUserEntity extends IBaseEntity {
   roles?: RoleEntity[];
   registrationStep: RegistrationStep;
   accountVerificationCode?: string | null;
-  accountVerificationCodeExpiresAt?: Date |null;
+  accountVerificationCodeExpiresAt?: Date | null;
   passwordResetCode?: string;
   passwordResetCodeExpiresAt?: Date;
 }
