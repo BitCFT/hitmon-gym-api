@@ -9,16 +9,13 @@ export type InputSign = {
 
 export type OutputSign = Either<IError, string>;
 
-export type OutputVerify = Either<
-  IError,
-  {
-    id: string;
-    iat?: number;
-    exp?: number;
-  }
->;
+export type PayloadResult = {
+  id: string;
+  iat?: number;
+  exp?: number;
+};
 
 export interface IJwtService {
-  sign(payload: InputSign): OutputSign;
-  verify(token: string): OutputVerify;
+  sign(payload: InputSign): Either<IError, string>;
+  verify(token: string): Either<IError, PayloadResult>;
 }

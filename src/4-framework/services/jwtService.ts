@@ -3,14 +3,15 @@ import {
   TokenExpiredError,
   VerifyTokenGeneralError,
 } from '@business/module/errors/services/jwtService';
-import { IJwtService, InputSign, OutputSign, OutputVerify } from '@business/services/iJwtService';
-import { left, right } from '@shared/either';
+import { IJwtService, InputSign, PayloadResult } from '@business/services/iJwtService';
+import { Either, left, right } from '@shared/either';
+import { IError } from '@shared/iError';
 import { injectable } from 'inversify';
 import JWT from 'jsonwebtoken';
 
 @injectable()
 export class JwtService implements IJwtService {
-  sign(payload: InputSign): OutputSign {
+  sign(payload: InputSign): Either<IError, string> {
     try {
       const token = JWT.sign(payload, process.env.JWT_SECRET_KEY ?? 'my-secret', { expiresIn: '1h' });
 
@@ -20,7 +21,7 @@ export class JwtService implements IJwtService {
     }
   }
 
-  verify(token: string): OutputVerify {
+  verify(token: string): Either<IError, PayloadResult> {
     try {
       const tokenPayload = JWT.verify(token, process.env.JWT_SECRET_KEY ?? 'my-secret') as JWT.JwtPayload;
 
