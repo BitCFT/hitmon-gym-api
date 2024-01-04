@@ -22,7 +22,7 @@ export class UserRepository implements IUserRepository {
           },
         },
       },
-      include: {roles: true}
+      include: { roles: true },
     });
 
     return this.mapper(user);
@@ -35,22 +35,22 @@ export class UserRepository implements IUserRepository {
   async findByEmail(email: string): Promise<OutputFindByEmail> {
     const user = await prismaClient.user.findUnique({ where: { email } });
 
-    return user ? this.mapper(user) : null;
+    return user ? this.mapperWithPassword(user) : null;
   }
 
   async findByAccountVerificationCode(code: string): Promise<OutputFindByAccountVerificationCode> {
-    const user = await prismaClient.user.findFirst({where: {accountVerificationCode: code}})
+    const user = await prismaClient.user.findFirst({ where: { accountVerificationCode: code } });
 
-    return user ? this.mapper(user) : null
+    return user ? this.mapper(user) : null;
   }
 
   async update(id: string, params: Partial<IUserEntity>): Promise<Omit<IUserEntity, 'password'>> {
     const updatedUser = await prismaClient.user.update({
-      where: {id},
-      data: params as any
-    })
+      where: { id },
+      data: params as any,
+    });
 
-    return this.mapper(updatedUser)
+    return this.mapper(updatedUser);
   }
 
   private mapper(data: any): Omit<IUserEntity, 'password'> {
@@ -67,7 +67,26 @@ export class UserRepository implements IUserRepository {
       ...(data?.passwordResetCodeExpiresAt && { passwordResetCodeExpiresAt: data.passwordResetCodeExpiresAt }),
       ...(data.createdAt && { createdAt: data.createdAt }),
       ...(data.updatedAt && { updatedAt: data.updatedAt }),
-      ...(data.roles && {roles: data.roles})
+      ...(data.roles && { roles: data.roles }),
+    };
+  }
+
+  private mapperWithPassword(data: any): IUserEntity {
+    return {
+      id: data?.id,
+      email: data?.email,
+      userName: data?.userName,
+      password: data.password,
+      registrationStep: data?.registrationStep,
+      ...(data?.accountVerificationCode && { accountVerificationCode: data.accountVerificationCode }),
+      ...(data?.accountVerificationCodeExpiresAt && {
+        accountVerificationCodeExpiresAt: data.accountVerificationCodeExpiresAt,
+      }),
+      ...(data?.passwordResetCode && { passwordResetCode: data.passwordResetCode }),
+      ...(data?.passwordResetCodeExpiresAt && { passwordResetCodeExpiresAt: data.passwordResetCodeExpiresAt }),
+      ...(data.createdAt && { createdAt: data.createdAt }),
+      ...(data.updatedAt && { updatedAt: data.updatedAt }),
+      ...(data.roles && { roles: data.roles }),
     };
   }
 }
