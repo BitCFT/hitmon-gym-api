@@ -1,3 +1,4 @@
+import { AuthenticationOperator } from '@controller/operators/authentication/authenticationOperator';
 import { CreateEquipmentOperator } from '@controller/operators/equipment/createEquipmentOperator';
 import { DeleteEquipmentOperator } from '@controller/operators/equipment/deleteEquipmentOperator';
 import { ListEquipmentsOperator } from '@controller/operators/equipment/listEquipmentsOperator';
@@ -26,6 +27,9 @@ export const OperatorModule = new ContainerModule((bind: interfaces.Bind) => {
 
   // users
   bind(CreateUserOperator).toSelf();
-  bind(CheckAccountVerificationCodeOperator).toSelf()
-  bind(ResendAccountVerificationCodeOperator).toSelf()
+  bind(CheckAccountVerificationCodeOperator).toSelf();
+  bind(ResendAccountVerificationCodeOperator).toSelf();
+
+  // authentication
+  bind(AuthenticationOperator).toSelf();
 });

@@ -1,3 +1,4 @@
+import { AuthenticationUseCase } from '@business/useCases/authentication/authenticationUseCase';
 import { CreateEquipmentUseCase } from '@business/useCases/equipment/createEquipmentUseCase';
 import { DeleteEquipmentUseCase } from '@business/useCases/equipment/deleteEquipmentUseCase';
 import { ListEquipmentsUseCase } from '@business/useCases/equipment/listEquipmentsUseCase';
@@ -28,4 +29,7 @@ export const UseCasesModule = new ContainerModule((bind: interfaces.Bind) => {
   bind(ListEquipmentsUseCase).toSelf();
   bind(DeleteEquipmentUseCase).toSelf();
   bind(UpdateEquipmentUseCase).toSelf();
+
+  // authentication
+  bind(AuthenticationUseCase).toSelf();
 });
