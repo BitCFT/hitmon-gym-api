@@ -1,3 +1,4 @@
+import { LoginController } from '@framework/server/controllers/authentication/loginController';
 import { CreateEquipmentController } from '@framework/server/controllers/equipment/createEquipmentController';
 import { DeleteEquipmentController } from '@framework/server/controllers/equipment/deleteEquipmentController';
 import { ListEquipmentsController } from '@framework/server/controllers/equipment/listEquipmentsController';
@@ -21,6 +22,7 @@ export const ControllersModule = new ContainerModule((bind: interfaces.Bind) => 
   bind(DeleteEquipmentController).toSelf();
   bind(UpdateEquipmentController).toSelf();
   bind(CreateUserController).toSelf();
-  bind(CheckAccountVerificationCodeController).toSelf()
-  bind(ResendAccountVerificationCodeController).toSelf()
+  bind(CheckAccountVerificationCodeController).toSelf();
+  bind(ResendAccountVerificationCodeController).toSelf();
+  bind(LoginController).toSelf();
 });

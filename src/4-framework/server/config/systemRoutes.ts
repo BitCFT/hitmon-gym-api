@@ -2,6 +2,7 @@ export enum BASE_ROUTES {
   EQUIPMENT_CATEGORIES = `/equipment-categories`,
   EQUIPMENTS = `/equipments`,
   USERS = `/users`,
+  AUTHENTICATION = '/auth',
 }
 
 export enum EquipmentCategoryRoutes {
@@ -22,4 +23,8 @@ export enum UserRoutes {
   CREATE = `${BASE_ROUTES.USERS}`,
   CHECK_ACCOUNT_VERIFICATION_CODE = `${BASE_ROUTES.USERS}/verification-code/:code`,
   RESEND_ACCOUNT_VERIFICATION_CODE = `${BASE_ROUTES.USERS}/resend-verification-code`,
+}
+
+export enum AuthenticationRoutes {
+  LOGIN = `${BASE_ROUTES.AUTHENTICATION}/login`,
 }

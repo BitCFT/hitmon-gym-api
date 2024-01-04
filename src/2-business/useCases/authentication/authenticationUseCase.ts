@@ -38,12 +38,17 @@ export class AuthenticationUseCase implements IUseCase<InputAuthenticationDto, O
         return left(InvalidCredentialsError);
       }
 
-      const token = await this.jwtService.sign({
+      const tokenResult = this.jwtService.sign({
         id: user.id,
       });
 
-      return right({ token });
+      if (tokenResult.isLeft()) {
+        return left(tokenResult.value);
+      }
+
+      return right({ token: tokenResult.value });
     } catch (error: any) {
+      this.logService.error(error);
       return left(AuthenticationGeneralError(error?.message));
     }
   }
