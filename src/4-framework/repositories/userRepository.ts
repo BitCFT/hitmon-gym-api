@@ -33,7 +33,7 @@ export class UserRepository implements IUserRepository {
   }
 
   async findByEmail(email: string): Promise<OutputFindByEmail> {
-    const user = await prismaClient.user.findUnique({ where: { email } });
+    const user = await prismaClient.user.findUnique({ where: { email }, include: { roles: true } });
 
     return user ? this.mapperWithPassword(user) : null;
   }

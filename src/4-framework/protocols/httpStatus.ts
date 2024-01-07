@@ -1,5 +1,5 @@
-import { HttpResponse } from '@business/services/iController';
-import { IError } from './iError';
+import { IError } from '@shared/iError';
+import { HttpResponse } from './http';
 
 export const serverError = (error: any): HttpResponse => {
   return {

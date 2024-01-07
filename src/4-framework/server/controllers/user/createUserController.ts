@@ -1,10 +1,11 @@
 import { createUserGeneralError } from '@business/module/errors/user/user';
 import { validationError } from '@business/module/errors/validation';
-import { HttpRequest, HttpResponse, IController } from '@business/services/iController';
 import { CreateUserOperator } from '@controller/operators/user/createUserOperator';
 import { InputCreateUser } from '@controller/serializers/user/createUserSerializer';
+import { IController } from '@framework/protocols/controller';
+import { HttpRequest, HttpResponse } from '@framework/protocols/http';
+import { badRequest, created, serverError } from '@framework/protocols/httpStatus';
 import { container } from '@shared/container';
-import { badRequest, created, serverError } from '@shared/httpHelper';
 import { injectable } from 'inversify';
 
 @injectable()

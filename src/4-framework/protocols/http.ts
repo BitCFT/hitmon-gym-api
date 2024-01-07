@@ -8,7 +8,3 @@ export type HttpResponse = {
   statusCode: number;
   body: any;
 };
-
-export interface IController {
-  handle(httpRequest: HttpRequest): Promise<HttpResponse>;
-}

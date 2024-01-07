@@ -3,11 +3,12 @@ import {
   equipmentCategoryIsNotFoundError,
 } from '@business/module/errors/equipmentCategory/equipmentCategory';
 import { validationError } from '@business/module/errors/validation';
-import { HttpRequest, HttpResponse, IController } from '@business/services/iController';
 import { DeleteEquipmentCategoryOperator } from '@controller/operators/equipmentCategory/deleteEquipmentCategoryOperator';
 import { InputDeleteEquipmentCategory } from '@controller/serializers/equipmentCategory/deleteEquipmentCategorySerializer';
+import { IController } from '@framework/protocols/controller';
+import { HttpRequest, HttpResponse } from '@framework/protocols/http';
+import { badRequest, noContent, notFound, serverError } from '@framework/protocols/httpStatus';
 import { container } from '@shared/container';
-import { badRequest, noContent, notFound, serverError } from '@shared/httpHelper';
 import { injectable } from 'inversify';
 
 @injectable()

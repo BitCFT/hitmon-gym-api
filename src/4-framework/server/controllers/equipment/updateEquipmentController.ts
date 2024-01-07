@@ -1,11 +1,12 @@
 import { updateEquipmentGeneralError } from '@business/module/errors/equipment/equipment';
 import { equipmentCategoryIsNotFoundError } from '@business/module/errors/equipmentCategory/equipmentCategory';
 import { validationError } from '@business/module/errors/validation';
-import { HttpRequest, HttpResponse, IController } from '@business/services/iController';
 import { UpdateEquipmentOperator } from '@controller/operators/equipment/updateEquipmentOperator';
 import { InputUpdateEquipment } from '@controller/serializers/equipment/updateEquipmentSerializer';
+import { IController } from '@framework/protocols/controller';
+import { HttpRequest, HttpResponse } from '@framework/protocols/http';
+import { badRequest, notFound, ok, serverError } from '@framework/protocols/httpStatus';
 import { container } from '@shared/container';
-import { badRequest, notFound, ok, serverError } from '@shared/httpHelper';
 import { injectable } from 'inversify';
 
 @injectable()
