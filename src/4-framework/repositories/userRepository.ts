@@ -28,8 +28,10 @@ export class UserRepository implements IUserRepository {
     return this.mapper(user);
   }
 
-  findById(id: string): Promise<OutputFindById> {
-    throw new Error('Method not implemented.');
+  async findById(id: string): Promise<OutputFindById> {
+    const user = await prismaClient.user.findUnique({ where: { id }, include: { roles: true } });
+
+    return user ? this.mapper(user) : null;
   }
 
   async findByEmail(email: string): Promise<OutputFindByEmail> {
