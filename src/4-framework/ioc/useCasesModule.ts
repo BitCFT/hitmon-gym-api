@@ -9,6 +9,7 @@ import { ListEquipmentCategoriesUseCase } from '@business/useCases/equipmentCate
 import { UpdateEquipmentCategoryUseCase } from '@business/useCases/equipmentCategory/updateEquipmentCategoryUseCase';
 import { CheckAccountVerificationCodeUseCase } from '@business/useCases/user/checkAccountVerificationCodeUseCase';
 import { CreateUserUseCase } from '@business/useCases/user/createUserUseCase';
+import { GetUserByTokenUseCase } from '@business/useCases/user/getUserByTokenUseCase';
 import { ResendAccountVerificationCodeUseCase } from '@business/useCases/user/resendAccountVerificationCodeUseCase';
 import { ContainerModule, interfaces } from 'inversify';
 
@@ -17,6 +18,7 @@ export const UseCasesModule = new ContainerModule((bind: interfaces.Bind) => {
   bind(CreateUserUseCase).toSelf();
   bind(ResendAccountVerificationCodeUseCase).toSelf();
   bind(CheckAccountVerificationCodeUseCase).toSelf();
+  bind(GetUserByTokenUseCase).toSelf();
 
   // equipment-categories
   bind(CreateEquipmentCategoryUseCase).toSelf();
