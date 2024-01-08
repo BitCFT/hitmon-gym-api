@@ -6,7 +6,7 @@ import {
   OutputFindById,
 } from '@business/repositories/user/iUserRepository';
 import { IUserEntity } from '@domain/entities/userEntity';
-import { prismaClient } from '@framework/prisma/prismaClient';
+import { prismaClient } from '@framework/database/prisma/prismaClient';
 import { injectable } from 'inversify';
 
 @injectable()

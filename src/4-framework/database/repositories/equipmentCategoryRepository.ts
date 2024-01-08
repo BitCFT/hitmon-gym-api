@@ -9,7 +9,7 @@ import {
 import { IEquipmentCategoryEntity } from '@domain/entities/equipmentCategoryEntity';
 import { PaginationParams } from '@domain/pagination';
 import { injectable } from 'inversify';
-import { prismaClient } from '@framework/prisma/prismaClient';
+import { prismaClient } from '@framework/database/prisma/prismaClient';
 
 @injectable()
 export class EquipmentCategoryRepository implements IEquipmentCategoryRepository {

@@ -8,7 +8,7 @@ import {
 } from '@business/repositories/equipment/iEquipmentRepository';
 import { IEquipmentEntity } from '@domain/entities/equipmentEntity';
 import { PaginationParams } from '@domain/pagination';
-import { prismaClient } from '@framework/prisma/prismaClient';
+import { prismaClient } from '@framework/database/prisma/prismaClient';
 import { injectable } from 'inversify';
 
 @injectable()

@@ -100,7 +100,7 @@
     "source-map-support": "^0.5.21"
   },
   "prisma": {
-    "schema": "./src/4-framework/prisma/schema.prisma",
-    "seed": "npx tsx ./src/4-framework/prisma/seeds/seed.ts"
+    "schema": "./src/4-framework/database/prisma/schema.prisma",
+    "seed": "npx tsx ./src/4-framework/database/prisma/seeds/seed.ts"
   }
 }
