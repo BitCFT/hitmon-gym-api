@@ -22,7 +22,7 @@ export class AuthMiddleware implements IMiddleware {
 
     const token = authorizationHeader.split(' ')[1];
 
-    if (!token) {
+    if (token === 'undefined') {
       return unauthorized(TokenNotProvided);
     }
 

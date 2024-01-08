@@ -14,6 +14,8 @@ import { CreateUserController } from '../controllers/user/createUserController';
 import { CheckAccountVerificationCodeController } from '../controllers/user/checkAccountVerificationCodeController';
 import { ResendAccountVerificationCodeController } from '../controllers/user/resendAccountVerificationCodeController';
 import { LoginController } from '../controllers/authentication/loginController';
+import { ExpressMiddlewareAdapter } from '../adapters/expressMiddlewareAdapter';
+import { AuthMiddleware } from '@framework/middlewares/auth';
 
 export const routes = () => {
   const router = Router();
@@ -43,7 +45,11 @@ export const routes = () => {
   );
 
   // equipment routes
-  router.post(EquipmentRoutes.CREATE, ExpressRoutesAdapter.adapt(container.get(CreateEquipmentController)));
+  router.post(
+    EquipmentRoutes.CREATE,
+    ExpressMiddlewareAdapter.adapt(container.get(AuthMiddleware)),
+    ExpressRoutesAdapter.adapt(container.get(CreateEquipmentController))
+  );
   router.get(EquipmentRoutes.FIND_ALL, ExpressRoutesAdapter.adapt(container.get(ListEquipmentsController)));
   router.delete(EquipmentRoutes.DELETE, ExpressRoutesAdapter.adapt(container.get(DeleteEquipmentController)));
   router.patch(EquipmentRoutes.UPDATE, ExpressRoutesAdapter.adapt(container.get(UpdateEquipmentController)));
