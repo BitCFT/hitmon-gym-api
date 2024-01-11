@@ -17,3 +17,9 @@ export const AuthorizationGeneralError: IError = {
   message: 'Authorization General Error, Please try again later',
   shortMessage: 'authorizationGeneralError',
 };
+
+export const ForbiddenError: IError = {
+  code: 'AUTH-004',
+  message: 'Without Permission To Access The Resource',
+  shortMessage: 'forbiddenError',
+};
