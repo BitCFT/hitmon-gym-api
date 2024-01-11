@@ -49,3 +49,10 @@ export const notFound = (error: IError): HttpResponse => {
     body: error,
   };
 };
+
+export const forbidden = (error: IError): HttpResponse => {
+  return {
+    statusCode: 403,
+    body: error,
+  };
+};
