@@ -1,10 +1,11 @@
 import { listEquipmentsGeneralError } from '@business/module/errors/equipment/equipment';
 import { validationError } from '@business/module/errors/validation';
-import { HttpRequest, HttpResponse, IController } from '@business/services/iController';
 import { ListEquipmentsOperator } from '@controller/operators/equipment/listEquipmentsOperator';
 import { InputListEquipments } from '@controller/serializers/equipment/listEquipmentsSerializer';
+import { IController } from '@framework/protocols/controller';
+import { HttpRequest, HttpResponse } from '@framework/protocols/http';
+import { badRequest, ok, serverError } from '@framework/protocols/httpStatus';
 import { container } from '@shared/container';
-import { badRequest, ok, serverError } from '@shared/httpHelper';
 import { injectable } from 'inversify';
 
 @injectable()

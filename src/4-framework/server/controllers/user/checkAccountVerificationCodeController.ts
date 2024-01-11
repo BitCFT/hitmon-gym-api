@@ -1,10 +1,11 @@
 import { checkCodeGeneralError, userIsNotFoundError } from '@business/module/errors/user/user';
 import { validationError } from '@business/module/errors/validation';
-import { HttpRequest, HttpResponse, IController } from '@business/services/iController';
 import { CheckAccountVerificationCodeOperator } from '@controller/operators/user/checkAccountVerificationCodeOperator';
 import { InputCheckAccountVerificationCode } from '@controller/serializers/user/checkAccountVerificationCodeSerializer';
+import { IController } from '@framework/protocols/controller';
+import { HttpRequest, HttpResponse } from '@framework/protocols/http';
+import { badRequest, noContent, notFound, serverError } from '@framework/protocols/httpStatus';
 import { container } from '@shared/container';
-import { badRequest, noContent, notFound, ok, serverError } from '@shared/httpHelper';
 import { injectable } from 'inversify';
 
 @injectable()
@@ -22,7 +23,7 @@ export class CheckAccountVerificationCodeController implements IController {
         }
 
         if (result.value === userIsNotFoundError) {
-          return notFound(result.value)
+          return notFound(result.value);
         }
         return badRequest(result.value);
       }

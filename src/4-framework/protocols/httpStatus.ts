@@ -1,5 +1,5 @@
-import { HttpResponse } from '@business/services/iController';
-import { IError } from './iError';
+import { IError } from '@shared/iError';
+import { HttpResponse } from './http';
 
 export const serverError = (error: any): HttpResponse => {
   return {
@@ -46,6 +46,13 @@ export const unauthorized = (error: IError): HttpResponse => {
 export const notFound = (error: IError): HttpResponse => {
   return {
     statusCode: 404,
+    body: error,
+  };
+};
+
+export const forbidden = (error: IError): HttpResponse => {
+  return {
+    statusCode: 403,
     body: error,
   };
 };

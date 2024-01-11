@@ -1,19 +1,30 @@
+export enum BASE_ROUTES {
+  EQUIPMENT_CATEGORIES = `/equipment-categories`,
+  EQUIPMENTS = `/equipments`,
+  USERS = `/users`,
+  AUTHENTICATION = '/auth',
+}
+
 export enum EquipmentCategoryRoutes {
-  CREATE = '/equipment-categories',
-  FIND_ALL = '/equipment-categories',
-  DELETE = '/equipment-categories/:id',
-  UPDATE = '/equipment-categories/:id',
+  CREATE = `${BASE_ROUTES.EQUIPMENT_CATEGORIES}`,
+  FIND_ALL = `${BASE_ROUTES.EQUIPMENT_CATEGORIES}`,
+  DELETE = `${BASE_ROUTES.EQUIPMENT_CATEGORIES}/:id`,
+  UPDATE = `${BASE_ROUTES.EQUIPMENT_CATEGORIES}/:id`,
 }
 
 export enum EquipmentRoutes {
-  CREATE = '/equipments',
-  FIND_ALL = '/equipments',
-  DELETE = '/equipments/:id',
-  UPDATE = '/equipments/:id',
+  CREATE = `${BASE_ROUTES.EQUIPMENTS}`,
+  FIND_ALL = `${BASE_ROUTES.EQUIPMENTS}`,
+  DELETE = `${BASE_ROUTES.EQUIPMENTS}/:id`,
+  UPDATE = `${BASE_ROUTES.EQUIPMENTS}/:id`,
 }
 
 export enum UserRoutes {
-  CREATE = '/users',
-  CHECK_ACCOUNT_VERIFICATION_CODE = '/users/verification-code/:code',
-  RESEND_ACCOUNT_VERIFICATION_CODE = '/users/resend-verification-code'
+  CREATE = `${BASE_ROUTES.USERS}`,
+  CHECK_ACCOUNT_VERIFICATION_CODE = `${BASE_ROUTES.USERS}/verification-code/:code`,
+  RESEND_ACCOUNT_VERIFICATION_CODE = `${BASE_ROUTES.USERS}/resend-verification-code`,
+}
+
+export enum AuthenticationRoutes {
+  LOGIN = `${BASE_ROUTES.AUTHENTICATION}/login`,
 }

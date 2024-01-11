@@ -4,7 +4,7 @@ export const IUserRepositoryToken = Symbol.for('IUserRepositoryToken');
 
 export type OutputFindById = Omit<IUserEntity, 'password'> | null;
 
-export type OutputFindByEmail = Omit<IUserEntity, 'password'> | null;
+export type OutputFindByEmail = IUserEntity | null;
 
 export type InputCreateUser = {
   id: string;

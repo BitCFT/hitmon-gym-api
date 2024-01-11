@@ -41,3 +41,9 @@ export const expiredCodeError: IError = {
   message: 'Expired Code Error',
   shortMessage: 'expiredCodeError',
 };
+
+export const GetUserByTokenGeneralError = (message?: string): IError => ({
+  code: '007',
+  message: message || 'Get User By Token General Error',
+  shortMessage: 'getUserByTokenGeneralError',
+});

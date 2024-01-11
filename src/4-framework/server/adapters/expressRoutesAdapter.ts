@@ -1,4 +1,5 @@
-import { HttpRequest, HttpResponse, IController } from '@business/services/iController';
+import { IController } from '@framework/protocols/controller';
+import { HttpRequest, HttpResponse } from '@framework/protocols/http';
 import { Request, Response } from 'express';
 
 export class ExpressRoutesAdapter {
@@ -8,6 +9,7 @@ export class ExpressRoutesAdapter {
         body: request.body,
         params: request.params,
         query: request.query,
+        user: request.user,
       };
 
       const httpResponse: HttpResponse = await controller.handle(httpRequest);

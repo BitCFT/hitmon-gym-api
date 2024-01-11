@@ -4,9 +4,9 @@ import {
   IEquipmentCategoryRepositoryToken,
 } from '@business/repositories/equipmentCategory/iEquipmentCategoryRepository';
 import { IUserRepository, IUserRepositoryToken } from '@business/repositories/user/iUserRepository';
-import { EquipmentCategoryRepository } from '@framework/repositories/equipmentCategoryRepository';
-import { EquipmentRepository } from '@framework/repositories/equipmentRepository';
-import { UserRepository } from '@framework/repositories/userRepository';
+import { EquipmentCategoryRepository } from '@framework/database/repositories/equipmentCategoryRepository';
+import { EquipmentRepository } from '@framework/database/repositories/equipmentRepository';
+import { UserRepository } from '@framework/database/repositories/userRepository';
 import { ContainerModule, interfaces } from 'inversify';
 
 export const RepositoryModule = new ContainerModule((bind: interfaces.Bind) => {

@@ -1,10 +1,9 @@
-import 'dotenv/config';
 import '@framework/ioc/inversifyConfig';
 import express, { json } from 'express';
 import { routes } from '@framework/server/config/routes';
 import { logRoutes } from './config/logRoutes';
 
-const SERVER_PORT: number = Number(process.env.PORT);
+const SERVER_PORT: number = Number(process.env.PORT || 3000);
 const app = express();
 
 app.use(json());

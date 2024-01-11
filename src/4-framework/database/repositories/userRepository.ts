@@ -6,7 +6,7 @@ import {
   OutputFindById,
 } from '@business/repositories/user/iUserRepository';
 import { IUserEntity } from '@domain/entities/userEntity';
-import { prismaClient } from '@framework/prisma/prismaClient';
+import { prismaClient } from '@framework/database/prisma/prismaClient';
 import { injectable } from 'inversify';
 
 @injectable()
@@ -22,35 +22,37 @@ export class UserRepository implements IUserRepository {
           },
         },
       },
-      include: {roles: true}
+      include: { roles: true },
     });
 
     return this.mapper(user);
   }
 
-  findById(id: string): Promise<OutputFindById> {
-    throw new Error('Method not implemented.');
-  }
-
-  async findByEmail(email: string): Promise<OutputFindByEmail> {
-    const user = await prismaClient.user.findUnique({ where: { email } });
+  async findById(id: string): Promise<OutputFindById> {
+    const user = await prismaClient.user.findUnique({ where: { id }, include: { roles: true } });
 
     return user ? this.mapper(user) : null;
   }
 
-  async findByAccountVerificationCode(code: string): Promise<OutputFindByAccountVerificationCode> {
-    const user = await prismaClient.user.findFirst({where: {accountVerificationCode: code}})
+  async findByEmail(email: string): Promise<OutputFindByEmail> {
+    const user = await prismaClient.user.findUnique({ where: { email }, include: { roles: true } });
 
-    return user ? this.mapper(user) : null
+    return user ? this.mapperWithPassword(user) : null;
+  }
+
+  async findByAccountVerificationCode(code: string): Promise<OutputFindByAccountVerificationCode> {
+    const user = await prismaClient.user.findFirst({ where: { accountVerificationCode: code } });
+
+    return user ? this.mapper(user) : null;
   }
 
   async update(id: string, params: Partial<IUserEntity>): Promise<Omit<IUserEntity, 'password'>> {
     const updatedUser = await prismaClient.user.update({
-      where: {id},
-      data: params as any
-    })
+      where: { id },
+      data: params as any,
+    });
 
-    return this.mapper(updatedUser)
+    return this.mapper(updatedUser);
   }
 
   private mapper(data: any): Omit<IUserEntity, 'password'> {
@@ -67,7 +69,26 @@ export class UserRepository implements IUserRepository {
       ...(data?.passwordResetCodeExpiresAt && { passwordResetCodeExpiresAt: data.passwordResetCodeExpiresAt }),
       ...(data.createdAt && { createdAt: data.createdAt }),
       ...(data.updatedAt && { updatedAt: data.updatedAt }),
-      ...(data.roles && {roles: data.roles})
+      ...(data.roles && { roles: data.roles }),
+    };
+  }
+
+  private mapperWithPassword(data: any): IUserEntity {
+    return {
+      id: data?.id,
+      email: data?.email,
+      userName: data?.userName,
+      password: data.password,
+      registrationStep: data?.registrationStep,
+      ...(data?.accountVerificationCode && { accountVerificationCode: data.accountVerificationCode }),
+      ...(data?.accountVerificationCodeExpiresAt && {
+        accountVerificationCodeExpiresAt: data.accountVerificationCodeExpiresAt,
+      }),
+      ...(data?.passwordResetCode && { passwordResetCode: data.passwordResetCode }),
+      ...(data?.passwordResetCodeExpiresAt && { passwordResetCodeExpiresAt: data.passwordResetCodeExpiresAt }),
+      ...(data.createdAt && { createdAt: data.createdAt }),
+      ...(data.updatedAt && { updatedAt: data.updatedAt }),
+      ...(data.roles && { roles: data.roles }),
     };
   }
 }
