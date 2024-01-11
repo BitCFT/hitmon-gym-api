@@ -36,6 +36,6 @@ export class AuthMiddleware implements IMiddleware {
       return serverError(AuthorizationGeneralError);
     }
 
-    return ok({ user });
+    return ok({ user: user.value });
   }
 }

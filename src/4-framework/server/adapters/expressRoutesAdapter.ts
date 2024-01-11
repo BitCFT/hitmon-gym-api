@@ -9,6 +9,7 @@ export class ExpressRoutesAdapter {
         body: request.body,
         params: request.params,
         query: request.query,
+        user: request.user,
       };
 
       const httpResponse: HttpResponse = await controller.handle(httpRequest);
