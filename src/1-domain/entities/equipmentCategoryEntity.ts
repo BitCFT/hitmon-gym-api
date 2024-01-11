@@ -10,9 +10,7 @@ export interface IEquipmentCategoryEntity extends IBaseEntity {
 
 export class EquipmentCategoryEntity extends AbstractEntity<IEquipmentCategoryEntity> {
   static create(props: IEquipmentCategoryEntity): Either<IError, EquipmentCategoryEntity> {
-    const equipmentCategory = new EquipmentCategoryEntity({
-      ...props,
-    });
+    const equipmentCategory = new EquipmentCategoryEntity(props);
 
     return right(equipmentCategory);
   }

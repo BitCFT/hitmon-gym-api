@@ -16,9 +16,7 @@ export interface IRoleEntity extends IBaseEntity {
 
 export class RoleEntity extends AbstractEntity<IRoleEntity> {
   static create(props: IRoleEntity): Either<IError, RoleEntity> {
-    const role = new RoleEntity({
-      ...props,
-    });
+    const role = new RoleEntity(props);
 
     return right(role);
   }

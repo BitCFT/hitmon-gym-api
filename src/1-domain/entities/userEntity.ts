@@ -23,9 +23,7 @@ export interface IUserEntity extends IBaseEntity {
 
 export class UserEntity extends AbstractEntity<IUserEntity> {
   static create(props: IUserEntity): Either<IError, UserEntity> {
-    const user = new UserEntity({
-      ...props,
-    });
+    const user = new UserEntity(props);
 
     return right(user);
   }

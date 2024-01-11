@@ -11,9 +11,7 @@ export interface IEquipmentEntity extends IBaseEntity {
 
 export class EquipmentEntity extends AbstractEntity<IEquipmentEntity> {
   static create(props: IEquipmentEntity): Either<IError, EquipmentEntity> {
-    const equipment = new EquipmentEntity({
-      ...props,
-    });
+    const equipment = new EquipmentEntity(props);
 
     return right(equipment);
   }
