@@ -1,9 +1,10 @@
+import { RoleTypes } from '@domain/entities/roleEntity';
 import { HttpRequest } from '@framework/protocols/http';
 import { IMiddleware } from '@framework/protocols/middleware';
 import { NextFunction, Request, Response } from 'express';
 
 export class ExpressMiddlewareAdapter {
-  static adapt(middleware: IMiddleware) {
+  static adapt(middleware: IMiddleware<RoleTypes[]>, roles: RoleTypes[] = []) {
     return async function (request: Request, response: Response, next: NextFunction) {
       const httpRequest: HttpRequest = {
         ...(request.headers && {
@@ -11,13 +12,20 @@ export class ExpressMiddlewareAdapter {
             authorization: request.headers.authorization,
           },
         }),
+        ...(request.user && {
+          user: request.user,
+        }),
       };
 
-      const httpResponse = await middleware.handle(httpRequest);
+      const httpResponse = await middleware.handle(httpRequest, roles);
 
       if (httpResponse.statusCode === 200) {
-        Object.assign(request, httpResponse.body);
-        next();
+        if (httpResponse.body !== null) {
+          Object.assign(request, httpResponse.body);
+          next();
+        } else {
+          next();
+        }
       } else {
         return response.status(httpResponse.statusCode).json(httpResponse.body);
       }

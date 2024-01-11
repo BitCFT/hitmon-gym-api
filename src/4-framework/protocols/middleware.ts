@@ -1,6 +1,6 @@
 import { RoleTypes } from '@domain/entities/roleEntity';
 import { HttpRequest, HttpResponse } from './http';
 
-export interface IMiddleware {
-  handle(httpRequest: HttpRequest, roles?: RoleTypes[]): Promise<HttpResponse>;
+export interface IMiddleware<T = undefined> {
+  handle(httpRequest: HttpRequest, ...options: T extends undefined ? [undefined] : [T]): Promise<HttpResponse>;
 }

@@ -16,6 +16,8 @@ import { ResendAccountVerificationCodeController } from '../controllers/user/res
 import { LoginController } from '../controllers/authentication/loginController';
 import { ExpressMiddlewareAdapter } from '../adapters/expressMiddlewareAdapter';
 import { AuthMiddleware } from '@framework/middlewares/auth';
+import { RoleMiddlware } from '@framework/middlewares/role';
+import { RoleTypes } from '@domain/entities/roleEntity';
 
 export const routes = () => {
   const router = Router();
@@ -48,6 +50,7 @@ export const routes = () => {
   router.post(
     EquipmentRoutes.CREATE,
     ExpressMiddlewareAdapter.adapt(container.get(AuthMiddleware)),
+    ExpressMiddlewareAdapter.adapt(container.get(RoleMiddlware), [RoleTypes.ADMIN]),
     ExpressRoutesAdapter.adapt(container.get(CreateEquipmentController))
   );
   router.get(EquipmentRoutes.FIND_ALL, ExpressRoutesAdapter.adapt(container.get(ListEquipmentsController)));
