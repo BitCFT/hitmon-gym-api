@@ -1,5 +1,5 @@
 import { AbstractEntity } from '@domain/abstractEntity';
-import { RoleEntity } from './roleEntity';
+import { IRoleEntity } from './roleEntity';
 import { Either, right } from '@shared/either';
 import { IError } from '@shared/iError';
 import { IBaseEntity } from '@domain/baseEntity';
@@ -13,7 +13,7 @@ export interface IUserEntity extends IBaseEntity {
   email: string;
   password: string;
   userName: string;
-  roles?: RoleEntity[];
+  roles?: IRoleEntity[];
   registrationStep: RegistrationStep;
   accountVerificationCode?: string | null;
   accountVerificationCodeExpiresAt?: Date | null;
