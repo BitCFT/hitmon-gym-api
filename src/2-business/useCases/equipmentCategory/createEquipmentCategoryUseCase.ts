@@ -2,10 +2,7 @@ import {
   InputCreateEquipmentCategoryDto,
   OutputCreateEquipmentCategoryDto,
 } from '@business/dto/equipmentCategory/createEquipmentCategoryDto';
-import {
-  IEquipmentCategoryRepository,
-  IEquipmentCategoryRepositoryToken,
-} from '@business/repositories/equipmentCategory/iEquipmentCategoryRepository';
+import { IEquipmentCategoryRepository } from '@business/repositories/equipmentCategory/iEquipmentCategoryRepository';
 import { IUseCase } from '@business/useCases/iUseCase';
 import { inject, injectable } from 'inversify';
 import { left, right } from '@shared/either';
@@ -16,6 +13,7 @@ import {
 import { EquipmentCategoryEntity } from '@domain/entities/equipmentCategoryEntity';
 import { IUniqueIdentifierService, IUniqueIdentifierServiceToken } from '@business/services/iUniqueIdentifierService';
 import { ILoggerService, ILoggerServiceToken } from '@business/services/iLogger';
+import { IEquipmentCategoryRepositoryToken } from '@business/repositories/equipmentCategory/types';
 
 @injectable()
 export class CreateEquipmentCategoryUseCase

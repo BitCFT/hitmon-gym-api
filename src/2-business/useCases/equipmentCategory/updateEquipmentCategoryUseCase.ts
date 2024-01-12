@@ -5,16 +5,14 @@ import {
   OutputUpdateEquipmentCategoryDto,
 } from '@business/dto/equipmentCategory/updateEquipmentCategoryDto';
 import { ILoggerService, ILoggerServiceToken } from '@business/services/iLogger';
-import {
-  IEquipmentCategoryRepository,
-  IEquipmentCategoryRepositoryToken,
-} from '@business/repositories/equipmentCategory/iEquipmentCategoryRepository';
+import { IEquipmentCategoryRepository } from '@business/repositories/equipmentCategory/iEquipmentCategoryRepository';
 import { left, right } from '@shared/either';
 import {
   EquipmentCategoryAlreadyInUseError,
   EquipmentCategoryIsNotFoundError,
   UpdateEquipmentCategoryGeneralError,
 } from '@business/module/errors/equipmentCategory/equipmentCategory';
+import { IEquipmentCategoryRepositoryToken } from '@business/repositories/equipmentCategory/types';
 
 @injectable()
 export class UpdateEquipmentCategoryUseCase

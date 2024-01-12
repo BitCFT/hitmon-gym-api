@@ -1,8 +1,6 @@
 import { IEquipmentRepository, IEquipmentRepositoryToken } from '@business/repositories/equipment/iEquipmentRepository';
-import {
-  IEquipmentCategoryRepository,
-  IEquipmentCategoryRepositoryToken,
-} from '@business/repositories/equipmentCategory/iEquipmentCategoryRepository';
+import { IEquipmentCategoryRepository } from '@business/repositories/equipmentCategory/iEquipmentCategoryRepository';
+import { IEquipmentCategoryRepositoryToken } from '@business/repositories/equipmentCategory/types';
 import { IUserRepository } from '@business/repositories/user/iUserRepository';
 import { IUserRepositoryToken } from '@business/repositories/user/types';
 import { EquipmentCategoryRepository } from '@framework/database/repositories/equipmentCategoryRepository';

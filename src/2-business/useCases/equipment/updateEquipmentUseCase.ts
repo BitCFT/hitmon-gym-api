@@ -9,11 +9,9 @@ import {
   EquipmentIsNotFoundError,
   UpdateEquipmentGeneralError,
 } from '@business/module/errors/equipment/equipment';
-import {
-  IEquipmentCategoryRepository,
-  IEquipmentCategoryRepositoryToken,
-} from '@business/repositories/equipmentCategory/iEquipmentCategoryRepository';
+import { IEquipmentCategoryRepository } from '@business/repositories/equipmentCategory/iEquipmentCategoryRepository';
 import { EquipmentCategoryIsNotFoundError } from '@business/module/errors/equipmentCategory/equipmentCategory';
+import { IEquipmentCategoryRepositoryToken } from '@business/repositories/equipmentCategory/types';
 
 @injectable()
 export class UpdateEquipmentUseCase implements IUseCase<InputUpdateEquipmentDto, OutputUpdateEquipmentDto> {

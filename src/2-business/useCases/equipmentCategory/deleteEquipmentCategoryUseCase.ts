@@ -1,9 +1,6 @@
 import { inject, injectable } from 'inversify';
 import { IUseCase } from '@business/useCases/iUseCase';
-import {
-  IEquipmentCategoryRepository,
-  IEquipmentCategoryRepositoryToken,
-} from '@business/repositories/equipmentCategory/iEquipmentCategoryRepository';
+import { IEquipmentCategoryRepository } from '@business/repositories/equipmentCategory/iEquipmentCategoryRepository';
 import { ILoggerService, ILoggerServiceToken } from '@business/services/iLogger';
 import {
   InputDeleteEquipmentCategoryDto,
@@ -14,6 +11,7 @@ import {
   DeleteEquipmentCategoryGeneralError,
   EquipmentCategoryIsNotFoundError,
 } from '@business/module/errors/equipmentCategory/equipmentCategory';
+import { IEquipmentCategoryRepositoryToken } from '@business/repositories/equipmentCategory/types';
 
 @injectable()
 export class DeleteEquipmentCategoryUseCase

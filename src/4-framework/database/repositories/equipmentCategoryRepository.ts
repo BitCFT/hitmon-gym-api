@@ -1,15 +1,15 @@
+import { IEquipmentCategoryRepository } from '@business/repositories/equipmentCategory/iEquipmentCategoryRepository';
+import { IEquipmentCategoryEntity } from '@domain/entities/equipmentCategoryEntity';
+import { injectable } from 'inversify';
+import { prismaClient } from '@framework/database/prisma/prismaClient';
 import {
-  IEquipmentCategoryRepository,
   InputCreateEquipmentCategory,
+  InputListAllEquipmentCategories,
   InputUpdateEquipmentCategory,
   OutputFindById,
   OutputFindByName,
   OutputListAllEquipmentCategories,
-} from '@business/repositories/equipmentCategory/iEquipmentCategoryRepository';
-import { IEquipmentCategoryEntity } from '@domain/entities/equipmentCategoryEntity';
-import { PaginationParams } from '@domain/pagination';
-import { injectable } from 'inversify';
-import { prismaClient } from '@framework/database/prisma/prismaClient';
+} from '@business/repositories/equipmentCategory/types';
 
 @injectable()
 export class EquipmentCategoryRepository implements IEquipmentCategoryRepository {
@@ -41,7 +41,7 @@ export class EquipmentCategoryRepository implements IEquipmentCategoryRepository
     await prismaClient.equipmentCategory.delete({ where: { id } });
   }
 
-  async listAll({ page, limit }: PaginationParams): Promise<OutputListAllEquipmentCategories> {
+  async listAll({ page, limit }: InputListAllEquipmentCategories): Promise<OutputListAllEquipmentCategories> {
     const data = await prismaClient.equipmentCategory.findMany({
       take: limit,
       skip: (page - 1) * limit,

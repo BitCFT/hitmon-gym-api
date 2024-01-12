@@ -5,13 +5,11 @@ import {
 import { IUseCase } from '@business/useCases/iUseCase';
 import { PaginationParams } from '@domain/pagination';
 import { inject, injectable } from 'inversify';
-import {
-  IEquipmentCategoryRepository,
-  IEquipmentCategoryRepositoryToken,
-} from '@business/repositories/equipmentCategory/iEquipmentCategoryRepository';
+import { IEquipmentCategoryRepository } from '@business/repositories/equipmentCategory/iEquipmentCategoryRepository';
 import { ILoggerService, ILoggerServiceToken } from '@business/services/iLogger';
 import { left, right } from '@shared/either';
 import { ListEquipmentCategoriesGeneralError } from '@business/module/errors/equipmentCategory/equipmentCategory';
+import { IEquipmentCategoryRepositoryToken } from '@business/repositories/equipmentCategory/types';
 
 @injectable()
 export class ListEquipmentCategoriesUseCase

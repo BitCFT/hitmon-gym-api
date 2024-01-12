@@ -2,10 +2,8 @@ import { InputCreateEquipmentDto, OutputCreateEquipmentDto } from '@business/dto
 import { CreateEquipmentGeneralError, EquipmentAlreadyInUseError } from '@business/module/errors/equipment/equipment';
 import { EquipmentCategoryIsNotFoundError } from '@business/module/errors/equipmentCategory/equipmentCategory';
 import { IEquipmentRepository, IEquipmentRepositoryToken } from '@business/repositories/equipment/iEquipmentRepository';
-import {
-  IEquipmentCategoryRepository,
-  IEquipmentCategoryRepositoryToken,
-} from '@business/repositories/equipmentCategory/iEquipmentCategoryRepository';
+import { IEquipmentCategoryRepository } from '@business/repositories/equipmentCategory/iEquipmentCategoryRepository';
+import { IEquipmentCategoryRepositoryToken } from '@business/repositories/equipmentCategory/types';
 import { ILoggerService, ILoggerServiceToken } from '@business/services/iLogger';
 import { IUniqueIdentifierService, IUniqueIdentifierServiceToken } from '@business/services/iUniqueIdentifierService';
 import { IUseCase } from '@business/useCases/iUseCase';
