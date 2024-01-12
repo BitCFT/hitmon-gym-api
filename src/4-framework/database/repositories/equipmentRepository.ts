@@ -1,13 +1,13 @@
+import { IEquipmentRepository } from '@business/repositories/equipment/iEquipmentRepository';
 import {
-  IEquipmentRepository,
   InputCreateEquipment,
+  InputListAllEquipments,
   InputUpdateEquipment,
   OutputFindById,
   OutputFindByName,
   OutputListAllEquipments,
-} from '@business/repositories/equipment/iEquipmentRepository';
+} from '@business/repositories/equipment/types';
 import { IEquipmentEntity } from '@domain/entities/equipmentEntity';
-import { PaginationParams } from '@domain/pagination';
 import { prismaClient } from '@framework/database/prisma/prismaClient';
 import { injectable } from 'inversify';
 
@@ -40,7 +40,7 @@ export class EquipmentRepository implements IEquipmentRepository {
     return equipment ? this.mapper(equipment) : null;
   }
 
-  async listAll({ page, limit }: PaginationParams): Promise<OutputListAllEquipments> {
+  async listAll({ page, limit }: InputListAllEquipments): Promise<OutputListAllEquipments> {
     const data = await prismaClient.equipment.findMany({
       take: limit,
       skip: (page - 1) * limit,

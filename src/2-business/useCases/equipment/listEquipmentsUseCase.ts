@@ -2,10 +2,11 @@ import { InputListEquipmentsDto, OutputListEquipmentsDto } from '@business/dto/e
 import { IUseCase } from '@business/useCases/iUseCase';
 import { inject, injectable } from 'inversify';
 import { PaginationParams } from '@domain/pagination';
-import { IEquipmentRepository, IEquipmentRepositoryToken } from '@business/repositories/equipment/iEquipmentRepository';
+import { IEquipmentRepository } from '@business/repositories/equipment/iEquipmentRepository';
 import { ILoggerService, ILoggerServiceToken } from '@business/services/iLogger';
 import { left, right } from '@shared/either';
 import { ListEquipmentsGeneralError } from '@business/module/errors/equipment/equipment';
+import { IEquipmentRepositoryToken } from '@business/repositories/equipment/types';
 
 @injectable()
 export class ListEquipmentsUseCase implements IUseCase<InputListEquipmentsDto, OutputListEquipmentsDto> {

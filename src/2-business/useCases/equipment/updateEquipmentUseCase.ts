@@ -2,7 +2,7 @@ import { inject, injectable } from 'inversify';
 import { IUseCase } from '@business/useCases/iUseCase';
 import { InputUpdateEquipmentDto, OutputUpdateEquipmentDto } from '@business/dto/equipment/updateEquipmentDto';
 import { ILoggerService, ILoggerServiceToken } from '@business/services/iLogger';
-import { IEquipmentRepository, IEquipmentRepositoryToken } from '@business/repositories/equipment/iEquipmentRepository';
+import { IEquipmentRepository } from '@business/repositories/equipment/iEquipmentRepository';
 import { left, right } from '@shared/either';
 import {
   EquipmentAlreadyInUseError,
@@ -12,6 +12,7 @@ import {
 import { IEquipmentCategoryRepository } from '@business/repositories/equipmentCategory/iEquipmentCategoryRepository';
 import { EquipmentCategoryIsNotFoundError } from '@business/module/errors/equipmentCategory/equipmentCategory';
 import { IEquipmentCategoryRepositoryToken } from '@business/repositories/equipmentCategory/types';
+import { IEquipmentRepositoryToken } from '@business/repositories/equipment/types';
 
 @injectable()
 export class UpdateEquipmentUseCase implements IUseCase<InputUpdateEquipmentDto, OutputUpdateEquipmentDto> {

@@ -3,10 +3,11 @@ import { Container } from 'inversify';
 import { userRepositoryMock } from '@test/utility/mocks/repository/userRepository.mock';
 import { IEquipmentCategoryRepository } from '@business/repositories/equipmentCategory/iEquipmentCategoryRepository';
 import { equipmentCategoryRepositoryMock } from '../mocks/repository/equipmentCategory.mock';
-import { IEquipmentRepository, IEquipmentRepositoryToken } from '@business/repositories/equipment/iEquipmentRepository';
+import { IEquipmentRepository } from '@business/repositories/equipment/iEquipmentRepository';
 import { equipmentRepositoryMock } from '../mocks/repository/equipment.mock';
 import { IUserRepositoryToken } from '@business/repositories/user/types';
 import { IEquipmentCategoryRepositoryToken } from '@business/repositories/equipmentCategory/types';
+import { IEquipmentRepositoryToken } from '@business/repositories/equipment/types';
 
 export const FakeRepositoriesModule = (container: Container) => {
   container.bind<IUserRepository>(IUserRepositoryToken).toConstantValue(userRepositoryMock);

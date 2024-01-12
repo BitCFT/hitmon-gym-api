@@ -3,8 +3,9 @@ import { IUseCase } from '@business/useCases/iUseCase';
 import { ILoggerService, ILoggerServiceToken } from '@business/services/iLogger';
 import { left, right } from '@shared/either';
 import { InputDeleteEquipmentDto, OutputDeleteEquipmentDto } from '@business/dto/equipment/deleteEquipmentDto';
-import { IEquipmentRepository, IEquipmentRepositoryToken } from '@business/repositories/equipment/iEquipmentRepository';
+import { IEquipmentRepository } from '@business/repositories/equipment/iEquipmentRepository';
 import { DeleteEquipmentGeneralError, EquipmentIsNotFoundError } from '@business/module/errors/equipment/equipment';
+import { IEquipmentRepositoryToken } from '@business/repositories/equipment/types';
 
 @injectable()
 export class DeleteEquipmentUseCase implements IUseCase<InputDeleteEquipmentDto, OutputDeleteEquipmentDto> {

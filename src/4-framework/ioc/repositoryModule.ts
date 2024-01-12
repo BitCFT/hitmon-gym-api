@@ -1,4 +1,5 @@
-import { IEquipmentRepository, IEquipmentRepositoryToken } from '@business/repositories/equipment/iEquipmentRepository';
+import { IEquipmentRepository } from '@business/repositories/equipment/iEquipmentRepository';
+import { IEquipmentRepositoryToken } from '@business/repositories/equipment/types';
 import { IEquipmentCategoryRepository } from '@business/repositories/equipmentCategory/iEquipmentCategoryRepository';
 import { IEquipmentCategoryRepositoryToken } from '@business/repositories/equipmentCategory/types';
 import { IUserRepository } from '@business/repositories/user/iUserRepository';
