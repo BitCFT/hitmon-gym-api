@@ -5,7 +5,7 @@ import { IUserRepository, IUserRepositoryToken } from '@business/repositories/us
 import { IHashService, IHashServiceToken } from '@business/services/iHashService';
 import { IRandomCodeService, IRandomCodeServiceToken } from '@business/services/iRandomCodeService';
 import { left, right } from '@shared/either';
-import { createUserGeneralError, emailNotAvailableError } from '@business/module/errors/user/user';
+import { CreateUserGeneralError, EmailNotAvailableError } from '@business/module/errors/user/user';
 import { ILoggerServiceToken, ILoggerService } from '@business/services/iLogger';
 import { IQueueService, IQueueServiceToken } from '@business/services/iQueueService';
 import { InputMailParams } from '@business/services/iMailTypes';
@@ -16,13 +16,13 @@ import { IDateService, IDateServiceToken } from '@business/services/iDateService
 @injectable()
 export class CreateUserUseCase implements IUseCase<InputCreateUserDto, OutputCreateUserDto> {
   constructor(
-    @inject(IUserRepositoryToken) private userRepository: IUserRepository,
-    @inject(IHashServiceToken) private hashService: IHashService,
-    @inject(IRandomCodeServiceToken) private randomCodeService: IRandomCodeService,
-    @inject(ILoggerServiceToken) private logService: ILoggerService,
-    @inject(IQueueServiceToken) private queueService: IQueueService,
-    @inject(IDateServiceToken) private dateService: IDateService,
-    @inject(IUniqueIdentifierServiceToken) private uniqueIdentifierService: IUniqueIdentifierService
+    @inject(IUserRepositoryToken) private readonly userRepository: IUserRepository,
+    @inject(IHashServiceToken) private readonly hashService: IHashService,
+    @inject(IRandomCodeServiceToken) private readonly randomCodeService: IRandomCodeService,
+    @inject(ILoggerServiceToken) private readonly logService: ILoggerService,
+    @inject(IQueueServiceToken) private readonly queueService: IQueueService,
+    @inject(IDateServiceToken) private readonly dateService: IDateService,
+    @inject(IUniqueIdentifierServiceToken) private readonly uniqueIdentifierService: IUniqueIdentifierService
   ) {}
 
   async exec(input: InputCreateUserDto): Promise<OutputCreateUserDto> {
@@ -30,7 +30,7 @@ export class CreateUserUseCase implements IUseCase<InputCreateUserDto, OutputCre
       const emailAlreadyExists = await this.userRepository.findByEmail(input.email);
 
       if (emailAlreadyExists) {
-        return left(emailNotAvailableError);
+        return left(EmailNotAvailableError);
       }
 
       const hashedPassword = await this.hashService.generateHash(input.password);
@@ -83,7 +83,7 @@ export class CreateUserUseCase implements IUseCase<InputCreateUserDto, OutputCre
       return right(user);
     } catch (error) {
       this.logService.error(error);
-      return left(createUserGeneralError);
+      return left(CreateUserGeneralError);
     }
   }
 }

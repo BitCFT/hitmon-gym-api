@@ -1,37 +1,37 @@
 import { IError } from '@shared/iError';
 
-export const createEquipmentCategoryGeneralError: IError = {
-  code: '001',
+export const CreateEquipmentCategoryGeneralError: IError = {
+  code: 'EQPC-001',
   message: 'Create Equipment Category General Error',
   shortMessage: 'createEquipmentCategoryGeneralError',
 };
 
-export const equipmentCategoryAlreadyInUseError: IError = {
-  code: '002',
+export const EquipmentCategoryAlreadyInUseError: IError = {
+  code: 'EQPC-002',
   message: 'Equipment Category Is Already In Use',
   shortMessage: 'nameNotAvailable',
 };
 
-export const listEquipmentCategoriesGeneralError: IError = {
-  code: '003',
+export const ListEquipmentCategoriesGeneralError: IError = {
+  code: 'EQPC-003',
   message: 'List Equipment Categories General Error',
   shortMessage: 'listEquipmentCategoriesGeneralError',
 };
 
-export const updateEquipmentCategoryGeneralError: IError = {
-  code: '004',
+export const UpdateEquipmentCategoryGeneralError: IError = {
+  code: 'EQPC-004',
   message: 'Update Equipment Category Genereal Error',
   shortMessage: 'updateEquipmentCategoryGeneralError',
 };
 
-export const equipmentCategoryIsNotFoundError: IError = {
-  code: '005',
+export const EquipmentCategoryIsNotFoundError: IError = {
+  code: 'EQPC-005',
   message: 'EquipmentCategory Is Not Found Error',
   shortMessage: 'equipmentCategoryIsNotFoundError',
 };
 
-export const deleteEquipmentCategoryGeneralError = (message?: string): IError => ({
-  code: '006',
-  message: message || 'Delete Equipment Category Genereal Error',
+export const DeleteEquipmentCategoryGeneralError = (message?: string): IError => ({
+  code: 'EQPC-006',
+  message: message ?? 'Delete Equipment Category Genereal Error',
   shortMessage: 'deleteEquipmentCategoryGeneralError',
 });

@@ -2,7 +2,11 @@ import { container } from '@test/utility/ioc/inversifyConfigTests';
 import { ResendAccountVerificationCodeUseCase } from '@business/useCases/user/resendAccountVerificationCodeUseCase';
 import { InputResendAccountVerificationCodeDto } from '@business/dto/user/resendAccountVerificationCodeDto';
 import { userRepositoryMock } from '@test/utility/mocks/repository/userRepository.mock';
-import { resendAccountVerificationCodeGeneralError, userAlreadyVerifiedError, userIsNotFoundError } from '@business/module/errors/user/user';
+import {
+  ResendAccountVerificationCodeGeneralError,
+  UserAlreadyVerifiedError,
+  UserIsNotFoundError,
+} from '@business/module/errors/user/user';
 import { randomCodeServiceMock } from '@test/utility/mocks/service/randomCodeService.mock';
 import { queueServiceMock } from '@test/utility/mocks/service/queueService.mock';
 import { left } from '@shared/either';
@@ -34,7 +38,7 @@ describe('2-business.useCases.user.resendAccountVerificationCodeUseCase', () => 
 
     expect(result.isRight()).toBeFalsy();
     expect(result.isLeft()).toBeTruthy();
-    expect(result.value).toEqual(resendAccountVerificationCodeGeneralError);
+    expect(result.value).toEqual(ResendAccountVerificationCodeGeneralError);
   });
 
   it('should calls findByEmail method with correct value', async () => {
@@ -52,7 +56,7 @@ describe('2-business.useCases.user.resendAccountVerificationCodeUseCase', () => 
 
     expect(result.isRight()).toBeFalsy();
     expect(result.isLeft()).toBeTruthy();
-    expect(result.value).toEqual(userIsNotFoundError);
+    expect(result.value).toEqual(UserIsNotFoundError);
   });
 
   it('should return left if user is already verified', async () => {
@@ -65,7 +69,7 @@ describe('2-business.useCases.user.resendAccountVerificationCodeUseCase', () => 
 
     expect(result.isRight()).toBeFalsy();
     expect(result.isLeft()).toBeTruthy();
-    expect(result.value).toEqual(userAlreadyVerifiedError);
+    expect(result.value).toEqual(UserAlreadyVerifiedError);
   });
 
   it('should is not be able to create user because exception in generateCode method', async () => {
@@ -77,7 +81,7 @@ describe('2-business.useCases.user.resendAccountVerificationCodeUseCase', () => 
 
     expect(result.isRight()).toBeFalsy();
     expect(result.isLeft()).toBeTruthy();
-    expect(result.value).toEqual(resendAccountVerificationCodeGeneralError);
+    expect(result.value).toEqual(ResendAccountVerificationCodeGeneralError);
   });
 
   it('should calls generateCode method', async () => {
@@ -97,7 +101,7 @@ describe('2-business.useCases.user.resendAccountVerificationCodeUseCase', () => 
 
     expect(result.isRight()).toBeFalsy();
     expect(result.isLeft()).toBeTruthy();
-    expect(result.value).toEqual(resendAccountVerificationCodeGeneralError);
+    expect(result.value).toEqual(ResendAccountVerificationCodeGeneralError);
   });
 
   it('should calls update method with correct values', async () => {
@@ -134,7 +138,7 @@ describe('2-business.useCases.user.resendAccountVerificationCodeUseCase', () => 
 
     expect(result.isRight()).toBeFalsy();
     expect(result.isLeft()).toBeTruthy();
-    expect(result.value).toEqual(resendAccountVerificationCodeGeneralError);
+    expect(result.value).toEqual(ResendAccountVerificationCodeGeneralError);
   });
 
   it('should calls sendData method with correct values', async () => {

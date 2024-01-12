@@ -2,9 +2,9 @@ import { container } from '@test/utility/ioc/inversifyConfigTests';
 import { CreateEquipmentUseCase } from '@business/useCases/equipment/createEquipmentUseCase';
 import { InputCreateEquipmentDto } from '@business/dto/equipment/createEquipmentDto';
 import { equipmentRepositoryMock } from '@test/utility/mocks/repository/equipment.mock';
-import { createEquipmentGeneralError, equipmentAlreadyInUseError } from '@business/module/errors/equipment/equipment';
+import { CreateEquipmentGeneralError, EquipmentAlreadyInUseError } from '@business/module/errors/equipment/equipment';
 import { equipmentCategoryRepositoryMock } from '@test/utility/mocks/repository/equipmentCategory.mock';
-import { equipmentCategoryIsNotFoundError } from '@business/module/errors/equipmentCategory/equipmentCategory';
+import { EquipmentCategoryIsNotFoundError } from '@business/module/errors/equipmentCategory/equipmentCategory';
 import { EquipmentEntity } from '@domain/entities/equipmentEntity';
 import { left } from '@shared/either';
 import { fakeIError } from '@test/utility/fakes/error/fakeIError';
@@ -35,7 +35,7 @@ describe('2-business.useCases.equipment.createEquipmentUseCase', () => {
 
     expect(result.isRight()).toBeFalsy();
     expect(result.isLeft()).toBeTruthy();
-    expect(result.value).toEqual(createEquipmentGeneralError);
+    expect(result.value).toEqual(CreateEquipmentGeneralError);
   });
 
   it('should calls findByName method with correct value', async () => {
@@ -51,7 +51,7 @@ describe('2-business.useCases.equipment.createEquipmentUseCase', () => {
 
     expect(result.isRight()).toBeFalsy();
     expect(result.isLeft()).toBeTruthy();
-    expect(result.value).toEqual(equipmentAlreadyInUseError);
+    expect(result.value).toEqual(EquipmentAlreadyInUseError);
   });
 
   it('should is not be able to create equipment because exception in findById method', async () => {
@@ -63,7 +63,7 @@ describe('2-business.useCases.equipment.createEquipmentUseCase', () => {
 
     expect(result.isRight()).toBeFalsy();
     expect(result.isLeft()).toBeTruthy();
-    expect(result.value).toEqual(createEquipmentGeneralError);
+    expect(result.value).toEqual(CreateEquipmentGeneralError);
   });
 
   it('should calls findById method with correct value', async () => {
@@ -79,7 +79,7 @@ describe('2-business.useCases.equipment.createEquipmentUseCase', () => {
 
     expect(result.isRight()).toBeFalsy();
     expect(result.isLeft()).toBeTruthy();
-    expect(result.value).toEqual(equipmentAlreadyInUseError);
+    expect(result.value).toEqual(EquipmentAlreadyInUseError);
   });
 
   it('should return left if equipment category is not found', async () => {
@@ -90,7 +90,7 @@ describe('2-business.useCases.equipment.createEquipmentUseCase', () => {
 
     expect(result.isRight()).toBeFalsy();
     expect(result.isLeft()).toBeTruthy();
-    expect(result.value).toEqual(equipmentCategoryIsNotFoundError);
+    expect(result.value).toEqual(EquipmentCategoryIsNotFoundError);
   });
 
   it('should return left if on create entity returns left', async () => {
@@ -127,7 +127,7 @@ describe('2-business.useCases.equipment.createEquipmentUseCase', () => {
 
     expect(result.isRight()).toBeFalsy();
     expect(result.isLeft()).toBeTruthy();
-    expect(result.value).toEqual(createEquipmentGeneralError);
+    expect(result.value).toEqual(CreateEquipmentGeneralError);
   });
 
   it('should calls create method with correct values', async () => {

@@ -1,6 +1,6 @@
 import {
-  deleteEquipmentCategoryGeneralError,
-  equipmentCategoryIsNotFoundError,
+  DeleteEquipmentCategoryGeneralError,
+  EquipmentCategoryIsNotFoundError,
 } from '@business/module/errors/equipmentCategory/equipmentCategory';
 import { validationError } from '@business/module/errors/validation';
 import { DeleteEquipmentCategoryOperator } from '@controller/operators/equipmentCategory/deleteEquipmentCategoryOperator';
@@ -21,10 +21,10 @@ export class DeleteEquimentCategoryController implements IController {
       const result = await operator.exec(input);
 
       if (result.isLeft()) {
-        if (result.value.code === deleteEquipmentCategoryGeneralError().code) {
+        if (result.value.code === DeleteEquipmentCategoryGeneralError().code) {
           throw result.value;
         }
-        if (result.value.code === equipmentCategoryIsNotFoundError.code) {
+        if (result.value.code === EquipmentCategoryIsNotFoundError.code) {
           return notFound(result.value);
         }
         return badRequest(result.value);

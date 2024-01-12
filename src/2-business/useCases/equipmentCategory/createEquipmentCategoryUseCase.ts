@@ -10,8 +10,8 @@ import { IUseCase } from '@business/useCases/iUseCase';
 import { inject, injectable } from 'inversify';
 import { left, right } from '@shared/either';
 import {
-  createEquipmentCategoryGeneralError,
-  equipmentCategoryAlreadyInUseError,
+  CreateEquipmentCategoryGeneralError,
+  EquipmentCategoryAlreadyInUseError,
 } from '@business/module/errors/equipmentCategory/equipmentCategory';
 import { EquipmentCategoryEntity } from '@domain/entities/equipmentCategoryEntity';
 import { IUniqueIdentifierService, IUniqueIdentifierServiceToken } from '@business/services/iUniqueIdentifierService';
@@ -22,9 +22,10 @@ export class CreateEquipmentCategoryUseCase
   implements IUseCase<InputCreateEquipmentCategoryDto, OutputCreateEquipmentCategoryDto>
 {
   constructor(
-    @inject(IEquipmentCategoryRepositoryToken) private equipmentCategoryRepository: IEquipmentCategoryRepository,
-    @inject(IUniqueIdentifierServiceToken) private uniqueIdentifierService: IUniqueIdentifierService,
-    @inject(ILoggerServiceToken) private logService: ILoggerService
+    @inject(IEquipmentCategoryRepositoryToken)
+    private readonly equipmentCategoryRepository: IEquipmentCategoryRepository,
+    @inject(IUniqueIdentifierServiceToken) private readonly uniqueIdentifierService: IUniqueIdentifierService,
+    @inject(ILoggerServiceToken) private readonly logService: ILoggerService
   ) {}
 
   async exec(input: InputCreateEquipmentCategoryDto): Promise<OutputCreateEquipmentCategoryDto> {
@@ -32,7 +33,7 @@ export class CreateEquipmentCategoryUseCase
       const nameAlreadyExists = await this.equipmentCategoryRepository.findByName(input.name);
 
       if (nameAlreadyExists) {
-        return left(equipmentCategoryAlreadyInUseError);
+        return left(EquipmentCategoryAlreadyInUseError);
       }
 
       const equipmentCategoryEntity = EquipmentCategoryEntity.create({
@@ -49,7 +50,7 @@ export class CreateEquipmentCategoryUseCase
       return right(equipmentCategory);
     } catch (error) {
       this.logService.error(error);
-      return left(createEquipmentCategoryGeneralError);
+      return left(CreateEquipmentCategoryGeneralError);
     }
   }
 }

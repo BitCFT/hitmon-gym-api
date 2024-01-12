@@ -1,4 +1,4 @@
-import { checkCodeGeneralError, userIsNotFoundError } from '@business/module/errors/user/user';
+import { CheckCodeGeneralError, UserIsNotFoundError } from '@business/module/errors/user/user';
 import { validationError } from '@business/module/errors/validation';
 import { CheckAccountVerificationCodeOperator } from '@controller/operators/user/checkAccountVerificationCodeOperator';
 import { InputCheckAccountVerificationCode } from '@controller/serializers/user/checkAccountVerificationCodeSerializer';
@@ -18,11 +18,11 @@ export class CheckAccountVerificationCodeController implements IController {
       const result = await operator.exec(input);
 
       if (result.isLeft()) {
-        if (result.value === checkCodeGeneralError) {
+        if (result.value === CheckCodeGeneralError) {
           throw result.value;
         }
 
-        if (result.value === userIsNotFoundError) {
+        if (result.value === UserIsNotFoundError) {
           return notFound(result.value);
         }
         return badRequest(result.value);

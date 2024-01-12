@@ -1,37 +1,37 @@
 import { IError } from '@shared/iError';
 
-export const createEquipmentGeneralError: IError = {
-  code: '001',
+export const CreateEquipmentGeneralError: IError = {
+  code: 'EQP-001',
   message: 'Create Equipment General Error',
   shortMessage: 'createEquipmentGeneralError',
 };
 
-export const equipmentAlreadyInUseError: IError = {
-  code: '002',
+export const EquipmentAlreadyInUseError: IError = {
+  code: 'EQP-002',
   message: 'Equipment Is Already In Use',
   shortMessage: 'nameNotAvailable',
 };
 
-export const listEquipmentsGeneralError: IError = {
-  code: '003',
+export const ListEquipmentsGeneralError: IError = {
+  code: 'EQP-003',
   message: 'List Equipments General Error',
   shortMessage: 'listEquipmentsGeneralError',
 };
 
-export const updateEquipmentGeneralError: IError = {
-  code: '004',
+export const UpdateEquipmentGeneralError: IError = {
+  code: 'EQP-004',
   message: 'Update Equipment General Error',
   shortMessage: 'updateEquipmentGeneralError',
 };
 
-export const equipmentIsNotFoundError: IError = {
-  code: '005',
+export const EquipmentIsNotFoundError: IError = {
+  code: 'EQP-005',
   message: 'Equipment Is Not Found Error',
   shortMessage: 'equipmentIsNotFoundError',
 };
 
-export const deleteEquipmentGeneralError: IError = {
-  code: '006',
+export const DeleteEquipmentGeneralError: IError = {
+  code: 'EQP-006',
   message: 'Delete Equipment General Error',
   shortMessage: 'deleteEquipmentGeneralError',
 };

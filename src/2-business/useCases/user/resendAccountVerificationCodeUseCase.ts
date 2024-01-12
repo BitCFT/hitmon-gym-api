@@ -2,7 +2,11 @@ import {
   InputResendAccountVerificationCodeDto,
   OutputResendAccountVerificationCodeDto,
 } from '@business/dto/user/resendAccountVerificationCodeDto';
-import { resendAccountVerificationCodeGeneralError, userAlreadyVerifiedError, userIsNotFoundError } from '@business/module/errors/user/user';
+import {
+  ResendAccountVerificationCodeGeneralError,
+  UserAlreadyVerifiedError,
+  UserIsNotFoundError,
+} from '@business/module/errors/user/user';
 import { IUserRepository, IUserRepositoryToken } from '@business/repositories/user/iUserRepository';
 import { IDateService, IDateServiceToken } from '@business/services/iDateService';
 import { ILoggerService, ILoggerServiceToken } from '@business/services/iLogger';
@@ -19,11 +23,11 @@ export class ResendAccountVerificationCodeUseCase
   implements IUseCase<InputResendAccountVerificationCodeDto, OutputResendAccountVerificationCodeDto>
 {
   constructor(
-    @inject(IUserRepositoryToken) private userRepository: IUserRepository,
-    @inject(ILoggerServiceToken) private logService: ILoggerService,
-    @inject(IRandomCodeServiceToken) private randomCodeService: IRandomCodeService,
-    @inject(IQueueServiceToken) private queueService: IQueueService,
-    @inject(IDateServiceToken) private dateService: IDateService
+    @inject(IUserRepositoryToken) private readonly userRepository: IUserRepository,
+    @inject(ILoggerServiceToken) private readonly logService: ILoggerService,
+    @inject(IRandomCodeServiceToken) private readonly randomCodeService: IRandomCodeService,
+    @inject(IQueueServiceToken) private readonly queueService: IQueueService,
+    @inject(IDateServiceToken) private readonly dateService: IDateService
   ) {}
 
   async exec(input: InputResendAccountVerificationCodeDto): Promise<OutputResendAccountVerificationCodeDto> {
@@ -31,11 +35,11 @@ export class ResendAccountVerificationCodeUseCase
       const user = await this.userRepository.findByEmail(input.email);
 
       if (!user) {
-        return left(userIsNotFoundError);
+        return left(UserIsNotFoundError);
       }
 
       if (user.registrationStep === RegistrationStep.VERIFIED) {
-        return left(userAlreadyVerifiedError);
+        return left(UserAlreadyVerifiedError);
       }
 
       const verificationCode = this.randomCodeService.generateCode();
@@ -67,7 +71,7 @@ export class ResendAccountVerificationCodeUseCase
       return right({});
     } catch (error) {
       this.logService.error(error);
-      return left(resendAccountVerificationCodeGeneralError);
+      return left(ResendAccountVerificationCodeGeneralError);
     }
   }
 }

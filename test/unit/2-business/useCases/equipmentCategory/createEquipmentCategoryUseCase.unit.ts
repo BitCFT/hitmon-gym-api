@@ -3,8 +3,8 @@ import { CreateEquipmentCategoryUseCase } from '@business/useCases/equipmentCate
 import { InputCreateEquipmentCategoryDto } from '@business/dto/equipmentCategory/createEquipmentCategoryDto';
 import { equipmentCategoryRepositoryMock } from '@test/utility/mocks/repository/equipmentCategory.mock';
 import {
-  createEquipmentCategoryGeneralError,
-  equipmentCategoryAlreadyInUseError,
+  CreateEquipmentCategoryGeneralError,
+  EquipmentCategoryAlreadyInUseError,
 } from '@business/module/errors/equipmentCategory/equipmentCategory';
 import { EquipmentCategoryEntity } from '@domain/entities/equipmentCategoryEntity';
 import { left } from '@shared/either';
@@ -34,7 +34,7 @@ describe('2-business.useCases.equipmentCategory.createEquipmentCategoryUseCase',
 
     expect(result.isRight()).toBeFalsy();
     expect(result.isLeft()).toBeTruthy();
-    expect(result.value).toEqual(createEquipmentCategoryGeneralError);
+    expect(result.value).toEqual(CreateEquipmentCategoryGeneralError);
   });
 
   it('should calls findByName method with correct value', async () => {
@@ -50,7 +50,7 @@ describe('2-business.useCases.equipmentCategory.createEquipmentCategoryUseCase',
 
     expect(result.isRight()).toBeFalsy();
     expect(result.isLeft()).toBeTruthy();
-    expect(result.value).toEqual(equipmentCategoryAlreadyInUseError);
+    expect(result.value).toEqual(EquipmentCategoryAlreadyInUseError);
   });
 
   it('should return left if on create entity returns left', async () => {
@@ -87,7 +87,7 @@ describe('2-business.useCases.equipmentCategory.createEquipmentCategoryUseCase',
 
     expect(result.isRight()).toBeFalsy();
     expect(result.isLeft()).toBeTruthy();
-    expect(result.value).toEqual(createEquipmentCategoryGeneralError);
+    expect(result.value).toEqual(CreateEquipmentCategoryGeneralError);
   });
 
   it('should calls create method with correct values', async () => {

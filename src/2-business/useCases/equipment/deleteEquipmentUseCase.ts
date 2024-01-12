@@ -1,16 +1,16 @@
 import { inject, injectable } from 'inversify';
-import { IUseCase } from '../iUseCase';
+import { IUseCase } from '@business/useCases/iUseCase';
 import { ILoggerService, ILoggerServiceToken } from '@business/services/iLogger';
 import { left, right } from '@shared/either';
 import { InputDeleteEquipmentDto, OutputDeleteEquipmentDto } from '@business/dto/equipment/deleteEquipmentDto';
 import { IEquipmentRepository, IEquipmentRepositoryToken } from '@business/repositories/equipment/iEquipmentRepository';
-import { deleteEquipmentGeneralError, equipmentIsNotFoundError } from '@business/module/errors/equipment/equipment';
+import { DeleteEquipmentGeneralError, EquipmentIsNotFoundError } from '@business/module/errors/equipment/equipment';
 
 @injectable()
 export class DeleteEquipmentUseCase implements IUseCase<InputDeleteEquipmentDto, OutputDeleteEquipmentDto> {
   constructor(
-    @inject(IEquipmentRepositoryToken) private equipmentRepository: IEquipmentRepository,
-    @inject(ILoggerServiceToken) private logService: ILoggerService
+    @inject(IEquipmentRepositoryToken) private readonly equipmentRepository: IEquipmentRepository,
+    @inject(ILoggerServiceToken) private readonly logService: ILoggerService
   ) {}
 
   async exec(input: InputDeleteEquipmentDto): Promise<OutputDeleteEquipmentDto> {
@@ -18,7 +18,7 @@ export class DeleteEquipmentUseCase implements IUseCase<InputDeleteEquipmentDto,
       const equipment = await this.equipmentRepository.findById(input.id);
 
       if (!equipment) {
-        return left(equipmentIsNotFoundError);
+        return left(EquipmentIsNotFoundError);
       }
 
       await this.equipmentRepository.delete(input.id);
@@ -26,7 +26,7 @@ export class DeleteEquipmentUseCase implements IUseCase<InputDeleteEquipmentDto,
       return right(undefined);
     } catch (error: any) {
       this.logService.error(error);
-      return left(deleteEquipmentGeneralError);
+      return left(DeleteEquipmentGeneralError);
     }
   }
 }

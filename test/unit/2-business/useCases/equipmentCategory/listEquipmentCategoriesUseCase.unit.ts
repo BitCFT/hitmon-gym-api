@@ -1,6 +1,6 @@
 import { container } from '@test/utility/ioc/inversifyConfigTests';
 import { equipmentCategoryRepositoryMock } from '@test/utility/mocks/repository/equipmentCategory.mock';
-import { listEquipmentCategoriesGeneralError } from '@business/module/errors/equipmentCategory/equipmentCategory';
+import { ListEquipmentCategoriesGeneralError } from '@business/module/errors/equipmentCategory/equipmentCategory';
 import { ListEquipmentCategoriesUseCase } from '@business/useCases/equipmentCategory/listEquipmentCategoriesUseCase';
 import { InputListEquipmentCategoriesDto } from '@business/dto/equipmentCategory/listEquipmentCategoriesDto';
 
@@ -28,7 +28,7 @@ describe('2-business.useCases.equipmentCategory.listEquipmentCategoriesUseCase',
 
     expect(result.isRight()).toBeFalsy();
     expect(result.isLeft()).toBeTruthy();
-    expect(result.value).toEqual(listEquipmentCategoriesGeneralError);
+    expect(result.value).toEqual(ListEquipmentCategoriesGeneralError);
   });
 
   it('should calls listAll method with correct values', async () => {

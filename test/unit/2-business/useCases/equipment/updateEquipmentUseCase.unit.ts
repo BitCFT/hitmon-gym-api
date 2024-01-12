@@ -1,14 +1,14 @@
 import { container } from '@test/utility/ioc/inversifyConfigTests';
 import { equipmentRepositoryMock } from '@test/utility/mocks/repository/equipment.mock';
 import {
-  equipmentAlreadyInUseError,
-  equipmentIsNotFoundError,
-  updateEquipmentGeneralError,
+  EquipmentAlreadyInUseError,
+  EquipmentIsNotFoundError,
+  UpdateEquipmentGeneralError,
 } from '@business/module/errors/equipment/equipment';
 import { fakeEquipment } from '@test/utility/fakes/entities/equipment';
 import { UpdateEquipmentUseCase } from '@business/useCases/equipment/updateEquipmentUseCase';
 import { InputUpdateEquipmentDto } from '@business/dto/equipment/updateEquipmentDto';
-import { equipmentCategoryIsNotFoundError } from '@business/module/errors/equipmentCategory/equipmentCategory';
+import { EquipmentCategoryIsNotFoundError } from '@business/module/errors/equipmentCategory/equipmentCategory';
 import { equipmentCategoryRepositoryMock } from '@test/utility/mocks/repository/equipmentCategory.mock';
 
 describe('2-business.useCases.equipment.updateEquipmentUseCase', () => {
@@ -39,7 +39,7 @@ describe('2-business.useCases.equipment.updateEquipmentUseCase', () => {
 
     expect(result.isRight()).toBeFalsy();
     expect(result.isLeft()).toBeTruthy();
-    expect(result.value).toEqual(updateEquipmentGeneralError);
+    expect(result.value).toEqual(UpdateEquipmentGeneralError);
   });
 
   it('should calls findById method with correct value', async () => {
@@ -57,7 +57,7 @@ describe('2-business.useCases.equipment.updateEquipmentUseCase', () => {
 
     expect(result.isRight()).toBeFalsy();
     expect(result.isLeft()).toBeTruthy();
-    expect(result.value).toEqual(equipmentIsNotFoundError);
+    expect(result.value).toEqual(EquipmentIsNotFoundError);
   });
 
   it('should is not be able to update equipment because exception in findByName method', async () => {
@@ -69,7 +69,7 @@ describe('2-business.useCases.equipment.updateEquipmentUseCase', () => {
 
     expect(result.isRight()).toBeFalsy();
     expect(result.isLeft()).toBeTruthy();
-    expect(result.value).toEqual(updateEquipmentGeneralError);
+    expect(result.value).toEqual(UpdateEquipmentGeneralError);
   });
 
   it('should calls findByName method with correct value', async () => {
@@ -90,7 +90,7 @@ describe('2-business.useCases.equipment.updateEquipmentUseCase', () => {
 
     expect(result.isRight()).toBeFalsy();
     expect(result.isLeft()).toBeTruthy();
-    expect(result.value).toEqual(equipmentAlreadyInUseError);
+    expect(result.value).toEqual(EquipmentAlreadyInUseError);
   });
 
   it('should is not be able to update equipment because exception in findById method', async () => {
@@ -102,7 +102,7 @@ describe('2-business.useCases.equipment.updateEquipmentUseCase', () => {
 
     expect(result.isRight()).toBeFalsy();
     expect(result.isLeft()).toBeTruthy();
-    expect(result.value).toEqual(updateEquipmentGeneralError);
+    expect(result.value).toEqual(UpdateEquipmentGeneralError);
   });
 
   it('should calls findById method with correct value', async () => {
@@ -120,7 +120,7 @@ describe('2-business.useCases.equipment.updateEquipmentUseCase', () => {
 
     expect(result.isRight()).toBeFalsy();
     expect(result.isLeft()).toBeTruthy();
-    expect(result.value).toEqual(equipmentCategoryIsNotFoundError);
+    expect(result.value).toEqual(EquipmentCategoryIsNotFoundError);
   });
 
   it('should is not be able to update equipment because exception in update method', async () => {
@@ -132,7 +132,7 @@ describe('2-business.useCases.equipment.updateEquipmentUseCase', () => {
 
     expect(result.isRight()).toBeFalsy();
     expect(result.isLeft()).toBeTruthy();
-    expect(result.value).toEqual(updateEquipmentGeneralError);
+    expect(result.value).toEqual(UpdateEquipmentGeneralError);
   });
 
   it('should calls update method with correct value', async () => {

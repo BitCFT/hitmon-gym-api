@@ -1,4 +1,4 @@
-import { updateEquipmentCategoryGeneralError } from '@business/module/errors/equipmentCategory/equipmentCategory';
+import { UpdateEquipmentCategoryGeneralError } from '@business/module/errors/equipmentCategory/equipmentCategory';
 import { validationError } from '@business/module/errors/validation';
 import { UpdateEquipmentCategoryOperator } from '@controller/operators/equipmentCategory/updateEquipmentCategoryOperator';
 import { InputUpdateEquipmentCategory } from '@controller/serializers/equipmentCategory/updateEquipmentCategorySerializer';
@@ -19,7 +19,7 @@ export class UpdateEquipmentCategoryController implements IController {
       const result = await operator.exec(input);
 
       if (result.isLeft()) {
-        if (result.value === updateEquipmentCategoryGeneralError) {
+        if (result.value === UpdateEquipmentCategoryGeneralError) {
           throw result.value;
         }
         return badRequest(result.value);

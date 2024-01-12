@@ -1,4 +1,4 @@
-import { listEquipmentsGeneralError } from '@business/module/errors/equipment/equipment';
+import { ListEquipmentsGeneralError } from '@business/module/errors/equipment/equipment';
 import { validationError } from '@business/module/errors/validation';
 import { ListEquipmentsOperator } from '@controller/operators/equipment/listEquipmentsOperator';
 import { InputListEquipments } from '@controller/serializers/equipment/listEquipmentsSerializer';
@@ -18,7 +18,7 @@ export class ListEquipmentsController implements IController {
       const result = await operator.exec(input);
 
       if (result.isLeft()) {
-        if (result.value === listEquipmentsGeneralError) {
+        if (result.value === ListEquipmentsGeneralError) {
           throw result.value;
         }
         return badRequest(result.value);

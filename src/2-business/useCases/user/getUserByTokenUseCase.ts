@@ -1,5 +1,5 @@
 import { InputGetUserByTokenDto, OutputGetUserByTokenDto } from '@business/dto/user/getUserByTokenDto';
-import { GetUserByTokenGeneralError, userIsNotFoundError } from '@business/module/errors/user/user';
+import { GetUserByTokenGeneralError, UserIsNotFoundError } from '@business/module/errors/user/user';
 import { IUserRepository, IUserRepositoryToken } from '@business/repositories/user/iUserRepository';
 import { IJwtService, IJwtServiceToken } from '@business/services/iJwtService';
 import { ILoggerService, ILoggerServiceToken } from '@business/services/iLogger';
@@ -29,7 +29,7 @@ export class GetUserByTokenUseCase implements IUseCase<InputGetUserByTokenDto, O
       const user = await this.userRepository.findById(payload.value.id);
 
       if (!user) {
-        return left(userIsNotFoundError);
+        return left(UserIsNotFoundError);
       }
 
       return right(user);

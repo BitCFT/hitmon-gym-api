@@ -1,5 +1,5 @@
-import { updateEquipmentGeneralError } from '@business/module/errors/equipment/equipment';
-import { equipmentCategoryIsNotFoundError } from '@business/module/errors/equipmentCategory/equipmentCategory';
+import { UpdateEquipmentGeneralError } from '@business/module/errors/equipment/equipment';
+import { EquipmentCategoryIsNotFoundError } from '@business/module/errors/equipmentCategory/equipmentCategory';
 import { validationError } from '@business/module/errors/validation';
 import { UpdateEquipmentOperator } from '@controller/operators/equipment/updateEquipmentOperator';
 import { InputUpdateEquipment } from '@controller/serializers/equipment/updateEquipmentSerializer';
@@ -20,11 +20,11 @@ export class UpdateEquipmentController implements IController {
       const result = await operator.exec(input);
 
       if (result.isLeft()) {
-        if (result.value === updateEquipmentGeneralError) {
+        if (result.value === UpdateEquipmentGeneralError) {
           throw result.value;
         }
 
-        if (result.value === equipmentCategoryIsNotFoundError) {
+        if (result.value === EquipmentCategoryIsNotFoundError) {
           return notFound(result.value);
         }
         return badRequest(result.value);

@@ -1,17 +1,17 @@
 import { InputListEquipmentsDto, OutputListEquipmentsDto } from '@business/dto/equipment/listEquipmentsDto';
-import { IUseCase } from '../iUseCase';
+import { IUseCase } from '@business/useCases/iUseCase';
 import { inject, injectable } from 'inversify';
 import { PaginationParams } from '@domain/pagination';
 import { IEquipmentRepository, IEquipmentRepositoryToken } from '@business/repositories/equipment/iEquipmentRepository';
 import { ILoggerService, ILoggerServiceToken } from '@business/services/iLogger';
 import { left, right } from '@shared/either';
-import { listEquipmentsGeneralError } from '@business/module/errors/equipment/equipment';
+import { ListEquipmentsGeneralError } from '@business/module/errors/equipment/equipment';
 
 @injectable()
 export class ListEquipmentsUseCase implements IUseCase<InputListEquipmentsDto, OutputListEquipmentsDto> {
   constructor(
-    @inject(IEquipmentRepositoryToken) private equipmentRepository: IEquipmentRepository,
-    @inject(ILoggerServiceToken) private logService: ILoggerService
+    @inject(IEquipmentRepositoryToken) private readonly equipmentRepository: IEquipmentRepository,
+    @inject(ILoggerServiceToken) private readonly logService: ILoggerService
   ) {}
 
   async exec(input: PaginationParams): Promise<OutputListEquipmentsDto> {
@@ -21,7 +21,7 @@ export class ListEquipmentsUseCase implements IUseCase<InputListEquipmentsDto, O
       return right(equipments);
     } catch (error) {
       this.logService.error(error);
-      return left(listEquipmentsGeneralError);
+      return left(ListEquipmentsGeneralError);
     }
   }
 }

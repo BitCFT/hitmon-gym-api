@@ -1,4 +1,4 @@
-import { createUserGeneralError } from '@business/module/errors/user/user';
+import { CreateUserGeneralError } from '@business/module/errors/user/user';
 import { validationError } from '@business/module/errors/validation';
 import { CreateUserOperator } from '@controller/operators/user/createUserOperator';
 import { InputCreateUser } from '@controller/serializers/user/createUserSerializer';
@@ -18,7 +18,7 @@ export class CreateUserController implements IController {
       const result = await operator.exec(input);
 
       if (result.isLeft()) {
-        if (result.value === createUserGeneralError) {
+        if (result.value === CreateUserGeneralError) {
           throw result.value;
         }
         return badRequest(result.value);

@@ -1,5 +1,5 @@
 import { inject, injectable } from 'inversify';
-import { IUseCase } from '../iUseCase';
+import { IUseCase } from '@business/useCases/iUseCase';
 import {
   IEquipmentCategoryRepository,
   IEquipmentCategoryRepositoryToken,
@@ -11,8 +11,8 @@ import {
 } from '@business/dto/equipmentCategory/deleteEquipmentCategoryDto';
 import { left, right } from '@shared/either';
 import {
-  deleteEquipmentCategoryGeneralError,
-  equipmentCategoryIsNotFoundError,
+  DeleteEquipmentCategoryGeneralError,
+  EquipmentCategoryIsNotFoundError,
 } from '@business/module/errors/equipmentCategory/equipmentCategory';
 
 @injectable()
@@ -20,8 +20,9 @@ export class DeleteEquipmentCategoryUseCase
   implements IUseCase<InputDeleteEquipmentCategoryDto, OutputDeleteEquipmentCategoryDto>
 {
   constructor(
-    @inject(IEquipmentCategoryRepositoryToken) private equipmentCategoryRepository: IEquipmentCategoryRepository,
-    @inject(ILoggerServiceToken) private logService: ILoggerService
+    @inject(IEquipmentCategoryRepositoryToken)
+    private readonly equipmentCategoryRepository: IEquipmentCategoryRepository,
+    @inject(ILoggerServiceToken) private readonly logService: ILoggerService
   ) {}
 
   async exec(input: InputDeleteEquipmentCategoryDto): Promise<OutputDeleteEquipmentCategoryDto> {
@@ -29,7 +30,7 @@ export class DeleteEquipmentCategoryUseCase
       const equipmentCategory = await this.equipmentCategoryRepository.findById(input.id);
 
       if (!equipmentCategory) {
-        return left(equipmentCategoryIsNotFoundError);
+        return left(EquipmentCategoryIsNotFoundError);
       }
 
       await this.equipmentCategoryRepository.delete(input.id);
@@ -37,7 +38,7 @@ export class DeleteEquipmentCategoryUseCase
       return right(undefined);
     } catch (error: any) {
       this.logService.error(error);
-      return left(deleteEquipmentCategoryGeneralError(error?.message));
+      return left(DeleteEquipmentCategoryGeneralError(error?.message));
     }
   }
 }

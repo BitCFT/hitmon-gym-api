@@ -1,6 +1,6 @@
 import { container } from '@test/utility/ioc/inversifyConfigTests';
 import { equipmentRepositoryMock } from '@test/utility/mocks/repository/equipment.mock';
-import { deleteEquipmentGeneralError, equipmentIsNotFoundError } from '@business/module/errors/equipment/equipment';
+import { DeleteEquipmentGeneralError, EquipmentIsNotFoundError } from '@business/module/errors/equipment/equipment';
 import { DeleteEquipmentUseCase } from '@business/useCases/equipment/deleteEquipmentUseCase';
 import { InputDeleteEquipmentDto } from '@business/dto/equipment/deleteEquipmentDto';
 
@@ -27,7 +27,7 @@ describe('2-business.useCases.equipment.deleteEquipmentUseCase', () => {
 
     expect(result.isRight()).toBeFalsy();
     expect(result.isLeft()).toBeTruthy();
-    expect(result.value).toEqual(deleteEquipmentGeneralError);
+    expect(result.value).toEqual(DeleteEquipmentGeneralError);
   });
 
   it('should calls findById method with correct value', async () => {
@@ -45,7 +45,7 @@ describe('2-business.useCases.equipment.deleteEquipmentUseCase', () => {
 
     expect(result.isRight()).toBeFalsy();
     expect(result.isLeft()).toBeTruthy();
-    expect(result.value).toEqual(equipmentIsNotFoundError);
+    expect(result.value).toEqual(EquipmentIsNotFoundError);
   });
 
   it('should is not be able to update equipment  because exception in delete method', async () => {
@@ -57,7 +57,7 @@ describe('2-business.useCases.equipment.deleteEquipmentUseCase', () => {
 
     expect(result.isRight()).toBeFalsy();
     expect(result.isLeft()).toBeTruthy();
-    expect(result.value).toEqual(deleteEquipmentGeneralError);
+    expect(result.value).toEqual(DeleteEquipmentGeneralError);
   });
 
   it('should calls delete method with correct value', async () => {

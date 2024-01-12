@@ -1,4 +1,4 @@
-import { deleteEquipmentGeneralError, equipmentIsNotFoundError } from '@business/module/errors/equipment/equipment';
+import { DeleteEquipmentGeneralError, EquipmentIsNotFoundError } from '@business/module/errors/equipment/equipment';
 import { validationError } from '@business/module/errors/validation';
 import { DeleteEquipmentOperator } from '@controller/operators/equipment/deleteEquipmentOperator';
 import { InputDeleteEquipment } from '@controller/serializers/equipment/deleteEquipmentSerializer';
@@ -18,10 +18,10 @@ export class DeleteEquipmentController implements IController {
       const result = await operator.exec(input);
 
       if (result.isLeft()) {
-        if (result.value === deleteEquipmentGeneralError) {
+        if (result.value === DeleteEquipmentGeneralError) {
           throw result.value;
         }
-        if (result.value === equipmentIsNotFoundError) {
+        if (result.value === EquipmentIsNotFoundError) {
           return notFound(result.value);
         }
         return badRequest(result.value);

@@ -1,5 +1,5 @@
-import { createEquipmentGeneralError } from '@business/module/errors/equipment/equipment';
-import { equipmentCategoryIsNotFoundError } from '@business/module/errors/equipmentCategory/equipmentCategory';
+import { CreateEquipmentGeneralError } from '@business/module/errors/equipment/equipment';
+import { EquipmentCategoryIsNotFoundError } from '@business/module/errors/equipmentCategory/equipmentCategory';
 import { validationError } from '@business/module/errors/validation';
 import { CreateEquipmentOperator } from '@controller/operators/equipment/createEquipmentOperator';
 import { InputCreateEquipment } from '@controller/serializers/equipment/createEquipmentSerializer';
@@ -20,10 +20,10 @@ export class CreateEquipmentController implements IController {
       const result = await operator.exec(input);
 
       if (result.isLeft()) {
-        if (result.value === createEquipmentGeneralError) {
+        if (result.value === CreateEquipmentGeneralError) {
           throw result.value;
         }
-        if (result.value === equipmentCategoryIsNotFoundError) {
+        if (result.value === EquipmentCategoryIsNotFoundError) {
           return notFound(result.value);
         }
         return badRequest(result.value);

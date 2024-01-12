@@ -1,6 +1,6 @@
 import { container } from '@test/utility/ioc/inversifyConfigTests';
 import { InputListEquipmentsDto } from '@business/dto/equipment/listEquipmentsDto';
-import { listEquipmentsGeneralError } from '@business/module/errors/equipment/equipment';
+import { ListEquipmentsGeneralError } from '@business/module/errors/equipment/equipment';
 import { ListEquipmentsUseCase } from '@business/useCases/equipment/listEquipmentsUseCase';
 import { equipmentRepositoryMock } from '@test/utility/mocks/repository/equipment.mock';
 
@@ -28,7 +28,7 @@ describe('2-business.useCases.equipment.listEquipmentsUseCase', () => {
 
     expect(result.isRight()).toBeFalsy();
     expect(result.isLeft()).toBeTruthy();
-    expect(result.value).toEqual(listEquipmentsGeneralError);
+    expect(result.value).toEqual(ListEquipmentsGeneralError);
   });
 
   it('should calls listAll method with correct values', async () => {

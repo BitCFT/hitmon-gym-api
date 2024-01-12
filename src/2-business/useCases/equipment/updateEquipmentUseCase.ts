@@ -1,26 +1,27 @@
 import { inject, injectable } from 'inversify';
-import { IUseCase } from '../iUseCase';
+import { IUseCase } from '@business/useCases/iUseCase';
 import { InputUpdateEquipmentDto, OutputUpdateEquipmentDto } from '@business/dto/equipment/updateEquipmentDto';
 import { ILoggerService, ILoggerServiceToken } from '@business/services/iLogger';
 import { IEquipmentRepository, IEquipmentRepositoryToken } from '@business/repositories/equipment/iEquipmentRepository';
 import { left, right } from '@shared/either';
 import {
-  equipmentAlreadyInUseError,
-  equipmentIsNotFoundError,
-  updateEquipmentGeneralError,
+  EquipmentAlreadyInUseError,
+  EquipmentIsNotFoundError,
+  UpdateEquipmentGeneralError,
 } from '@business/module/errors/equipment/equipment';
 import {
   IEquipmentCategoryRepository,
   IEquipmentCategoryRepositoryToken,
 } from '@business/repositories/equipmentCategory/iEquipmentCategoryRepository';
-import { equipmentCategoryIsNotFoundError } from '@business/module/errors/equipmentCategory/equipmentCategory';
+import { EquipmentCategoryIsNotFoundError } from '@business/module/errors/equipmentCategory/equipmentCategory';
 
 @injectable()
 export class UpdateEquipmentUseCase implements IUseCase<InputUpdateEquipmentDto, OutputUpdateEquipmentDto> {
   constructor(
-    @inject(IEquipmentRepositoryToken) private equipmentRepository: IEquipmentRepository,
-    @inject(IEquipmentCategoryRepositoryToken) private equipmentCategoryRepository: IEquipmentCategoryRepository,
-    @inject(ILoggerServiceToken) private logService: ILoggerService
+    @inject(IEquipmentRepositoryToken) private readonly equipmentRepository: IEquipmentRepository,
+    @inject(IEquipmentCategoryRepositoryToken)
+    private readonly equipmentCategoryRepository: IEquipmentCategoryRepository,
+    @inject(ILoggerServiceToken) private readonly logService: ILoggerService
   ) {}
 
   async exec(input: InputUpdateEquipmentDto): Promise<OutputUpdateEquipmentDto> {
@@ -28,7 +29,7 @@ export class UpdateEquipmentUseCase implements IUseCase<InputUpdateEquipmentDto,
       const equipment = await this.equipmentRepository.findById(input.id);
 
       if (!equipment) {
-        return left(equipmentIsNotFoundError);
+        return left(EquipmentIsNotFoundError);
       }
 
       if (input.params.name) {
@@ -36,7 +37,7 @@ export class UpdateEquipmentUseCase implements IUseCase<InputUpdateEquipmentDto,
         const equipmentByName = await this.equipmentRepository.findByName(name);
 
         if (equipmentByName && equipmentByName.name !== equipment.name) {
-          return left(equipmentAlreadyInUseError);
+          return left(EquipmentAlreadyInUseError);
         }
       }
 
@@ -45,7 +46,7 @@ export class UpdateEquipmentUseCase implements IUseCase<InputUpdateEquipmentDto,
         const equipmentCategory = await this.equipmentCategoryRepository.findById(categoryId);
 
         if (!equipmentCategory) {
-          return left(equipmentCategoryIsNotFoundError);
+          return left(EquipmentCategoryIsNotFoundError);
         }
       }
 
@@ -57,7 +58,7 @@ export class UpdateEquipmentUseCase implements IUseCase<InputUpdateEquipmentDto,
       return right(updatedEquipment);
     } catch (error) {
       this.logService.error(error);
-      return left(updateEquipmentGeneralError);
+      return left(UpdateEquipmentGeneralError);
     }
   }
 }

@@ -1,4 +1,4 @@
-import { resendAccountVerificationCodeGeneralError, userIsNotFoundError } from '@business/module/errors/user/user';
+import { ResendAccountVerificationCodeGeneralError, UserIsNotFoundError } from '@business/module/errors/user/user';
 import { validationError } from '@business/module/errors/validation';
 import { ResendAccountVerificationCodeOperator } from '@controller/operators/user/resendAccountVerificationCodeOperator';
 import { InputResendAccountVerificationCode } from '@controller/serializers/user/resendAccountVerificationCodeSerializer';
@@ -18,11 +18,11 @@ export class ResendAccountVerificationCodeController implements IController {
       const result = await operator.exec(input);
 
       if (result.isLeft()) {
-        if (result.value === resendAccountVerificationCodeGeneralError) {
+        if (result.value === ResendAccountVerificationCodeGeneralError) {
           throw result.value;
         }
 
-        if (result.value === userIsNotFoundError) {
+        if (result.value === UserIsNotFoundError) {
           return notFound(result.value);
         }
         return badRequest(result.value);

@@ -1,5 +1,5 @@
 import { inject, injectable } from 'inversify';
-import { IUseCase } from '../iUseCase';
+import { IUseCase } from '@business/useCases/iUseCase';
 import {
   InputUpdateEquipmentCategoryDto,
   OutputUpdateEquipmentCategoryDto,
@@ -11,9 +11,9 @@ import {
 } from '@business/repositories/equipmentCategory/iEquipmentCategoryRepository';
 import { left, right } from '@shared/either';
 import {
-  equipmentCategoryAlreadyInUseError,
-  equipmentCategoryIsNotFoundError,
-  updateEquipmentCategoryGeneralError,
+  EquipmentCategoryAlreadyInUseError,
+  EquipmentCategoryIsNotFoundError,
+  UpdateEquipmentCategoryGeneralError,
 } from '@business/module/errors/equipmentCategory/equipmentCategory';
 
 @injectable()
@@ -21,8 +21,9 @@ export class UpdateEquipmentCategoryUseCase
   implements IUseCase<InputUpdateEquipmentCategoryDto, OutputUpdateEquipmentCategoryDto>
 {
   constructor(
-    @inject(IEquipmentCategoryRepositoryToken) private equipmentCategoryRepository: IEquipmentCategoryRepository,
-    @inject(ILoggerServiceToken) private logService: ILoggerService
+    @inject(IEquipmentCategoryRepositoryToken)
+    private readonly equipmentCategoryRepository: IEquipmentCategoryRepository,
+    @inject(ILoggerServiceToken) private readonly logService: ILoggerService
   ) {}
 
   async exec(input: InputUpdateEquipmentCategoryDto): Promise<OutputUpdateEquipmentCategoryDto> {
@@ -30,7 +31,7 @@ export class UpdateEquipmentCategoryUseCase
       const equipmentCategory = await this.equipmentCategoryRepository.findById(input.id);
 
       if (!equipmentCategory) {
-        return left(equipmentCategoryIsNotFoundError);
+        return left(EquipmentCategoryIsNotFoundError);
       }
 
       if (input.params.name) {
@@ -38,7 +39,7 @@ export class UpdateEquipmentCategoryUseCase
         const equipmentCategoryByName = await this.equipmentCategoryRepository.findByName(name);
 
         if (equipmentCategoryByName && equipmentCategoryByName.name !== equipmentCategory.name) {
-          return left(equipmentCategoryAlreadyInUseError);
+          return left(EquipmentCategoryAlreadyInUseError);
         }
       }
 
@@ -50,7 +51,7 @@ export class UpdateEquipmentCategoryUseCase
       return right(updatedEquipmentCategory);
     } catch (error) {
       this.logService.error(error);
-      return left(updateEquipmentCategoryGeneralError);
+      return left(UpdateEquipmentCategoryGeneralError);
     }
   }
 }

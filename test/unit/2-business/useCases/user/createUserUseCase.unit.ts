@@ -3,7 +3,7 @@ import { InputCreateUserDto } from '@business/dto/user/createUserDto';
 import { CreateUserUseCase } from '@business/useCases/user/createUserUseCase';
 import { userRepositoryMock } from '@test/utility/mocks/repository/userRepository.mock';
 import { fakeUserEntity } from '@test/utility/fakes/entities/userEntity';
-import { createUserGeneralError, emailNotAvailableError } from '@business/module/errors/user/user';
+import { CreateUserGeneralError, EmailNotAvailableError } from '@business/module/errors/user/user';
 import { hashServiceMock } from '@test/utility/mocks/service/hashService.mock';
 import { queueServiceMock } from '@test/utility/mocks/service/queueService.mock';
 import { left } from '@shared/either';
@@ -37,7 +37,7 @@ describe('2-business.useCases.user.createUserUseCase', () => {
 
     expect(result.isRight()).toBeFalsy();
     expect(result.isLeft()).toBeTruthy();
-    expect(result.value).toEqual(createUserGeneralError);
+    expect(result.value).toEqual(CreateUserGeneralError);
   });
 
   it('should calls findByEmail method with correct value', async () => {
@@ -53,7 +53,7 @@ describe('2-business.useCases.user.createUserUseCase', () => {
 
     expect(result.isRight()).toBeFalsy();
     expect(result.isLeft()).toBeTruthy();
-    expect(result.value).toEqual(emailNotAvailableError);
+    expect(result.value).toEqual(EmailNotAvailableError);
   });
 
   it('should is not be able to create user because exception in generateHash method', async () => {
@@ -66,7 +66,7 @@ describe('2-business.useCases.user.createUserUseCase', () => {
 
     expect(result.isRight()).toBeFalsy();
     expect(result.isLeft()).toBeTruthy();
-    expect(result.value).toEqual(createUserGeneralError);
+    expect(result.value).toEqual(CreateUserGeneralError);
   });
 
   it('should calls generateHash method with correct value', async () => {
@@ -89,7 +89,7 @@ describe('2-business.useCases.user.createUserUseCase', () => {
 
     expect(result.isRight()).toBeFalsy();
     expect(result.isLeft()).toBeTruthy();
-    expect(result.value).toEqual(createUserGeneralError);
+    expect(result.value).toEqual(CreateUserGeneralError);
   });
 
   it('should calls generateCode method', async () => {
@@ -112,7 +112,7 @@ describe('2-business.useCases.user.createUserUseCase', () => {
 
     expect(result.isRight()).toBeFalsy();
     expect(result.isLeft()).toBeTruthy();
-    expect(result.value).toEqual(createUserGeneralError);
+    expect(result.value).toEqual(CreateUserGeneralError);
   });
 
   it('should calls addMinutesToADate method with correct values', async () => {
@@ -172,7 +172,7 @@ describe('2-business.useCases.user.createUserUseCase', () => {
 
     expect(result.isRight()).toBeFalsy();
     expect(result.isLeft()).toBeTruthy();
-    expect(result.value).toEqual(createUserGeneralError);
+    expect(result.value).toEqual(CreateUserGeneralError);
   });
 
   it('should calls create method with correct values', async () => {
@@ -219,7 +219,7 @@ describe('2-business.useCases.user.createUserUseCase', () => {
 
     expect(result.isRight()).toBeFalsy();
     expect(result.isLeft()).toBeTruthy();
-    expect(result.value).toEqual(createUserGeneralError);
+    expect(result.value).toEqual(CreateUserGeneralError);
   });
 
   it('should calls sendData method with correct values', async () => {

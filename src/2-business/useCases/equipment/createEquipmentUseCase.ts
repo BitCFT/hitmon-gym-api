@@ -1,6 +1,6 @@
 import { InputCreateEquipmentDto, OutputCreateEquipmentDto } from '@business/dto/equipment/createEquipmentDto';
-import { createEquipmentGeneralError, equipmentAlreadyInUseError } from '@business/module/errors/equipment/equipment';
-import { equipmentCategoryIsNotFoundError } from '@business/module/errors/equipmentCategory/equipmentCategory';
+import { CreateEquipmentGeneralError, EquipmentAlreadyInUseError } from '@business/module/errors/equipment/equipment';
+import { EquipmentCategoryIsNotFoundError } from '@business/module/errors/equipmentCategory/equipmentCategory';
 import { IEquipmentRepository, IEquipmentRepositoryToken } from '@business/repositories/equipment/iEquipmentRepository';
 import {
   IEquipmentCategoryRepository,
@@ -16,10 +16,11 @@ import { inject, injectable } from 'inversify';
 @injectable()
 export class CreateEquipmentUseCase implements IUseCase<InputCreateEquipmentDto, OutputCreateEquipmentDto> {
   constructor(
-    @inject(IEquipmentRepositoryToken) private equipmentRepository: IEquipmentRepository,
-    @inject(IEquipmentCategoryRepositoryToken) private equipmentCategoryRepository: IEquipmentCategoryRepository,
-    @inject(IUniqueIdentifierServiceToken) private uniqueIdentifierService: IUniqueIdentifierService,
-    @inject(ILoggerServiceToken) private logService: ILoggerService
+    @inject(IEquipmentRepositoryToken) private readonly equipmentRepository: IEquipmentRepository,
+    @inject(IEquipmentCategoryRepositoryToken)
+    private readonly equipmentCategoryRepository: IEquipmentCategoryRepository,
+    @inject(IUniqueIdentifierServiceToken) private readonly uniqueIdentifierService: IUniqueIdentifierService,
+    @inject(ILoggerServiceToken) private readonly logService: ILoggerService
   ) {}
 
   async exec(input: InputCreateEquipmentDto): Promise<OutputCreateEquipmentDto> {
@@ -31,11 +32,11 @@ export class CreateEquipmentUseCase implements IUseCase<InputCreateEquipmentDto,
       ]);
 
       if (equipmentByName) {
-        return left(equipmentAlreadyInUseError);
+        return left(EquipmentAlreadyInUseError);
       }
 
       if (!equipmentCategory) {
-        return left(equipmentCategoryIsNotFoundError);
+        return left(EquipmentCategoryIsNotFoundError);
       }
 
       const equipmentEntity = EquipmentEntity.create({
@@ -52,7 +53,7 @@ export class CreateEquipmentUseCase implements IUseCase<InputCreateEquipmentDto,
       return right(equipment);
     } catch (error) {
       this.logService.error(error);
-      return left(createEquipmentGeneralError);
+      return left(CreateEquipmentGeneralError);
     }
   }
 }

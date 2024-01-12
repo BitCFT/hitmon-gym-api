@@ -1,11 +1,6 @@
 import { container } from '@test/utility/ioc/inversifyConfigTests';
 import { userRepositoryMock } from '@test/utility/mocks/repository/userRepository.mock';
-import {
-  checkCodeGeneralError,
-  expiredCodeError,
-  userAlreadyVerifiedError,
-  userIsNotFoundError,
-} from '@business/module/errors/user/user';
+import { CheckCodeGeneralError, ExpiredCodeError, UserIsNotFoundError } from '@business/module/errors/user/user';
 import { CheckAccountVerificationCodeUseCase } from '@business/useCases/user/checkAccountVerificationCodeUseCase';
 import { InputCheckAccountVerificationCodeDto } from '@business/dto/user/checkAccountVerificationCodeDto';
 import { fakeUserEntity } from '@test/utility/fakes/entities/userEntity';
@@ -35,7 +30,7 @@ describe('2-business.useCases.user.checkAccountVerificationCodeUseCase', () => {
 
     expect(result.isRight()).toBeFalsy();
     expect(result.isLeft()).toBeTruthy();
-    expect(result.value).toEqual(checkCodeGeneralError);
+    expect(result.value).toEqual(CheckCodeGeneralError);
   });
 
   it('should calls findByAccountVerificationCode method with correct value', async () => {
@@ -53,7 +48,7 @@ describe('2-business.useCases.user.checkAccountVerificationCodeUseCase', () => {
 
     expect(result.isRight()).toBeFalsy();
     expect(result.isLeft()).toBeTruthy();
-    expect(result.value).toEqual(userIsNotFoundError);
+    expect(result.value).toEqual(UserIsNotFoundError);
   });
 
   it('should is not be able to check code because exception in checkIfIsAfter method', async () => {
@@ -65,7 +60,7 @@ describe('2-business.useCases.user.checkAccountVerificationCodeUseCase', () => {
 
     expect(result.isRight()).toBeFalsy();
     expect(result.isLeft()).toBeTruthy();
-    expect(result.value).toEqual(checkCodeGeneralError);
+    expect(result.value).toEqual(CheckCodeGeneralError);
   });
 
   it('should calls checkIfIsAfter method with correct values', async () => {
@@ -92,7 +87,7 @@ describe('2-business.useCases.user.checkAccountVerificationCodeUseCase', () => {
 
     expect(result.isRight()).toBeFalsy();
     expect(result.isLeft()).toBeTruthy();
-    expect(result.value).toEqual(expiredCodeError);
+    expect(result.value).toEqual(ExpiredCodeError);
   });
 
   it('should is not be able to update user because exception in update method', async () => {
@@ -104,7 +99,7 @@ describe('2-business.useCases.user.checkAccountVerificationCodeUseCase', () => {
 
     expect(result.isRight()).toBeFalsy();
     expect(result.isLeft()).toBeTruthy();
-    expect(result.value).toEqual(checkCodeGeneralError);
+    expect(result.value).toEqual(CheckCodeGeneralError);
   });
 
   it('should calls update method with correct values', async () => {

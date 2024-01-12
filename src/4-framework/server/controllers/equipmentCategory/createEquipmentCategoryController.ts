@@ -1,4 +1,4 @@
-import { createEquipmentCategoryGeneralError } from '@business/module/errors/equipmentCategory/equipmentCategory';
+import { CreateEquipmentCategoryGeneralError } from '@business/module/errors/equipmentCategory/equipmentCategory';
 import { validationError } from '@business/module/errors/validation';
 import { CreateEquipmentCategoryOperator } from '@controller/operators/equipmentCategory/createEquipmentCategoryOperator';
 import { InputCreateEquipmentCategory } from '@controller/serializers/equipmentCategory/createEquipmentCategorySerializer';
@@ -18,7 +18,7 @@ export class CreateEquimentCategoryController implements IController {
       const result = await operator.exec(input);
 
       if (result.isLeft()) {
-        if (result.value === createEquipmentCategoryGeneralError) {
+        if (result.value === CreateEquipmentCategoryGeneralError) {
           throw result.value;
         }
         return badRequest(result.value);
