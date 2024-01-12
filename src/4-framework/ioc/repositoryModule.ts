@@ -3,7 +3,8 @@ import {
   IEquipmentCategoryRepository,
   IEquipmentCategoryRepositoryToken,
 } from '@business/repositories/equipmentCategory/iEquipmentCategoryRepository';
-import { IUserRepository, IUserRepositoryToken } from '@business/repositories/user/iUserRepository';
+import { IUserRepository } from '@business/repositories/user/iUserRepository';
+import { IUserRepositoryToken } from '@business/repositories/user/types';
 import { EquipmentCategoryRepository } from '@framework/database/repositories/equipmentCategoryRepository';
 import { EquipmentRepository } from '@framework/database/repositories/equipmentRepository';
 import { UserRepository } from '@framework/database/repositories/userRepository';

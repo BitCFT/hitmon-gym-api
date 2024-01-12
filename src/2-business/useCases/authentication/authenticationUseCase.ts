@@ -3,7 +3,8 @@ import {
   AuthenticationGeneralError,
   InvalidCredentialsError,
 } from '@business/module/errors/authentication/authentication';
-import { IUserRepository, IUserRepositoryToken } from '@business/repositories/user/iUserRepository';
+import { IUserRepository } from '@business/repositories/user/iUserRepository';
+import { IUserRepositoryToken } from '@business/repositories/user/types';
 import { IHashService, IHashServiceToken } from '@business/services/iHashService';
 import { IJwtService, IJwtServiceToken } from '@business/services/iJwtService';
 import { ILoggerService, ILoggerServiceToken } from '@business/services/iLogger';

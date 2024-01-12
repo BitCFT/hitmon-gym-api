@@ -1,6 +1,7 @@
 import { InputGetUserByTokenDto, OutputGetUserByTokenDto } from '@business/dto/user/getUserByTokenDto';
 import { GetUserByTokenGeneralError, UserIsNotFoundError } from '@business/module/errors/user/user';
-import { IUserRepository, IUserRepositoryToken } from '@business/repositories/user/iUserRepository';
+import { IUserRepository } from '@business/repositories/user/iUserRepository';
+import { IUserRepositoryToken } from '@business/repositories/user/types';
 import { IJwtService, IJwtServiceToken } from '@business/services/iJwtService';
 import { ILoggerService, ILoggerServiceToken } from '@business/services/iLogger';
 import { IUseCase } from '@business/useCases/iUseCase';

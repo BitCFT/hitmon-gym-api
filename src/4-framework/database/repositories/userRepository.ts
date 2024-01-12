@@ -1,10 +1,10 @@
+import { IUserRepository } from '@business/repositories/user/iUserRepository';
 import {
-  IUserRepository,
   InputCreateUser,
   OutputFindByAccountVerificationCode,
   OutputFindByEmail,
   OutputFindById,
-} from '@business/repositories/user/iUserRepository';
+} from '@business/repositories/user/types';
 import { IUserEntity } from '@domain/entities/userEntity';
 import { prismaClient } from '@framework/database/prisma/prismaClient';
 import { injectable } from 'inversify';

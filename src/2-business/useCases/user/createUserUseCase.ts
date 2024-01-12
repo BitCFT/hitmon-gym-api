@@ -1,7 +1,7 @@
 import { injectable, inject } from 'inversify';
 import { InputCreateUserDto, OutputCreateUserDto } from '@business/dto/user/createUserDto';
 import { IUseCase } from '@business/useCases/iUseCase';
-import { IUserRepository, IUserRepositoryToken } from '@business/repositories/user/iUserRepository';
+import { IUserRepository } from '@business/repositories/user/iUserRepository';
 import { IHashService, IHashServiceToken } from '@business/services/iHashService';
 import { IRandomCodeService, IRandomCodeServiceToken } from '@business/services/iRandomCodeService';
 import { left, right } from '@shared/either';
@@ -12,6 +12,7 @@ import { InputMailParams } from '@business/services/iMailTypes';
 import { RegistrationStep, UserEntity } from '@domain/entities/userEntity';
 import { IUniqueIdentifierService, IUniqueIdentifierServiceToken } from '@business/services/iUniqueIdentifierService';
 import { IDateService, IDateServiceToken } from '@business/services/iDateService';
+import { IUserRepositoryToken } from '@business/repositories/user/types';
 
 @injectable()
 export class CreateUserUseCase implements IUseCase<InputCreateUserDto, OutputCreateUserDto> {
