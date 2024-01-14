@@ -1,15 +1,12 @@
 import '@framework/ioc/inversifyConfig';
-import express, { json } from 'express';
-import { routes } from '@framework/server/config/routes';
 import { logRoutes } from './config/logRoutes';
+import { setUpApp } from './config/app';
+import { configRoutes } from './config/routes';
 
 const SERVER_PORT: number = Number(process.env.PORT || 3000);
-const app = express();
-
-app.use(json());
-app.use(routes());
+const app = setUpApp();
 
 app.listen(SERVER_PORT, () => {
   console.log(`Server running on port ${SERVER_PORT}`);
-  logRoutes(routes());
+  logRoutes(configRoutes(app));
 });

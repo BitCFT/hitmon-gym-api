@@ -25,7 +25,7 @@ export class DeleteEquipmentUseCase implements IUseCase<InputDeleteEquipmentDto,
       await this.equipmentRepository.delete(input.id);
 
       return right(undefined);
-    } catch (error: any) {
+    } catch (error) {
       this.logService.error(error);
       return left(DeleteEquipmentGeneralError);
     }
