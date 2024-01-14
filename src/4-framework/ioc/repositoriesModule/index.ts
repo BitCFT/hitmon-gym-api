@@ -9,7 +9,7 @@ import { EquipmentRepository } from '@framework/database/repositories/equipmentR
 import { UserRepository } from '@framework/database/repositories/userRepository';
 import { ContainerModule, interfaces } from 'inversify';
 
-export const RepositoryModule = new ContainerModule((bind: interfaces.Bind) => {
+export const RepositoriesModule = new ContainerModule((bind: interfaces.Bind) => {
   bind<IEquipmentCategoryRepository>(IEquipmentCategoryRepositoryToken).to(EquipmentCategoryRepository);
   bind<IEquipmentRepository>(IEquipmentRepositoryToken).to(EquipmentRepository);
   bind<IUserRepository>(IUserRepositoryToken).to(UserRepository);
