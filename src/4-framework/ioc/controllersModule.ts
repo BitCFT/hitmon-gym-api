@@ -1,15 +1,15 @@
-import { LoginController } from '@framework/server/controllers/authentication/loginController';
-import { CreateEquipmentController } from '@framework/server/controllers/equipment/createEquipmentController';
-import { DeleteEquipmentController } from '@framework/server/controllers/equipment/deleteEquipmentController';
-import { ListEquipmentsController } from '@framework/server/controllers/equipment/listEquipmentsController';
-import { UpdateEquipmentController } from '@framework/server/controllers/equipment/updateEquipmentController';
-import { CreateEquimentCategoryController } from '@framework/server/controllers/equipmentCategory/createEquipmentCategoryController';
-import { DeleteEquimentCategoryController } from '@framework/server/controllers/equipmentCategory/deleteEquipmentCategoryController';
-import { ListEquipmentCategoriesController } from '@framework/server/controllers/equipmentCategory/listEquipmentCategoriesController';
-import { UpdateEquipmentCategoryController } from '@framework/server/controllers/equipmentCategory/updateEquipmentCategoryController';
-import { CheckAccountVerificationCodeController } from '@framework/server/controllers/user/checkAccountVerificationCodeController';
-import { CreateUserController } from '@framework/server/controllers/user/createUserController';
-import { ResendAccountVerificationCodeController } from '@framework/server/controllers/user/resendAccountVerificationCodeController';
+import { LoginController } from '@presentation/controllers/authentication/loginController';
+import { CreateEquipmentController } from '@presentation/controllers/equipment/createEquipmentController';
+import { DeleteEquipmentController } from '@presentation/controllers/equipment/deleteEquipmentController';
+import { ListEquipmentsController } from '@presentation/controllers/equipment/listEquipmentsController';
+import { UpdateEquipmentController } from '@presentation/controllers/equipment/updateEquipmentController';
+import { CreateEquimentCategoryController } from '@presentation/controllers/equipmentCategory/createEquipmentCategoryController';
+import { DeleteEquimentCategoryController } from '@presentation/controllers/equipmentCategory/deleteEquipmentCategoryController';
+import { ListEquipmentCategoriesController } from '@presentation/controllers/equipmentCategory/listEquipmentCategoriesController';
+import { UpdateEquipmentCategoryController } from '@presentation/controllers/equipmentCategory/updateEquipmentCategoryController';
+import { CheckAccountVerificationCodeController } from '@presentation/controllers/user/checkAccountVerificationCodeController';
+import { CreateUserController } from '@presentation/controllers/user/createUserController';
+import { ResendAccountVerificationCodeController } from '@presentation/controllers/user/resendAccountVerificationCodeController';
 import { ContainerModule, interfaces } from 'inversify';
 
 export const ControllersModule = new ContainerModule((bind: interfaces.Bind) => {

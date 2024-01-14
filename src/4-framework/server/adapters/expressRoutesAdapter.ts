@@ -1,5 +1,5 @@
-import { IController } from '@framework/protocols/controller';
-import { HttpRequest, HttpResponse } from '@framework/protocols/http';
+import { IController } from '@presentation/protocols/controller';
+import { HttpRequest, HttpResponse } from '@presentation/protocols/http';
 import { Request, Response } from 'express';
 
 export class ExpressRoutesAdapter {

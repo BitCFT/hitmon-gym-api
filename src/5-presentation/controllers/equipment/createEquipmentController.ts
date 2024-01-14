@@ -3,9 +3,9 @@ import { EquipmentCategoryIsNotFoundError } from '@business/module/errors/equipm
 import { validationError } from '@business/module/errors/validation';
 import { CreateEquipmentOperator } from '@controller/operators/equipment/createEquipmentOperator';
 import { InputCreateEquipment } from '@controller/serializers/equipment/createEquipmentSerializer';
-import { IController } from '@framework/protocols/controller';
-import { HttpResponse, HttpRequest } from '@framework/protocols/http';
-import { notFound, badRequest, created, serverError } from '@framework/protocols/httpStatus';
+import { IController } from '@presentation/protocols/controller';
+import { HttpRequest, HttpResponse } from '@presentation/protocols/http';
+import { badRequest, created, notFound, serverError } from '@presentation/protocols/httpStatus';
 import { container } from '@shared/container';
 import { injectable } from 'inversify';
 

@@ -80,6 +80,7 @@
       "@business/(.*)": "<rootDir>/src/2-business/$1",
       "@controller/(.*)": "<rootDir>/src/3-controller/$1",
       "@framework/(.*)": "<rootDir>/src/4-framework/$1",
+      "@presentation/(.*)": "<rootDir>/src/5-presentation/$1",
       "@shared/(.*)": "<rootDir>/src/shared/$1",
       "@test/(.*)": "<rootDir>/test/$1"
     }

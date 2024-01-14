@@ -1,6 +1,6 @@
 import { RoleTypes } from '@domain/entities/roleEntity';
-import { HttpRequest } from '@framework/protocols/http';
-import { IMiddleware } from '@framework/protocols/middleware';
+import { HttpRequest } from '@presentation/protocols/http';
+import { IMiddleware } from '@presentation/protocols/middleware';
 import { NextFunction, Request, Response } from 'express';
 
 export class ExpressMiddlewareAdapter {

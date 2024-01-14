@@ -2,9 +2,9 @@ import { InvalidCredentialsError } from '@business/module/errors/authentication/
 import { validationError } from '@business/module/errors/validation';
 import { AuthenticationOperator } from '@controller/operators/authentication/authenticationOperator';
 import { InputAuthentication } from '@controller/serializers/authentication/authenticationSerializer';
-import { IController } from '@framework/protocols/controller';
-import { HttpRequest, HttpResponse } from '@framework/protocols/http';
-import { badRequest, ok, serverError, unauthorized } from '@framework/protocols/httpStatus';
+import { IController } from '@presentation/protocols/controller';
+import { HttpRequest, HttpResponse } from '@presentation/protocols/http';
+import { badRequest, ok, serverError, unauthorized } from '@presentation/protocols/httpStatus';
 import { container } from '@shared/container';
 import { injectable } from 'inversify';
 

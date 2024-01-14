@@ -2,9 +2,9 @@ import { ListEquipmentCategoriesGeneralError } from '@business/module/errors/equ
 import { validationError } from '@business/module/errors/validation';
 import { ListEquipmentCategoriesOperator } from '@controller/operators/equipmentCategory/listEquipmentCategoriesOperator';
 import { InputListEquipmentCategories } from '@controller/serializers/equipmentCategory/listEquipmentCategoriesSerializer';
-import { IController } from '@framework/protocols/controller';
-import { HttpRequest, HttpResponse } from '@framework/protocols/http';
-import { badRequest, ok, serverError } from '@framework/protocols/httpStatus';
+import { IController } from '@presentation/protocols/controller';
+import { HttpRequest, HttpResponse } from '@presentation/protocols/http';
+import { badRequest, ok, serverError } from '@presentation/protocols/httpStatus';
 import { container } from '@shared/container';
 import { injectable } from 'inversify';
 

@@ -5,9 +5,9 @@ import {
 import { validationError } from '@business/module/errors/validation';
 import { DeleteEquipmentCategoryOperator } from '@controller/operators/equipmentCategory/deleteEquipmentCategoryOperator';
 import { InputDeleteEquipmentCategory } from '@controller/serializers/equipmentCategory/deleteEquipmentCategorySerializer';
-import { IController } from '@framework/protocols/controller';
-import { HttpRequest, HttpResponse } from '@framework/protocols/http';
-import { badRequest, noContent, notFound, serverError } from '@framework/protocols/httpStatus';
+import { IController } from '@presentation/protocols/controller';
+import { HttpRequest, HttpResponse } from '@presentation/protocols/http';
+import { badRequest, noContent, notFound, serverError } from '@presentation/protocols/httpStatus';
 import { container } from '@shared/container';
 import { injectable } from 'inversify';
 

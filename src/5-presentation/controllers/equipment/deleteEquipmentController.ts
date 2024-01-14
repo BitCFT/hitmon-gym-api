@@ -2,11 +2,11 @@ import { DeleteEquipmentGeneralError, EquipmentIsNotFoundError } from '@business
 import { validationError } from '@business/module/errors/validation';
 import { DeleteEquipmentOperator } from '@controller/operators/equipment/deleteEquipmentOperator';
 import { InputDeleteEquipment } from '@controller/serializers/equipment/deleteEquipmentSerializer';
+import { IController } from '@presentation/protocols/controller';
+import { HttpRequest, HttpResponse } from '@presentation/protocols/http';
+import { badRequest, noContent, notFound, serverError } from '@presentation/protocols/httpStatus';
 import { container } from '@shared/container';
 import { injectable } from 'inversify';
-import { notFound, badRequest, serverError, noContent } from '@framework/protocols/httpStatus';
-import { IController } from '@framework/protocols/controller';
-import { HttpRequest, HttpResponse } from '@framework/protocols/http';
 
 @injectable()
 export class DeleteEquipmentController implements IController {

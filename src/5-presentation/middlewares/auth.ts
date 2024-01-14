@@ -1,10 +1,10 @@
 import { GetUserByTokenUseCase } from '@business/useCases/user/getUserByTokenUseCase';
-import { HttpRequest, HttpResponse } from '@framework/protocols/http';
-import { ok, serverError, unauthorized } from '@framework/protocols/httpStatus';
-import { IMiddleware } from '@framework/protocols/middleware';
+import { HttpRequest, HttpResponse } from '@presentation/protocols/http';
+import { ok, serverError, unauthorized } from '@presentation/protocols/httpStatus';
 import { inject, injectable } from 'inversify';
 import { AuthorizationGeneralError, AuthorizationHeaderNotProvided, TokenNotProvided } from './errors';
 import { TokenExpiredError } from '@business/module/errors/services/jwtService';
+import { IMiddleware } from '@presentation/protocols/middleware';
 
 @injectable()
 export class AuthMiddleware implements IMiddleware {

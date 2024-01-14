@@ -1,23 +1,23 @@
 import { container } from '@shared/container';
 import { Router } from 'express';
-import { CreateEquimentCategoryController } from '@framework/server/controllers/equipmentCategory/createEquipmentCategoryController';
 import { AuthenticationRoutes, EquipmentCategoryRoutes, EquipmentRoutes, UserRoutes } from './systemRoutes';
 import { ExpressRoutesAdapter } from '../adapters/expressRoutesAdapter';
-import { DeleteEquimentCategoryController } from '@framework/server/controllers/equipmentCategory/deleteEquipmentCategoryController';
-import { ListEquipmentCategoriesController } from '../controllers/equipmentCategory/listEquipmentCategoriesController';
-import { UpdateEquipmentCategoryController } from '../controllers/equipmentCategory/updateEquipmentCategoryController';
-import { CreateEquipmentController } from '../controllers/equipment/createEquipmentController';
-import { ListEquipmentsController } from '../controllers/equipment/listEquipmentsController';
-import { DeleteEquipmentController } from '../controllers/equipment/deleteEquipmentController';
-import { UpdateEquipmentController } from '../controllers/equipment/updateEquipmentController';
-import { CreateUserController } from '../controllers/user/createUserController';
-import { CheckAccountVerificationCodeController } from '../controllers/user/checkAccountVerificationCodeController';
-import { ResendAccountVerificationCodeController } from '../controllers/user/resendAccountVerificationCodeController';
-import { LoginController } from '../controllers/authentication/loginController';
 import { ExpressMiddlewareAdapter } from '../adapters/expressMiddlewareAdapter';
-import { AuthMiddleware } from '@framework/middlewares/auth';
-import { RoleMiddlware } from '@framework/middlewares/role';
 import { RoleTypes } from '@domain/entities/roleEntity';
+import { CreateEquimentCategoryController } from '@presentation/controllers/equipmentCategory/createEquipmentCategoryController';
+import { DeleteEquimentCategoryController } from '@presentation/controllers/equipmentCategory/deleteEquipmentCategoryController';
+import { ListEquipmentCategoriesController } from '@presentation/controllers/equipmentCategory/listEquipmentCategoriesController';
+import { UpdateEquipmentCategoryController } from '@presentation/controllers/equipmentCategory/updateEquipmentCategoryController';
+import { AuthMiddleware } from '@presentation/middlewares/auth';
+import { RoleMiddlware } from '@presentation/middlewares/role';
+import { CreateEquipmentController } from '@presentation/controllers/equipment/createEquipmentController';
+import { ListEquipmentsController } from '@presentation/controllers/equipment/listEquipmentsController';
+import { DeleteEquipmentController } from '@presentation/controllers/equipment/deleteEquipmentController';
+import { UpdateEquipmentController } from '@presentation/controllers/equipment/updateEquipmentController';
+import { CreateUserController } from '@presentation/controllers/user/createUserController';
+import { CheckAccountVerificationCodeController } from '@presentation/controllers/user/checkAccountVerificationCodeController';
+import { ResendAccountVerificationCodeController } from '@presentation/controllers/user/resendAccountVerificationCodeController';
+import { LoginController } from '@presentation/controllers/authentication/loginController';
 
 export const routes = () => {
   const router = Router();

@@ -1,9 +1,9 @@
-import { HttpRequest, HttpResponse } from '@framework/protocols/http';
-import { forbidden, ok, unauthorized } from '@framework/protocols/httpStatus';
-import { IMiddleware } from '@framework/protocols/middleware';
 import { injectable } from 'inversify';
 import { AuthorizationGeneralError, ForbiddenError } from './errors';
 import { RoleTypes } from '@domain/entities/roleEntity';
+import { IMiddleware } from '@presentation/protocols/middleware';
+import { HttpRequest, HttpResponse } from '@presentation/protocols/http';
+import { forbidden, ok, unauthorized } from '@presentation/protocols/httpStatus';
 
 @injectable()
 export class RoleMiddlware implements IMiddleware<RoleTypes[]> {

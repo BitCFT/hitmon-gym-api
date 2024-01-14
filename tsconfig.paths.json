@@ -6,6 +6,7 @@
       "@business/*": ["src/2-business/*"],
       "@controller/*": ["src/3-controller/*"],
       "@framework/*": ["src/4-framework/*"],
+      "@presentation/*": ["src/5-presentation/*"],
       "@shared/*": ["src/shared/*"],
       "@test/*": ["test/*"]
     }

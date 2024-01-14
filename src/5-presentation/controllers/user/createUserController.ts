@@ -2,9 +2,9 @@ import { CreateUserGeneralError } from '@business/module/errors/user/user';
 import { validationError } from '@business/module/errors/validation';
 import { CreateUserOperator } from '@controller/operators/user/createUserOperator';
 import { InputCreateUser } from '@controller/serializers/user/createUserSerializer';
-import { IController } from '@framework/protocols/controller';
-import { HttpRequest, HttpResponse } from '@framework/protocols/http';
-import { badRequest, created, serverError } from '@framework/protocols/httpStatus';
+import { IController } from '@presentation/protocols/controller';
+import { HttpRequest, HttpResponse } from '@presentation/protocols/http';
+import { badRequest, created, serverError } from '@presentation/protocols/httpStatus';
 import { container } from '@shared/container';
 import { injectable } from 'inversify';
 
